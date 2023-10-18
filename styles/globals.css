@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "grifter";
+  src: url("../public/font/grifterbold.otf") format("opentype");
+}
+
+h1,
+h2,
+h3 {
+  font-family: "grifter";
+}
+
+.collapse-plus .collapse-title:after {
+  color: #1759d7;
+}
+
+.collapse {
+  background-color: white;
+}
