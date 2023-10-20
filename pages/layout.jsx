@@ -12,7 +12,8 @@ export default function Layout({ children }) {
   const params = usePathname();
   return (
     <div className={`bg-[#F6F8FD] ${jakarta.className} `}>
-      {params !== "/auth/login" && <NavbarPage params={params} />}
+      {params !== "/auth/login" ||
+        (params !== "/auth/register" && <NavbarPage params={params} />)}
       <ModalLogin />
       {children}
     </div>

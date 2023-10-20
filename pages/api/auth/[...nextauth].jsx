@@ -36,6 +36,9 @@ export const authOptions = {
       },
     }),
   ],
+  pages: {
+    signIn: "/auth/login",
+  },
   callbacks: {
     jwt({ token, account, profile, user }) {
       if (account) {
@@ -43,12 +46,12 @@ export const authOptions = {
       }
       return token;
     },
-    async session({ session, token }) {
-      if ("email" in token) {
-        session.user.email = token.email;
-      }
-      return session;
-    },
+    // async session({ session, token }) {
+    //   if ("email" in token) {
+    //     session.user.email = token.email;
+    //   }
+    //   return session;
+    // },
   },
 };
 
