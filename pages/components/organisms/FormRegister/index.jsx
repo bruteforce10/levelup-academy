@@ -1,6 +1,8 @@
 import { signUp } from "@/lib/service";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
+import isEmail from "validator/lib/isemail";
 
 export default function FormRegister() {
   const [data, setData] = useState({
@@ -9,31 +11,86 @@ export default function FormRegister() {
     password: "",
   });
 
+  const [error, setError] = useState({
+    name: "",
+    errorRegister: "",
+    email: "",
+    password: "",
+  });
+
+  const { push, query } = useRouter();
+
   const onChange = (e) => {
     setData({
       ...data,
       [e.target.name]: e.target.value,
     });
+    setError({
+      ...error,
+      [e.target.name]: "",
+      errorRegister: "",
+    });
   };
+
+  const validate = () => {
+    const newError = { ...error };
+    if (!data.email) {
+      newError.email = "Email harus diisi";
+    } else if (!isEmail(data.email)) {
+      newError.email = "Email tidak valid";
+    }
+    if (!data.name) {
+      newError.name = "Nama harus diisi";
+    }
+
+    if (!data.password) {
+      newError.password = "Password harus diisi";
+    } else if (data.password.length <= 6) {
+      newError.password = "Password minimal 6 karakter";
+    }
+
+    return newError;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await signUp(data);
-    console.log(result);
+    const findErrors = validate();
+
+    if (Object.values(findErrors).some((err) => err !== "")) {
+      setError(findErrors);
+    } else {
+      const result = await signUp(data);
+      if (!result?.response?.status) {
+        push(`/auth/register/upload-profile?data=${result.id}`);
+      }
+
+      const errorResult = result?.response?.errors[0]?.message;
+      setError({
+        ...error,
+        errorRegister: errorResult,
+      });
+    }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-control w-full mb-2">
+        <p className="text-red-500">{error?.errorRegister}</p>
         <label className="label">
-          <span className="label-text text-lg">Nama (maks. 50 karakter)</span>
+          <span className="label-text text-lg">Nama (maks. 20 karakter)</span>
         </label>
         <input
           type="text"
+          maxLength={20}
           name="name"
           value={data.name}
           onChange={onChange}
           className="input bg-[#E5E9F2] w-full rounded-full"
         />
+        <label className="label">
+          <span className="label-text-alt text-red-500">{error.name}</span>
+          <span className="label-text-alt text-white">.</span>
+        </label>
       </div>
       <div className="form-control w-full mb-2">
         <label className="label">
@@ -46,6 +103,10 @@ export default function FormRegister() {
           onChange={onChange}
           className="input bg-[#E5E9F2] w-full rounded-full"
         />
+        <label className="label">
+          <span className="label-text-alt text-red-500">{error.email}</span>
+          <span className="label-text-alt text-white">.</span>
+        </label>
       </div>
       <div className="form-control w-full mb-6">
         <label className="label">
@@ -56,10 +117,15 @@ export default function FormRegister() {
         <input
           type="password"
           name="password"
+          maxLength={12}
           value={data.password}
           onChange={onChange}
           className="input bg-[#E5E9F2] w-full rounded-full"
         />
+        <label className="label">
+          <span className="label-text-alt text-red-500">{error.password}</span>
+          <span className="label-text-alt text-white">.</span>
+        </label>
       </div>
       <div className="space-y-4">
         <button

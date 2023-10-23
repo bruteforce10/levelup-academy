@@ -10,7 +10,8 @@ export default function withAuth(middleware, requireAuth) {
         secret: process.env.NEXTAUTH_SECRET,
       });
       if (!token) {
-        const url = new URL("/", req.url);
+        const url = new URL("/auth/login", req.url);
+        url.searchParams.set("callbackUrl", encodeURI(req.url));
         return NextResponse.redirect(url);
       }
     }

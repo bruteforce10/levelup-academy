@@ -7,11 +7,13 @@ import { AiFillCaretDown } from "react-icons/ai";
 import Link from "next/link";
 import { BiMenu } from "react-icons/bi";
 import clsx from "clsx";
+import { signOut, useSession } from "next-auth/react";
 
 export default function NavbarPage({ params }) {
   const [open, setOpen] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const toggleNavbar = useRef();
+  const { data: session } = useSession();
 
   function handleOpen(e) {
     if (!toggleNavbar.current.contains(e.target)) {
@@ -98,20 +100,78 @@ export default function NavbarPage({ params }) {
         <div
           className={
             !open
-              ? "items-center  text-deep lg:space-x-4 max-lg:space-y-4 max-lg:fixed max-lg:top-[470px] max-lg:left-[30px] lg:flex max-lg:w-[200px] w-2/12 transition-all "
-              : "items-center  text-deep lg:space-x-4 max-lg:space-y-4 max-lg:fixed max-lg:top-[470px] max-lg:left-[30px] lg:flex max-lg:w-[200px] w-2/12 transition-all max-lg:hidden"
+              ? "items-center   text-deep lg:space-x-4 max-lg:space-y-4 max-lg:fixed max-lg:top-[470px] max-lg:left-[30px] lg:flex max-lg:w-[200px] w-3/12 transition-all "
+              : "items-center justify-end text-deep lg:space-x-4 max-lg:space-y-4 max-lg:fixed max-lg:top-[470px] max-lg:left-[30px] lg:flex max-lg:w-[200px] w-3/12 transition-all max-lg:hidden"
           }
         >
           <div className="bg-tersier p-4 rounded-full cursor-pointer flex items-center gap-2">
             <BsSearch />
             <p className="lg:hidden">Search...</p>
           </div>
-          <button
-            className="font-bold lg:bg-tersier px-6 py-3 bg-primebase max-lg:text-white rounded-full max-lg:w-full"
-            onClick={() => document.getElementById("my_modal_1").showModal()}
-          >
-            Masuk/Daftar
-          </button>
+
+          {session ? (
+            <div className="dropdown">
+              <div
+                tabIndex={0}
+                className="flex cursor-pointer  items-center gap-4 justify-end px-2 py-4"
+              >
+                <p
+                  className={
+                    !isScrolled
+                      ? `text-tersier font-medium text-[18px] ${
+                          !open ? "hidden" : ""
+                        } `
+                      : `text-deep font-medium text-[18px]  ${
+                          !open ? "hidden" : ""
+                        } `
+                  }
+                >
+                  Halo, {session?.user?.name}
+                </p>
+                <p
+                  className={
+                    open ? "hidden" : "text-black font-medium text-[18px] "
+                  }
+                >
+                  Halo, {session?.user?.name}
+                </p>
+                {session?.user?.image ? (
+                  <Image
+                    src={session?.user?.image}
+                    alt="avatar"
+                    width={40}
+                    height={40}
+                    className="rounded-full "
+                  />
+                ) : (
+                  <Image
+                    src={"/icon/profile.svg"}
+                    alt="avatar"
+                    width={49}
+                    height={49}
+                    className="rounded-full "
+                  />
+                )}
+              </div>
+              <ul
+                tabIndex={0}
+                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 text-[16px]"
+              >
+                <li>
+                  <a onClick={() => signOut()}>Logout</a>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <button
+              className="font-bold lg:bg-tersier px-6 py-3 bg-primebase max-lg:text-white rounded-full max-lg:w-full"
+              onClick={() => {
+                document.getElementById("my_modal_1").showModal();
+              }}
+            >
+              Masuk/Daftar
+            </button>
+          )}
         </div>
         <div
           ref={toggleNavbar}
