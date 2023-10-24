@@ -24,7 +24,7 @@ export default function UploadProfile() {
   const router = useRouter();
 
   useEffect(() => {
-    getUserName(router.query.data).then((nameResult) => {
+    getUserName(router?.query?.data).then((nameResult) => {
       setData({
         ...data,
         id: nameResult?.account?.id,
@@ -36,7 +36,7 @@ export default function UploadProfile() {
         password: nameResult?.account?.password,
       });
     });
-  }, [setGetData]);
+  }, [router, setData, setGetData, getData, data]);
 
   const handleUploadFile = async (e) => {
     setError({
