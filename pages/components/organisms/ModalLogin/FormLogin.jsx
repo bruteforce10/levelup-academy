@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
-import isEmail from "validator/lib/isemail";
+import * as EmailValidator from "email-validator";
 
 export default function FormLogin() {
   const [data, setData] = useState({
@@ -31,7 +31,7 @@ export default function FormLogin() {
     const newError = { ...error };
     if (!data.email) {
       newError.email = "Email harus diisi";
-    } else if (!isEmail(data.email)) {
+    } else if (!EmailValidator.validate(data.email)) {
       newError.email = "Email tidak valid";
     }
 

@@ -1,7 +1,7 @@
 import { signUp } from "@/lib/service";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import isEmail from "validator/lib/isemail";
+import * as EmailValidator from "email-validator";
 import { signIn } from "next-auth/react";
 
 export default function FormRegister() {
@@ -36,7 +36,7 @@ export default function FormRegister() {
     const newError = { ...error };
     if (!data.email) {
       newError.email = "Email harus diisi";
-    } else if (!isEmail(data.email)) {
+    } else if (!EmailValidator.validate(data.email)) {
       newError.email = "Email tidak valid";
     }
     if (!data.name) {
