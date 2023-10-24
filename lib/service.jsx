@@ -123,10 +123,46 @@ export const getUserName = async (id) => {
       account(where: { id: "` +
     id +
     `" }) {
+        id
         name
       }
     }
   `;
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result;
+};
+
+export const updateUser = async (data) => {
+  console.log(data);
+  const query =
+    gql`
+    mutation MyMutation {
+      updateAccount(
+        data: { image: { connect: { id: "` +
+    data.id +
+    `" } } }
+        where: { id: "` +
+    data.name +
+    `" }
+      ) {
+        id
+      }
+      publishAsset(where: { id: "` +
+    data.id +
+    `" }) {
+        id
+      }
+      publishAccount(where: { id: "` +
+    data.name +
+    `" }) {
+        id
+      }
+    }
+  `;
+
   const result = await request(
     "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
     query

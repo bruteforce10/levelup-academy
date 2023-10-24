@@ -16,7 +16,7 @@ export default function NavbarPage({ params }) {
   const { data: session } = useSession();
 
   function handleOpen(e) {
-    if (!toggleNavbar.current.contains(e.target)) {
+    if (!toggleNavbar?.current?.contains(e.target)) {
       setOpen(true);
     }
   }

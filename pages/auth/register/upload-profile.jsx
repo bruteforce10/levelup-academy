@@ -2,12 +2,13 @@ import Image from "next/image";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { createAssets, getUserName } from "@/lib/service";
+import { createAssets, getUserName, updateUser } from "@/lib/service";
 
 export default function UploadProfile() {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [name, setName] = useState("");
+  const [named, setName] = useState("");
   const [data, setData] = useState({
+    id: "",
+    name: "",
     file: "",
     select: "",
   });
@@ -19,6 +20,10 @@ export default function UploadProfile() {
 
   useEffect(() => {
     getUserName(router.query.data).then((nameResult) => {
+      setData({
+        ...data,
+        id: nameResult?.account?.id,
+      });
       setName(nameResult?.account?.name);
     });
   }, [setName]);
@@ -49,24 +54,34 @@ export default function UploadProfile() {
         file: `File harus kurang dari 1MB`,
       });
     } else {
-      setSelectedFile(file);
-      const HYGRAPH_URL =
-        "https://api-ap-southeast-2.hygraph.com/v2/clnrgq1m6llmt01uo7zk9hnhc/master/upload";
-      const HYGRAPH_ASSET_TOKEN =
-        "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImdjbXMtbWFpbi1wcm9kdWN0aW9uIn0.eyJ2ZXJzaW9uIjozLCJpYXQiOjE2OTgwMTg3MDAsImF1ZCI6WyJodHRwczovL2FwaS1hcC1zb3V0aGVhc3QtMi5oeWdyYXBoLmNvbS92Mi9jbG5yZ3ExbTZsbG10MDF1bzd6azlobmhjL21hc3RlciIsIm1hbmFnZW1lbnQtbmV4dC5ncmFwaGNtcy5jb20iXSwiaXNzIjoiaHR0cHM6Ly9tYW5hZ2VtZW50LmdyYXBoY21zLmNvbS8iLCJzdWIiOiI5ODk4YmVjZC04NGQ5LTQ1ODAtYTE1ZS1iOTg5NDZjY2NhMzYiLCJqdGkiOiJjbG8yNGhxcmVlbWZuMDF1a2F2eXcxcWtlIn0.xQBudreGtSdTG3ien8M2ulu-oa9Q5KXx8NPDU22YwNCHa_qIMpWgmGCfURyH1WAt0due_hoZfhRaUMtB0t74HmfdEGikXZVa1FQoQxNnhxrEU4y_dcJE2LDk5Q64XX2cA81-FZyHRbflqsCalewXK0l3Ds68ZRLbKKXBQLPT6ZsLryi0iyc9LPYFZMtxI5DhUo7YppNeTNi62HA9qfZOiOA75D5CvXmTFcKWsZ6zp90hMgERLK0nvSQ3OmevtYKmDmM6XgiLbyY3hgdnZfpp0YG1KE0F-glbk8KNNJhhm340HY0t1RcBesLBaivy22-O9KrqjBi0yQWKkujUG_N5ZmU73zi19DSBxZxfZY5oEdBVQK-d7UZUZNshmgPIr2GFjZ61O_lhQ1T1h1R5fvln1sweLniX6Uqsg2Sp9E8FSXSLObTDgAf0xNlQ1rXntdqtH4r9kwIlDwvBvbHmWvFKu7OYsIDdpxQXDNy1mAObjlZYj5f6GvHY89DO-sWjKYldiiXUKTtf4q3Dnuah5eix0uuz5pX7FfmrIz-SNyKNGrw_lhHoJiENFTCRmvmEyOn-jCvfaphYwoRLLiMHFDHPusnpLFNhC73gA8y3gtUtfyGxSK_5aMA5LNoYLIMw4LJnXzrIpXfeqiJYMw-X8mJvhFvUJom2GhHiG-DZLGMFiaQ";
-
-      const form = new FormData();
-      form.append("fileUpload", file);
-      const response = await fetch(HYGRAPH_URL, {
-        method: "POST",
-        body: form,
-        headers: {
-          // "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${HYGRAPH_ASSET_TOKEN}`,
-        },
+      setData({
+        ...data,
+        file,
       });
-      const result = await response.json();
-      console.log(result);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const url =
+      "https://api-ap-southeast-2.hygraph.com/v2/clnrgq1m6llmt01uo7zk9hnhc/master/upload";
+    const token =
+      "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImdjbXMtbWFpbi1wcm9kdWN0aW9uIn0.eyJ2ZXJzaW9uIjozLCJpYXQiOjE2OTgwMTg3MDAsImF1ZCI6WyJodHRwczovL2FwaS1hcC1zb3V0aGVhc3QtMi5oeWdyYXBoLmNvbS92Mi9jbG5yZ3ExbTZsbG10MDF1bzd6azlobmhjL21hc3RlciIsIm1hbmFnZW1lbnQtbmV4dC5ncmFwaGNtcy5jb20iXSwiaXNzIjoiaHR0cHM6Ly9tYW5hZ2VtZW50LmdyYXBoY21zLmNvbS8iLCJzdWIiOiI5ODk4YmVjZC04NGQ5LTQ1ODAtYTE1ZS1iOTg5NDZjY2NhMzYiLCJqdGkiOiJjbG8yNGhxcmVlbWZuMDF1a2F2eXcxcWtlIn0.xQBudreGtSdTG3ien8M2ulu-oa9Q5KXx8NPDU22YwNCHa_qIMpWgmGCfURyH1WAt0due_hoZfhRaUMtB0t74HmfdEGikXZVa1FQoQxNnhxrEU4y_dcJE2LDk5Q64XX2cA81-FZyHRbflqsCalewXK0l3Ds68ZRLbKKXBQLPT6ZsLryi0iyc9LPYFZMtxI5DhUo7YppNeTNi62HA9qfZOiOA75D5CvXmTFcKWsZ6zp90hMgERLK0nvSQ3OmevtYKmDmM6XgiLbyY3hgdnZfpp0YG1KE0F-glbk8KNNJhhm340HY0t1RcBesLBaivy22-O9KrqjBi0yQWKkujUG_N5ZmU73zi19DSBxZxfZY5oEdBVQK-d7UZUZNshmgPIr2GFjZ61O_lhQ1T1h1R5fvln1sweLniX6Uqsg2Sp9E8FSXSLObTDgAf0xNlQ1rXntdqtH4r9kwIlDwvBvbHmWvFKu7OYsIDdpxQXDNy1mAObjlZYj5f6GvHY89DO-sWjKYldiiXUKTtf4q3Dnuah5eix0uuz5pX7FfmrIz-SNyKNGrw_lhHoJiENFTCRmvmEyOn-jCvfaphYwoRLLiMHFDHPusnpLFNhC73gA8y3gtUtfyGxSK_5aMA5LNoYLIMw4LJnXzrIpXfeqiJYMw-X8mJvhFvUJom2GhHiG-DZLGMFiaQ";
+
+    const form = new FormData();
+    form.append("fileUpload", data.file);
+    const response = await fetch(url, {
+      method: "POST",
+      body: form,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    if (result.id) {
+      updateUser({ id: result.id, name: data.id }).then((result) => {
+        console.log(result);
+      });
     }
   };
 
@@ -97,9 +112,9 @@ export default function UploadProfile() {
 
           <div className=" mt-20 max-lg:mx-auto lg:ml-[600px] w-8/12 ">
             <div className="space-y-6 mb-10 text-center">
-              {selectedFile ? (
+              {data.file ? (
                 <Image
-                  src={URL.createObjectURL(selectedFile)}
+                  src={URL.createObjectURL(data.file)}
                   alt="avatar"
                   width={84}
                   height={84}
@@ -116,10 +131,10 @@ export default function UploadProfile() {
               )}
 
               <div>
-                <h4 className="font-extrabold text-xl">{name}</h4>
+                <h4 className="font-extrabold text-xl">{named}</h4>
               </div>
             </div>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="form-control w-full mb-2">
                 <label className="label">
                   <span className="label-text text-lg">Upload Avatar</span>
@@ -128,7 +143,6 @@ export default function UploadProfile() {
                   type="file"
                   accept="image/*"
                   name="file"
-                  value={data.file}
                   onChange={handleUploadFile}
                   className="file-input file-input-ghost w-full  bg-[#E5E9F2] rounded-full"
                 />
