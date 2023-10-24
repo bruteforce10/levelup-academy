@@ -19,6 +19,7 @@ export const signUp = async (userData) => {
         id
         name
         email
+        password
       }
       publishAccount(where: {email: "` +
     userData.email +
@@ -125,6 +126,8 @@ export const getUserName = async (id) => {
     `" }) {
         id
         name
+        email
+        password
       }
     }
   `;
@@ -136,14 +139,15 @@ export const getUserName = async (id) => {
 };
 
 export const updateUser = async (data) => {
-  console.log(data);
   const query =
     gql`
     mutation MyMutation {
       updateAccount(
         data: { image: { connect: { id: "` +
     data.id +
-    `" } } }
+    `" } }, goals: "` +
+    data.goals +
+    `"}
         where: { id: "` +
     data.name +
     `" }
@@ -152,7 +156,8 @@ export const updateUser = async (data) => {
       }
       publishAsset(where: { id: "` +
     data.id +
-    `" }) {
+    `"
+  }) {
         id
       }
       publishAccount(where: { id: "` +

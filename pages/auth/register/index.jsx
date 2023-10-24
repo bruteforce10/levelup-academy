@@ -24,7 +24,7 @@ export default function Register() {
             />
           </div>
 
-          <div className=" mt-20 max-lg:mx-auto lg:ml-[600px] w-8/12 ">
+          <div className=" mt-20 max-lg:mx-auto lg:ml-[600px] w-8/12 h-screen">
             <div className="space-y-4 mb-10">
               <h4 className="font-extrabold text-3xl">New Account</h4>
               <p className="w-8/12">

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import isEmail from "validator/lib/isemail";
+import { signIn } from "next-auth/react";
 
 export default function FormRegister() {
   const [data, setData] = useState({
@@ -61,7 +62,14 @@ export default function FormRegister() {
     } else {
       const result = await signUp(data);
       if (!result?.response?.status) {
-        push(`/auth/register/upload-profile?data=${result.id}`);
+        const res = await signIn("credentials", {
+          redirect: false,
+          email: result.email,
+          password: result.password,
+        });
+        if (res.ok) {
+          push(`/auth/register/upload-profile?data=${result.id}`);
+        }
       }
 
       const errorResult = result?.response?.errors[0]?.message;
