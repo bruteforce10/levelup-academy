@@ -1,5 +1,4 @@
 import { signUp } from "@/lib/service";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import isEmail from "validator/lib/isemail";
