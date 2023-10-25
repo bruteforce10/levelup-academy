@@ -4,7 +4,7 @@ import Heading from "./heading";
 import { listSoftware, listSoftwareSecond } from "@/lib/data";
 import CardSoftware from "./CardSoftware";
 
-export default function ListSoftware() {
+export default function ListSoftwareResult() {
   return (
     <section className="mt-20">
       <Heading

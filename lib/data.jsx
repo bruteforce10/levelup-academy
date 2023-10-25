@@ -31,32 +31,32 @@ export const listSoftware = [
   {
     name: "Javascript",
     desc: "Back-End & Front-End Dev",
-    img: "/icon/javascript.svg",
+    image: "/icon/javascript.svg",
   },
   {
     name: "React JS",
     desc: "Front-End Dev",
-    img: "/icon/react-js.svg",
+    image: "/icon/react-js.svg",
   },
   {
     name: "Tailwind",
     desc: "Front-End Dev",
-    img: "/icon/tailwind.svg",
+    image: "/icon/tailwind.svg",
   },
   {
     name: "Bootstrap",
     desc: "Front-End Dev",
-    img: "/icon/bootstrap.svg",
+    image: "/icon/bootstrap.svg",
   },
   {
     name: "GIT",
     desc: "Utilities Dev",
-    img: "/icon/git.svg",
+    image: "/icon/git.svg",
   },
   {
     name: "Firebase",
     desc: "Back-End Dev",
-    img: "/icon/firebase.svg",
+    image: "/icon/firebase.svg",
   },
 ];
 
@@ -64,32 +64,32 @@ export const listSoftwareSecond = [
   {
     name: "After Effects",
     desc: "Motion Graphic",
-    img: "/icon/after-effects.svg",
+    image: "/icon/after-effects.svg",
   },
   {
     name: "Wordpress",
     desc: "CMS Dev",
-    img: "/icon/wordpress.svg",
+    image: "/icon/wordpress.svg",
   },
   {
     name: "Python",
     desc: "Data Science",
-    img: "/icon/python.svg",
+    image: "/icon/python.svg",
   },
   {
     name: "Autocad",
     desc: "Drawing Construction",
-    img: "/icon/autocad.svg",
+    image: "/icon/autocad.svg",
   },
   {
     name: "Android Studio",
     desc: "App Mobile Development",
-    img: "/icon/android-studio.svg",
+    image: "/icon/android-studio.svg",
   },
   {
     name: "Codeigniter",
     desc: "Back-End Dev",
-    img: "/icon/codeigniter.svg",
+    image: "/icon/codeigniter.svg",
   },
 ];
 

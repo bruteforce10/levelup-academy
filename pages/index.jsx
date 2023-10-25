@@ -1,6 +1,6 @@
 import Header from "./components/header";
 import CategorySection from "./components/category-section";
-import ListSoftware from "./components/ListSoftware";
+import ListSoftwareResult from "./components/ListSoftwareResult";
 import Testimoni from "./components/testimoni";
 import Faq from "./components/Faq";
 
@@ -9,7 +9,7 @@ export default function Home() {
     <div>
       <Header />
       <CategorySection />
-      <ListSoftware />
+      <ListSoftwareResult />
       <Testimoni />
       <Faq />
     </div>

@@ -8,11 +8,11 @@ export default function CardSoftware({ item }) {
         hover:border-prime hover:border-2 transition-all box-border h-auto"
     >
       <div className="md:w-[72px] w-[60px]">
-        <Image src={item.img} alt="icon" width={72} height={72} />
+        <Image src={item?.image} alt="icon" width={72} height={72} />
       </div>
       <div>
-        <h4 className="md:text-xl text-lg font-bold">{item.name}</h4>
-        <p className="text-deep/60 max-md:text-sm">{item.desc}</p>
+        <h4 className="md:text-xl text-lg font-bold">{item?.name}</h4>
+        <p className="text-deep/60 max-md:text-sm">{item?.desc}</p>
       </div>
     </div>
   );
