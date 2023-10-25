@@ -111,13 +111,15 @@ export default function UploadProfile() {
       ...error,
       select: "",
     });
-    setIsSubmitting(false);
+    if (data.select) {
+      setIsSubmitting(false);
+    }
   };
 
   const validate = () => {
     const newError = { ...error };
 
-    if (!data.select) {
+    if (!data?.select) {
       newError.select = "Keahlian harus diisi";
     }
 
@@ -138,7 +140,7 @@ export default function UploadProfile() {
         goals: data.select,
       });
       if (result) {
-        router.push("/");
+        // router.push("/");
         setLoading(false);
       }
     }
