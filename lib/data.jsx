@@ -31,67 +31,32 @@ export const listSoftware = [
   {
     name: "Javascript",
     desc: "Back-End & Front-End Dev",
-    img: (
-      <Image
-        width={72}
-        height={72}
-        alt="programming"
-        src="/icon/javascript.svg"
-      />
-    ),
+    img: "/icon/javascript.svg",
   },
   {
     name: "React JS",
     desc: "Front-End Dev",
-    img: (
-      <Image
-        width={72}
-        height={72}
-        alt="programming"
-        src="/icon/react-js.svg"
-      />
-    ),
+    img: "/icon/react-js.svg",
   },
   {
     name: "Tailwind",
     desc: "Front-End Dev",
-    img: (
-      <Image
-        width={72}
-        height={72}
-        alt="programming"
-        src="/icon/tailwind.svg"
-      />
-    ),
+    img: "/icon/tailwind.svg",
   },
   {
     name: "Bootstrap",
     desc: "Front-End Dev",
-    img: (
-      <Image
-        width={72}
-        height={72}
-        alt="programming"
-        src="/icon/bootstrap.svg"
-      />
-    ),
+    img: "/icon/bootstrap.svg",
   },
   {
     name: "GIT",
     desc: "Utilities Dev",
-    img: <Image width={72} height={72} alt="programming" src="/icon/git.svg" />,
+    img: "/icon/git.svg",
   },
   {
     name: "Firebase",
     desc: "Back-End Dev",
-    img: (
-      <Image
-        width={72}
-        height={72}
-        alt="programming"
-        src="/icon/firebase.svg"
-      />
-    ),
+    img: "/icon/firebase.svg",
   },
 ];
 
@@ -99,64 +64,32 @@ export const listSoftwareSecond = [
   {
     name: "After Effects",
     desc: "Motion Graphic",
-    img: (
-      <Image
-        width={72}
-        height={72}
-        alt="programming"
-        src="/icon/after-effects.svg"
-      />
-    ),
+    img: "/icon/after-effects.svg",
   },
   {
     name: "Wordpress",
     desc: "CMS Dev",
-    img: (
-      <Image
-        width={72}
-        height={72}
-        alt="programming"
-        src="/icon/wordpress.svg"
-      />
-    ),
+    img: "/icon/wordpress.svg",
   },
   {
     name: "Python",
     desc: "Data Science",
-    img: (
-      <Image width={72} height={72} alt="programming" src="/icon/python.svg" />
-    ),
+    img: "/icon/python.svg",
   },
   {
     name: "Autocad",
     desc: "Drawing Construction",
-    img: (
-      <Image width={72} height={72} alt="programming" src="/icon/autocad.svg" />
-    ),
+    img: "/icon/autocad.svg",
   },
   {
     name: "Android Studio",
     desc: "App Mobile Development",
-    img: (
-      <Image
-        width={72}
-        height={72}
-        alt="programming"
-        src="/icon/android-studio.svg"
-      />
-    ),
+    img: "/icon/android-studio.svg",
   },
   {
     name: "Codeigniter",
     desc: "Back-End Dev",
-    img: (
-      <Image
-        width={72}
-        height={72}
-        alt="programming"
-        src="/icon/codeigniter.svg"
-      />
-    ),
+    img: "/icon/codeigniter.svg",
   },
 ];
 

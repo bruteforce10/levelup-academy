@@ -1,6 +1,6 @@
 import Header from "./components/header";
 import CategorySection from "./components/category-section";
-import ListSoftware from "./components/listSoftware";
+import ListSoftware from "./components/ListSoftware";
 import Testimoni from "./components/testimoni";
 import Faq from "./components/Faq";
 

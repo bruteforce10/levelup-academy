@@ -2,7 +2,7 @@ import React from "react";
 import Marquee from "react-fast-marquee";
 import Heading from "./heading";
 import { listSoftware, listSoftwareSecond } from "@/lib/data";
-import CardSoftware from "./card-software";
+import CardSoftware from "./CardSoftware";
 
 export default function ListSoftware() {
   return (
