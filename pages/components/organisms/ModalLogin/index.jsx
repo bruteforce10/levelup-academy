@@ -2,15 +2,18 @@
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import FormLogin from "./FormLogin";
+import Image from "next/image";
 
 export default function ModalLogin() {
   return (
     <dialog id="my_modal_1" className="modal ">
       <div className="bg-white absolute flex gap-8  w-[60%] max-sm:w-[95%]  rounded-[30px] overflow-clip">
         <div className="md:w-5/12 hidden md:block">
-          <img
+          <Image
             src="/cover-login.png"
             alt="logo"
+            width={400}
+            height={400}
             className="h-full object-cover"
           />
         </div>
