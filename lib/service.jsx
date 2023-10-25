@@ -127,6 +127,9 @@ export const getUserName = async (id) => {
         id
         name
         email
+        image {
+          url
+        }
         password
       }
     }
@@ -145,23 +148,44 @@ export const updateUser = async (data) => {
       updateAccount(
         data: { image: { connect: { id: "` +
     data.id +
-    `" } }, goals: "` +
-    data.goals +
-    `"}
+    `" } } }
         where: { id: "` +
     data.name +
     `" }
       ) {
         id
+        image {
+          url
+        }
       }
       publishAsset(where: { id: "` +
     data.id +
-    `"
-  }) {
+    `" }) {
         id
       }
       publishAccount(where: { id: "` +
     data.name +
+    `" }) {
+        id
+      }
+    }
+  `;
+
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result;
+};
+
+export const updateGoal = async (data) => {
+  const query =
+    gql`
+    mutation MyMutation {
+      updateAccount(data: { goals: "` +
+    data.goals +
+    `" }, where: { id: "` +
+    data.id +
     `" }) {
         id
       }

@@ -3,19 +3,21 @@ import Image from "next/image";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { getUserName, updateUser } from "@/lib/service";
+import { getUserName, updateGoal, updateUser } from "@/lib/service";
+import clsx from "clsx";
 
 export default function UploadProfile() {
   const [getData, setGetData] = useState({
     name: "",
     email: "",
+    image: "",
     password: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(true);
+  const [loadingImage, setLoadingImage] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [data, setData] = useState({
     id: "",
-    file: "",
     select: "",
   });
   const [error, setError] = useState({
@@ -34,6 +36,7 @@ export default function UploadProfile() {
         ...getData,
         name: nameResult?.account?.name,
         email: nameResult?.account?.email,
+        image: nameResult?.account?.image?.url,
         password: nameResult?.account?.password,
       });
     });
@@ -65,18 +68,44 @@ export default function UploadProfile() {
         file: `File harus kurang dari 1MB`,
       });
     } else {
-      setData({
-        ...data,
-        file,
+      setLoadingImage(true);
+      setIsSubmitting(true);
+      const url =
+        "https://api-ap-southeast-2.hygraph.com/v2/clnrgq1m6llmt01uo7zk9hnhc/master/upload";
+      const token =
+        "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImdjbXMtbWFpbi1wcm9kdWN0aW9uIn0.eyJ2ZXJzaW9uIjozLCJpYXQiOjE2OTgwMTg3MDAsImF1ZCI6WyJodHRwczovL2FwaS1hcC1zb3V0aGVhc3QtMi5oeWdyYXBoLmNvbS92Mi9jbG5yZ3ExbTZsbG10MDF1bzd6azlobmhjL21hc3RlciIsIm1hbmFnZW1lbnQtbmV4dC5ncmFwaGNtcy5jb20iXSwiaXNzIjoiaHR0cHM6Ly9tYW5hZ2VtZW50LmdyYXBoY21zLmNvbS8iLCJzdWIiOiI5ODk4YmVjZC04NGQ5LTQ1ODAtYTE1ZS1iOTg5NDZjY2NhMzYiLCJqdGkiOiJjbG8yNGhxcmVlbWZuMDF1a2F2eXcxcWtlIn0.xQBudreGtSdTG3ien8M2ulu-oa9Q5KXx8NPDU22YwNCHa_qIMpWgmGCfURyH1WAt0due_hoZfhRaUMtB0t74HmfdEGikXZVa1FQoQxNnhxrEU4y_dcJE2LDk5Q64XX2cA81-FZyHRbflqsCalewXK0l3Ds68ZRLbKKXBQLPT6ZsLryi0iyc9LPYFZMtxI5DhUo7YppNeTNi62HA9qfZOiOA75D5CvXmTFcKWsZ6zp90hMgERLK0nvSQ3OmevtYKmDmM6XgiLbyY3hgdnZfpp0YG1KE0F-glbk8KNNJhhm340HY0t1RcBesLBaivy22-O9KrqjBi0yQWKkujUG_N5ZmU73zi19DSBxZxfZY5oEdBVQK-d7UZUZNshmgPIr2GFjZ61O_lhQ1T1h1R5fvln1sweLniX6Uqsg2Sp9E8FSXSLObTDgAf0xNlQ1rXntdqtH4r9kwIlDwvBvbHmWvFKu7OYsIDdpxQXDNy1mAObjlZYj5f6GvHY89DO-sWjKYldiiXUKTtf4q3Dnuah5eix0uuz5pX7FfmrIz-SNyKNGrw_lhHoJiENFTCRmvmEyOn-jCvfaphYwoRLLiMHFDHPusnpLFNhC73gA8y3gtUtfyGxSK_5aMA5LNoYLIMw4LJnXzrIpXfeqiJYMw-X8mJvhFvUJom2GhHiG-DZLGMFiaQ";
+
+      const form = new FormData();
+      form.append("fileUpload", file);
+      const response = await fetch(url, {
+        method: "POST",
+        body: form,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
-      setIsSubmitting(false);
+      const result = await response.json();
+
+      if (result.id) {
+        updateUser({
+          id: result.id,
+          name: data.id,
+        }).then(async (result) => {
+          setData({
+            ...data,
+            file: result?.updateAccount.image?.url,
+          });
+          setLoadingImage(false);
+          setIsSubmitting(false);
+        });
+      }
     }
   };
 
   const onSelect = (e) => {
     setData({
       ...data,
-      select: e.target.value,
+      [e.target.name]: e.target.value,
     });
     setError({
       ...error,
@@ -87,9 +116,6 @@ export default function UploadProfile() {
 
   const validate = () => {
     const newError = { ...error };
-    if (!data.file) {
-      newError.file = "Profile harus diisi";
-    }
 
     if (!data.select) {
       newError.select = "Keahlian harus diisi";
@@ -107,27 +133,13 @@ export default function UploadProfile() {
       setError(findErrors);
     } else {
       setLoading(true);
-      const url =
-        "https://api-ap-southeast-2.hygraph.com/v2/clnrgq1m6llmt01uo7zk9hnhc/master/upload";
-      const token =
-        "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImdjbXMtbWFpbi1wcm9kdWN0aW9uIn0.eyJ2ZXJzaW9uIjozLCJpYXQiOjE2OTgwMTg3MDAsImF1ZCI6WyJodHRwczovL2FwaS1hcC1zb3V0aGVhc3QtMi5oeWdyYXBoLmNvbS92Mi9jbG5yZ3ExbTZsbG10MDF1bzd6azlobmhjL21hc3RlciIsIm1hbmFnZW1lbnQtbmV4dC5ncmFwaGNtcy5jb20iXSwiaXNzIjoiaHR0cHM6Ly9tYW5hZ2VtZW50LmdyYXBoY21zLmNvbS8iLCJzdWIiOiI5ODk4YmVjZC04NGQ5LTQ1ODAtYTE1ZS1iOTg5NDZjY2NhMzYiLCJqdGkiOiJjbG8yNGhxcmVlbWZuMDF1a2F2eXcxcWtlIn0.xQBudreGtSdTG3ien8M2ulu-oa9Q5KXx8NPDU22YwNCHa_qIMpWgmGCfURyH1WAt0due_hoZfhRaUMtB0t74HmfdEGikXZVa1FQoQxNnhxrEU4y_dcJE2LDk5Q64XX2cA81-FZyHRbflqsCalewXK0l3Ds68ZRLbKKXBQLPT6ZsLryi0iyc9LPYFZMtxI5DhUo7YppNeTNi62HA9qfZOiOA75D5CvXmTFcKWsZ6zp90hMgERLK0nvSQ3OmevtYKmDmM6XgiLbyY3hgdnZfpp0YG1KE0F-glbk8KNNJhhm340HY0t1RcBesLBaivy22-O9KrqjBi0yQWKkujUG_N5ZmU73zi19DSBxZxfZY5oEdBVQK-d7UZUZNshmgPIr2GFjZ61O_lhQ1T1h1R5fvln1sweLniX6Uqsg2Sp9E8FSXSLObTDgAf0xNlQ1rXntdqtH4r9kwIlDwvBvbHmWvFKu7OYsIDdpxQXDNy1mAObjlZYj5f6GvHY89DO-sWjKYldiiXUKTtf4q3Dnuah5eix0uuz5pX7FfmrIz-SNyKNGrw_lhHoJiENFTCRmvmEyOn-jCvfaphYwoRLLiMHFDHPusnpLFNhC73gA8y3gtUtfyGxSK_5aMA5LNoYLIMw4LJnXzrIpXfeqiJYMw-X8mJvhFvUJom2GhHiG-DZLGMFiaQ";
-
-      const form = new FormData();
-      form.append("fileUpload", data.file);
-      const response = await fetch(url, {
-        method: "POST",
-        body: form,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      const result = await updateGoal({
+        id: data.id,
+        goals: data.select,
       });
-      const result = await response.json();
-      if (result.id) {
-        updateUser({ id: result.id, name: data.id, goals: data.select }).then(
-          async (result) => {
-            router.push("/");
-          }
-        );
+      if (result) {
+        router.push("/");
+        setLoading(false);
       }
     }
   };
@@ -159,21 +171,24 @@ export default function UploadProfile() {
 
           <div className=" mt-20 max-lg:mx-auto lg:ml-[600px] w-8/12 h-screen">
             <div className="space-y-6 mb-10 text-center">
-              {data?.file ? (
+              {getData.image ? (
                 <img
-                  src={URL.createObjectURL(data?.file)}
+                  src={getData.image}
                   alt="avatar"
                   width={84}
                   height={84}
-                  className=" mx-auto w-[84px] h-[84px] object-cover rounded-full"
+                  className={clsx(
+                    " mx-auto w-[84px] h-[84px] object-cover rounded-full",
+                    loadingImage && "animate-bounce"
+                  )}
                 />
               ) : (
-                <Image
+                <img
                   src={"/icon/upload.svg"}
                   alt="upload-file"
                   width={84}
                   height={84}
-                  className=" mx-auto"
+                  className={clsx("mx-auto", loadingImage && "animate-bounce")}
                 />
               )}
 
