@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import Head from "next/head";
 import { useEffect, useState } from "react";
@@ -52,7 +53,7 @@ export default function UploadProfile() {
         "image/jpg",
         "image/webp",
         "image/gif",
-      ].includes(file.type)
+      ].includes(file?.type)
     ) {
       setError({
         ...error,
@@ -158,13 +159,13 @@ export default function UploadProfile() {
 
           <div className=" mt-20 max-lg:mx-auto lg:ml-[600px] w-8/12 h-screen">
             <div className="space-y-6 mb-10 text-center">
-              {data.file ? (
-                <Image
-                  src={URL.createObjectURL(data.file)}
+              {data?.file ? (
+                <img
+                  src={URL.createObjectURL(data?.file)}
                   alt="avatar"
                   width={84}
                   height={84}
-                  className=" mx-auto rounded-full"
+                  className=" mx-auto w-[84px] h-[84px] object-cover rounded-full"
                 />
               ) : (
                 <Image
