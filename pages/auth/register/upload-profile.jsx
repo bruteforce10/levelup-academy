@@ -10,7 +10,6 @@ export default function UploadProfile() {
   const [getData, setGetData] = useState({
     name: "",
     email: "",
-    image: "",
     password: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(true);
@@ -19,6 +18,7 @@ export default function UploadProfile() {
   const [data, setData] = useState({
     id: "",
     select: "",
+    image: "",
   });
   const [error, setError] = useState({
     file: "",
@@ -31,12 +31,12 @@ export default function UploadProfile() {
       setData({
         ...data,
         id: nameResult?.account?.id,
+        image: nameResult?.account?.image?.url,
       });
       setGetData({
         ...getData,
         name: nameResult?.account?.name,
         email: nameResult?.account?.email,
-        image: nameResult?.account?.image?.url,
         password: nameResult?.account?.password,
       });
     });
@@ -93,7 +93,7 @@ export default function UploadProfile() {
         }).then(async (result) => {
           setData({
             ...data,
-            file: result?.updateAccount.image?.url,
+            image: result?.updateAccount.image?.url,
           });
           setLoadingImage(false);
           setIsSubmitting(false);
@@ -140,7 +140,7 @@ export default function UploadProfile() {
         goals: data.select,
       });
       if (result) {
-        // router.push("/");
+        router.push("/");
         setLoading(false);
       }
     }
@@ -173,9 +173,9 @@ export default function UploadProfile() {
 
           <div className=" mt-20 max-lg:mx-auto lg:ml-[600px] w-8/12 h-screen">
             <div className="space-y-6 mb-10 text-center">
-              {getData.image ? (
+              {getData.image || data.image ? (
                 <img
-                  src={getData.image}
+                  src={getData.image || data.image}
                   alt="avatar"
                   width={84}
                   height={84}
