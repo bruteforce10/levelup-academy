@@ -100,3 +100,22 @@ export const faq = [
       "Level-Up menyediakan kelas online UI/UX Design, Web Development, Freelancer, Data Science yang bisa dipelajari secara gratis, sangat dianjurkan untuk pemula atau Anda yang ingin switch career. Setelah menyelesaikan kelas gratis, BuildWithAngga menyarankan Anda mengikuti kelas Premium dalam membangun portfolio yang digunakan sebagai modal bekerja.",
   },
 ];
+
+export const goalsTarget = [
+  "UX Designer",
+  "UI Designer",
+  "Front-End Developer",
+  "Back-End Developer",
+  "Mobile App Developer",
+  "Full-Stack Developer",
+  "Lifetime Learner",
+  "Data Scientist",
+  "Project Manager",
+  "Logo Designer",
+  "Drafter",
+  "Graphic Designer",
+  "Motion Graphic",
+  "3D Modelling",
+  "Video Editor",
+  "Engineer",
+];

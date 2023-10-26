@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { getUserName, updateGoal, updateUser } from "@/lib/service";
 import clsx from "clsx";
+import { signIn } from "next-auth/react";
+import { goalsTarget } from "@/lib/data";
 
 export default function UploadProfile() {
   const [getData, setGetData] = useState({
@@ -15,9 +17,9 @@ export default function UploadProfile() {
   const [isSubmitting, setIsSubmitting] = useState(true);
   const [loadingImage, setLoadingImage] = useState(false);
   const [isLoading, setLoading] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("");
   const [data, setData] = useState({
     id: "",
-    select: "",
     image: "",
   });
   const [error, setError] = useState({
@@ -102,16 +104,13 @@ export default function UploadProfile() {
     }
   };
 
-  const onSelect = (e) => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    });
+  const onSelect = (value) => {
+    setSelectedOption(value);
     setError({
       ...error,
       select: "",
     });
-    if (data.select) {
+    if (selectedOption) {
       setIsSubmitting(false);
     }
   };
@@ -119,7 +118,7 @@ export default function UploadProfile() {
   const validate = () => {
     const newError = { ...error };
 
-    if (!data?.select) {
+    if (!selectedOption) {
       newError.select = "Keahlian harus diisi";
     }
 
@@ -140,7 +139,14 @@ export default function UploadProfile() {
         goals: data.select,
       });
       if (result) {
-        router.push("/");
+        const res = await signIn("credentials", {
+          redirect: false,
+          email: result.updateAccount.email,
+          password: result.updateAccount.password,
+        });
+        if (res.ok) {
+          router.push("/");
+        }
         setLoading(false);
       }
     }
@@ -223,37 +229,21 @@ export default function UploadProfile() {
                 <label className="label">
                   <span className="label-text text-lg">Personal Goals</span>
                 </label>
-                <select
-                  className="select select-ghost  bg-[#E5E9F2] rounded-full"
-                  name="select"
-                  onChange={onSelect}
-                >
-                  <option disabled selected>
-                    Pilih Keahlian
-                  </option>
-                  <option value="UX Designer">UX Designer</option>
-                  <option value="UI Designer">UI Designer</option>
-                  <option value="Front-End Developer">
-                    Front-End Developer
-                  </option>
-                  <option value="Back-End Developer">Back-End Developer</option>
-                  <option value="Mobile App Developer">
-                    Mobile App Developer
-                  </option>
-                  <option value="Full-Stack Developer">
-                    Full-Stack Developer
-                  </option>
-                  <option value="Lifetime Learner">Lifetime Learner</option>
-                  <option value="Data Scientist">Data Scientist</option>
-                  <option value="Project Manager">Project Manager</option>
-                  <option value="Logo Designer">Logo Designer</option>
-                  <option value="Drafter">Drafter</option>
-                  <option value="Graphic Designer">Graphic Designer</option>
-                  <option value="Motion Graphic">Motion Graphic</option>
-                  <option value="3D Modelling">3D Modelling</option>
-                  <option value="Video Editor">Video Editor</option>
-                  <option value="Engineer">Engineer</option>
-                </select>
+                <div className="dropdown dropdown-bottom">
+                  <label tabIndex={0} className="btn m-1">
+                    {selectedOption || "Pilih Keahlian"}
+                  </label>
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                  >
+                    {goalsTarget.map((option, index) => (
+                      <li key={index} onClick={() => onSelect(option)}>
+                        <a>{option}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                 <label className="label">
                   <span className="label-text-alt text-red-500">
                     {error.select}

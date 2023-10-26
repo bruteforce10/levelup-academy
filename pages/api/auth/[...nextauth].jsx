@@ -41,10 +41,12 @@ export const authOptions = {
   ],
   callbacks: {
     async jwt({ token, account, profile, user }) {
+      console.log(user);
       if (account?.provider === "credentials") {
         token.email = user.email;
         token.name = user.name;
         token.role = user.role;
+        token.image = user?.image?.url;
       }
 
       if (account?.provider === "google") {
@@ -69,6 +71,9 @@ export const authOptions = {
       }
       if ("name" in token) {
         session.user.name = token.name;
+      }
+      if ("image" in token) {
+        session.user.image = token.image;
       }
       return session;
     },

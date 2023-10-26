@@ -19,6 +19,9 @@ export const signUp = async (userData) => {
         id
         name
         email
+        image {
+          url
+        }
         password
       }
       publishAccount(where: {email: "` +
@@ -105,6 +108,9 @@ export const getUser = async (userData) => {
         email
         name
         id
+        image {
+          url
+        }
         role
         password
       }
@@ -188,6 +194,11 @@ export const updateGoal = async (data) => {
     data.id +
     `" }) {
         id
+        email
+        image {
+          url
+        }
+        password
       }
     }
   `;

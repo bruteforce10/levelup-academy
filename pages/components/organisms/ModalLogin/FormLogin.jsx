@@ -115,9 +115,9 @@ export default function FormLogin() {
             <span className="label-text-alt text-red-500">
               {error.password}
             </span>
-            <span className="label-text-alt text-sm cursor-pointer text-gray-400 hover:scale-95 origin-top-right transition-all">
+            {/* <span className="label-text-alt text-sm cursor-pointer text-gray-400 hover:scale-95 origin-top-right transition-all">
               Lupa Password
-            </span>
+            </span> */}
           </label>
         </div>
         <div className="space-y-4">
