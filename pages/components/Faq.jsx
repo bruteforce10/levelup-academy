@@ -1,9 +1,10 @@
 import React from "react";
 import Heading from "./heading";
+import { faqQuest } from "@/lib/data";
 
 export default function Faq() {
   return (
-    <section className="container px-8 mx-auto mt-20 mb-[2000px]">
+    <section className="container lg:px-8 px-4 mx-auto mt-20 ">
       <Heading
         tag={"Tanya Mimin Level-Up"}
         judul={
@@ -11,37 +12,19 @@ export default function Faq() {
             Frequently Asked <br /> Questions 😊
           </span>
         }
-        align={"sm:text-center"}
+        align={"text-center"}
       />
 
-      <div className="grid grid-cols-2 gap-12">
-        <div className="collapse bg-base-200">
-          <input type="radio" name="my-accordion-1" checked="checked" />
-          <div className="collapse-title text-xl font-medium">
-            Click to open this one and close others
+      <div className="grid md:grid-cols-2 gap-6 gridcols-1">
+        {faqQuest.map((item, index) => (
+          <div className="collapse collapse-plus bg-base-200 h-fit" key={index}>
+            <input type="radio" name="my-accordion-3" />
+            <div className="collapse-title text-xl font-medium">
+              {item.question}
+            </div>
+            <div className="collapse-content">{item.answer}</div>
           </div>
-          <div className="collapse-content">
-            <p>hello</p>
-          </div>
-        </div>
-        <div className="collapse bg-base-200">
-          <input type="radio" name="my-accordion-1" />
-          <div className="collapse-title text-xl font-medium">
-            Click to open this one and close others
-          </div>
-          <div className="collapse-content">
-            <p>hello</p>
-          </div>
-        </div>
-        <div className="collapse bg-base-200">
-          <input type="radio" name="my-accordion-1" />
-          <div className="collapse-title text-xl font-medium">
-            Click to open this one and close others
-          </div>
-          <div className="collapse-content">
-            <p>hello</p>
-          </div>
-        </div>
+        ))}
       </div>
     </section>
   );

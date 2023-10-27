@@ -1,10 +1,10 @@
 import Image from "next/image";
 import React from "react";
 
-export default function CardSoftware({ item }) {
+export default function CardTestimoni({ item }) {
   return (
     <div
-      className="flex px-3 gap-4 items-center border-2 border-white md:w-[300px]  py-4 rounded-2xl mx-2  md:mx-4 bg-[#fff] shadow-sm  cursor-pointer
+      className="flex px-3 gap-4 items-center border-2 border-white md:w-[300px] w-[200px] py-4 rounded-2xl mx-2  md:mx-4 bg-[#fff] shadow-sm  cursor-pointer
         hover:border-prime hover:border-2 transition-all box-border h-auto"
     >
       <div className="md:w-[72px] w-[60px]">

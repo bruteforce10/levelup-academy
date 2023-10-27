@@ -106,13 +106,12 @@ export default function UploadProfile() {
 
   const onSelect = (value) => {
     setSelectedOption(value);
+
     setError({
       ...error,
       select: "",
     });
-    if (selectedOption) {
-      setIsSubmitting(false);
-    }
+    setIsSubmitting(false);
   };
 
   const validate = () => {
@@ -136,7 +135,7 @@ export default function UploadProfile() {
       setLoading(true);
       const result = await updateGoal({
         id: data.id,
-        goals: data.select,
+        goals: selectedOption,
       });
       if (result) {
         const res = await signIn("credentials", {
@@ -157,7 +156,7 @@ export default function UploadProfile() {
       <Head>
         <title>Lengkapi Profile Belajar Level-Up</title>
       </Head>
-      <div>
+      <div className="bg-[#F6F8FD] h-[800px]">
         <Image
           src={"/img/logo.png"}
           alt="logo"
@@ -177,7 +176,7 @@ export default function UploadProfile() {
             />
           </div>
 
-          <div className=" mt-20 max-lg:mx-auto lg:ml-[600px] w-8/12 h-screen">
+          <div className=" mt-20 max-lg:mx-auto lg:ml-[600px] w-8/12 ">
             <div className="space-y-6 mb-10 text-center">
               {getData.image || data.image ? (
                 <img
@@ -205,7 +204,7 @@ export default function UploadProfile() {
               </div>
             </div>
             <form onSubmit={handleSubmit}>
-              <div className="form-control w-full mb-2">
+              <div className="form-control w-full ">
                 <label className="label">
                   <span className="label-text text-lg">Upload Avatar</span>
                 </label>
@@ -229,16 +228,20 @@ export default function UploadProfile() {
                 <label className="label">
                   <span className="label-text text-lg">Personal Goals</span>
                 </label>
-                <div className="dropdown dropdown-bottom">
-                  <label tabIndex={0} className="btn m-1">
+                <div className="dropdown dropdown-bottom ">
+                  <label tabIndex={0} className="btn m-1 bg-[#E5E9F2]">
                     {selectedOption || "Pilih Keahlian"}
                   </label>
                   <ul
                     tabIndex={0}
-                    className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                    className="dropdown-content z-[1] menu p-2 shadow bg-white  rounded-box block w-52 h-[250px] overflow-y-auto"
                   >
                     {goalsTarget.map((option, index) => (
-                      <li key={index} onClick={() => onSelect(option)}>
+                      <li
+                        className="block"
+                        key={index}
+                        onClick={() => onSelect(option)}
+                      >
                         <a>{option}</a>
                       </li>
                     ))}

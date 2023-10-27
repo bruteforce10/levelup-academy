@@ -6,7 +6,7 @@ import Heading from "./heading";
 
 export default function CategorySection() {
   return (
-    <section className="container px-8 mx-auto mt-20">
+    <section className="container lg:px-8 px-4 mx-auto mt-20">
       <Heading
         tag={"Start Learning Today"}
         judul={

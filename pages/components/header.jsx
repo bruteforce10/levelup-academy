@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function Header() {
   return (
     <div className="bg-[url('../public/img/background.png')] bg-contain bg-top h-fit w-full">
-      <div className="container lg:px-8 mx-auto px-4 ">
+      <div className="container  lg:px-8 mx-auto px-4 ">
         <main className=" mt-[-300px] text-white   ">
           <div className="sm:pt-[380px] pt-[350px] ">
             <div className="flex gap-4  max-lg:flex-wrap ">

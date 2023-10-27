@@ -11,7 +11,7 @@ const jakarta = Plus_Jakarta_Sans({
 export default function Layout({ children }) {
   const params = usePathname();
   return (
-    <div className={`bg-[#F6F8FD] ${jakarta.className} `}>
+    <div className={`bg-[#F6F8FD]  ${jakarta.className} `}>
       {params !== "/auth/login" &&
         params !== "/auth/register" &&
         params !== "/auth/register/upload-profile" && (

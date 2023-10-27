@@ -93,11 +93,80 @@ export const listSoftwareSecond = [
   },
 ];
 
-export const faq = [
+export const faqQuest = [
   {
     question: "Apakah seorang pemula bisa ikut belajar?",
-    answer:
-      "Level-Up menyediakan kelas online UI/UX Design, Web Development, Freelancer, Data Science yang bisa dipelajari secara gratis, sangat dianjurkan untuk pemula atau Anda yang ingin switch career. Setelah menyelesaikan kelas gratis, BuildWithAngga menyarankan Anda mengikuti kelas Premium dalam membangun portfolio yang digunakan sebagai modal bekerja.",
+    answer: (
+      <p className="leading-relaxed">
+        Level-Up menyediakan kelas online UI/UX Design, Web Development,
+        Freelancer, Data Science yang bisa dipelajari secara gratis, sangat
+        dianjurkan untuk pemula atau Anda yang ingin switch career. Setelah
+        menyelesaikan kelas gratis, BuildWithAngga menyarankan Anda mengikuti
+        kelas Premium dalam membangun portfolio yang digunakan sebagai modal
+        bekerja.
+      </p>
+    ),
+  },
+  {
+    question: "Apakah ini berlangganan?",
+    answer: (
+      <p className="leading-relaxed">
+        Tidak, disini sistemnya sekali pembayaran untuk 1 kelasnya. Kelas bisa
+        kamu akses selamanya.
+        <br />
+        <b>*Akses selamanya</b> tergantung kebijakan kami kedepannya. Misal
+        nantinya kebijakan berubah, kami pastikan paling tidak setiap peserta
+        minimal mendapat akses 1 tahun.
+      </p>
+    ),
+  },
+  {
+    question: "Bagaimana cara belajarnya ?",
+    answer: (
+      <p className="leading-relaxed">
+        Setelah anda melakukan pembayaran, nanti akan ada pemberitahuan di
+        email. Lalu anda login menggunakan ID dan Password yang telah dibuat.
+        Materi ada di kolom Enrolled Courses
+      </p>
+    ),
+  },
+  {
+    question: "Kapan saya bisa memulai kursus ini ?",
+    answer: (
+      <p className="leading-relaxed">
+        Setelah melakukan pembayaran, tunggu 5-10 menit. Nanti akan ada
+        notification di email anda
+      </p>
+    ),
+  },
+  {
+    question: "Bagaimana caranya saya membeli produk ini ?",
+    answer: (
+      <p className="leading-relaxed">
+        Anda klik “Daftar Sekarang” lalu ikuti alur Checkout nya. Ingat !
+        nominal harus sesuai dengan kolom “Total” agar sistem membaca secara
+        otomatis. Lakukan pembayaran maksimal 1×24 Jam
+      </p>
+    ),
+  },
+  {
+    question: "Bagaimana jika saya ingin membeli dua produk/lebih sekaligus ?",
+    answer: (
+      <p className="leading-relaxed">
+        Silahkan anda pilih salah satu kelas saja terlebih dahulu, lalu klik
+        “Daftar Sekarang”. Setelah itu klik “Lanjutkan Pembayaran” dan pilih
+        kelas lain yang ingin anda beli.
+      </p>
+    ),
+  },
+  {
+    question: "Apakah kelas ini mendapatkan Sertifikat ?",
+    answer: (
+      <p className="leading-relaxed">
+        Iya ! di kelas ini anda akan mendapatkan sertifikat. Nanti akan
+        disediakan di Dashboard Kelas masing-masing
+      </p>
+    ),
   },
 ];
 

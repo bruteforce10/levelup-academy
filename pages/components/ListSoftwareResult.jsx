@@ -7,16 +7,18 @@ import CardSoftware from "./CardSoftware";
 export default function ListSoftwareResult() {
   return (
     <section className="mt-20">
-      <Heading
-        tag={"Mastering Development Skills"}
-        judul={
-          <span>
-            Level-Up Class Online. <br />
-            Materi Paling Update.
-          </span>
-        }
-        align={"sm:text-center"}
-      />
+      <div className="container lg:px-8 px-4 mx-auto">
+        <Heading
+          tag={"Mastering Development Skills"}
+          judul={
+            <span>
+              Level-Up Class Online. <br />
+              Materi Paling Update.
+            </span>
+          }
+          align={"max-sm:text-center"}
+        />
+      </div>
       <Marquee className=" pb-10  " pauseOnHover={true}>
         {listSoftware.map((item, index) => (
           <CardSoftware key={index} item={item} />
