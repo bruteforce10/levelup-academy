@@ -7,7 +7,7 @@ export default function TestimoniItems({ isReverse }) {
   return (
     <motion.div
       animate={{
-        transform: isReverse ? "translateY(-300px)" : "translateY(300px)",
+        transform: isReverse ? "translateY(-550px)" : "translateY(550px)",
       }}
       transition={{
         duration: 10,
@@ -16,7 +16,7 @@ export default function TestimoniItems({ isReverse }) {
         ease: "easeInOut",
         delay: 1,
       }}
-      className={clsx(isReverse ? "mt-[0] " : "mt-[-300px] ")}
+      className={clsx(isReverse ? "mt-[0] " : "mt-[-550px] ")}
     >
       <div className="w-full space-y-4  ">
         {[1, 2, 3, 4, 5].map((item, index) => (

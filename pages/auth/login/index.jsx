@@ -4,7 +4,7 @@ import React from "react";
 
 export default function Login() {
   return (
-    <div>
+    <div className="bg-[#F6F8FD]  h-[800px]">
       <Image
         src={"/img/logo.png"}
         alt="logo"
@@ -23,7 +23,7 @@ export default function Login() {
           />
         </div>
 
-        <div className=" mt-20 max-lg:mx-auto lg:ml-[600px] w-8/12 ">
+        <div className=" mt-20 max-lg:mx-auto lg:ml-[600px] w-8/12 h-full  ">
           <FormLogin />
         </div>
       </div>

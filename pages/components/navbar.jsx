@@ -39,7 +39,7 @@ export default function NavbarPage({ params }) {
       className={clsx(
         " py-4 px-8 top-[-100px] transition-all sticky z-10 ",
         isScrolled &&
-          "sticky top-[-12px] delay-500 bg-white/90 backdrop-blur-sm   "
+          "sticky top-[-12px] delay-500 bg-white/90 backdrop-blur-sm  z-[99]  "
       )}
     >
       <nav
@@ -47,13 +47,13 @@ export default function NavbarPage({ params }) {
           "flex items-center gap-4 justify-center container mx-auto  max-lg:justify-between relative "
         }
       >
-        <div className="lg:w-1/12 max-sm:w-3/12 w-2/12 ">
-          {isScrolled || params == "/kelas" ? (
+        <Link href={"/"} className="lg:w-1/12 max-sm:w-3/12 w-2/12 ">
+          {isScrolled || params == "/kelas" || params == "/testimonials" ? (
             <Image src={Logo} alt="logo" className="w-full" />
           ) : (
             <Image src={LogoWhite} alt="logo" className="w-full" />
           )}
-        </div>
+        </Link>
         <ul
           className={clsx(
             "items-center lg:space-x-8 lg:w-8/12 max-lg:fixed lg:flex max-lg:top-[80px]  transition-all max-lg:left-0 max-lg:bg-tersier w-[300px] lg:h-0 h-screen ",
@@ -62,7 +62,7 @@ export default function NavbarPage({ params }) {
         >
           <li
             className={
-              isScrolled || params == "/kelas"
+              isScrolled || params == "/kelas" || params == "/testimonials"
                 ? "py-8 px-12 lg:p-0 text-black"
                 : "py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -71,7 +71,7 @@ export default function NavbarPage({ params }) {
           </li>
           <li
             className={
-              isScrolled || params == "/kelas"
+              isScrolled || params == "/kelas" || params == "/testimonials"
                 ? "flex gap-2 items-center py-8 px-12 lg:p-0 text-black"
                 : "flex gap-2 items-center py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -80,7 +80,7 @@ export default function NavbarPage({ params }) {
           </li>
           <li
             className={
-              isScrolled || params == "/kelas"
+              isScrolled || params == "/kelas" || params == "/testimonials"
                 ? "py-8 px-12 lg:p-0 text-black"
                 : "py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -89,7 +89,7 @@ export default function NavbarPage({ params }) {
           </li>
           <li
             className={
-              isScrolled || params == "/kelas"
+              isScrolled || params == "/kelas" || params == "/testimonials"
                 ? "py-8 px-12 lg:p-0 text-black"
                 : "py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -104,7 +104,7 @@ export default function NavbarPage({ params }) {
               : "items-center justify-end text-deep lg:space-x-4 max-lg:space-y-4 max-lg:fixed max-lg:top-[470px] max-lg:left-[30px] lg:flex max-lg:w-[200px] w-3/12 transition-all max-lg:hidden"
           }
         >
-          <div className="bg-tersier p-4 rounded-full cursor-pointer flex items-center gap-2">
+          <div className="bg-tersier p-4  rounded-full cursor-pointer flex items-center gap-2">
             <BsSearch />
             <p className="lg:hidden">Search...</p>
           </div>
@@ -117,11 +117,13 @@ export default function NavbarPage({ params }) {
               >
                 <p
                   className={
-                    !isScrolled
-                      ? `text-tersier font-medium text-[18px] ${
+                    isScrolled ||
+                    params == "/kelas" ||
+                    params == "/testimonials"
+                      ? `text-deep font-medium text-[18px]  ${
                           !open ? "hidden" : ""
                         } `
-                      : `text-deep font-medium text-[18px]  ${
+                      : `text-tersier font-medium text-[18px] ${
                           !open ? "hidden" : ""
                         } `
                   }
@@ -176,9 +178,9 @@ export default function NavbarPage({ params }) {
         <div
           ref={toggleNavbar}
           className={
-            !isScrolled
-              ? "p-2 rounded-xl border-2 border-tersier  lg:hidden cursor-pointer"
-              : "p-2 rounded-xl border-2 border-deep/20  lg:hidden cursor-pointer"
+            isScrolled || params == "/kelas" || params == "/testimonials"
+              ? "p-2 rounded-xl border-2 border-deep/20  lg:hidden cursor-pointer"
+              : "p-2 rounded-xl border-2 border-tersier  lg:hidden cursor-pointer"
           }
           onClick={(event) => {
             event.stopPropagation();
@@ -187,7 +189,11 @@ export default function NavbarPage({ params }) {
         >
           <BiMenu
             size={32}
-            className={!isScrolled ? "text-white" : "text-deep"}
+            className={
+              isScrolled || params == "/kelas" || params == "/testimonials"
+                ? "text-deep"
+                : "text-white"
+            }
           />
         </div>
       </nav>

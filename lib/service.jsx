@@ -1,3 +1,4 @@
+import { parseValue } from "graphql";
 import request, { gql } from "graphql-request";
 
 export const signUp = async (userData) => {
@@ -208,4 +209,57 @@ export const updateGoal = async (data) => {
     query
   );
   return result;
+};
+
+export const postComment = async (data) => {
+  const query =
+    gql`
+    mutation MyMutation {
+      createTestimoniLevelup(
+        data: {
+          title: "` +
+    data.title +
+    `"
+          description: "` +
+    String(data.desc) +
+    `"
+          account: { connect: { email: "` +
+    data.email +
+    `" } }
+        }
+      ) {
+        id
+      }
+    }
+  `;
+
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result;
+};
+
+export const getComments = async () => {
+  const query = gql`
+    query MyQuery {
+      testimoniLevelups {
+        id
+        title
+        description
+        account {
+          image {
+            url
+          }
+          name
+          goals
+        }
+      }
+    }
+  `;
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result.testimoniLevelups;
 };

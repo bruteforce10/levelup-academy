@@ -150,16 +150,6 @@ export const faqQuest = [
     ),
   },
   {
-    question: "Bagaimana jika saya ingin membeli dua produk/lebih sekaligus ?",
-    answer: (
-      <p className="leading-relaxed">
-        Silahkan anda pilih salah satu kelas saja terlebih dahulu, lalu klik
-        “Daftar Sekarang”. Setelah itu klik “Lanjutkan Pembayaran” dan pilih
-        kelas lain yang ingin anda beli.
-      </p>
-    ),
-  },
-  {
     question: "Apakah kelas ini mendapatkan Sertifikat ?",
     answer: (
       <p className="leading-relaxed">

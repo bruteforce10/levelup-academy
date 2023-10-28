@@ -1,18 +1,25 @@
 import Image from "next/image";
 import React from "react";
 
-export default function CardTestimoni({ item }) {
+export default function CardTestimoni({ data }) {
   return (
-    <div
-      className="flex px-3 gap-4 items-center border-2 border-white md:w-[300px] w-[200px] py-4 rounded-2xl mx-2  md:mx-4 bg-[#fff] shadow-sm  cursor-pointer
-        hover:border-prime hover:border-2 transition-all box-border h-auto"
-    >
-      <div className="md:w-[72px] w-[60px]">
-        <Image src={item?.image} alt="icon" width={72} height={72} />
+    <div className=" bg-[#fff] rounded-2xl mx-2 cursor-pointer flex flex-col justify-between  space-y-4 p-4 h-[230px]  w-[300px]">
+      <div className="space-y-6">
+        <h4 className="text-xl font-extrabold">{data.title}</h4>
+        <p className="text-sm">{data.description}</p>
       </div>
-      <div>
-        <h4 className="md:text-xl text-lg font-bold">{item?.name}</h4>
-        <p className="text-deep/60 max-md:text-sm">{item?.desc}</p>
+      <div className="flex gap-2 items-center">
+        {!data.account.image ? (
+          <Image src="/icon/profile.svg" alt="avatar" width={40} height={40} />
+        ) : (
+          <Image src={data.account.image} alt="avatar" width={40} height={40} />
+        )}
+        <div className="flex flex-col space-y-1 items-center\">
+          <p className="text-xs font-extrabold">{data.account.name}</p>
+          <span className="text-xs text-light opacity-60">
+            {data.account.goals || "Lifetime Learner"}
+          </span>
+        </div>
       </div>
     </div>
   );
