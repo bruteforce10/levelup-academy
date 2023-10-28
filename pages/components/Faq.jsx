@@ -26,9 +26,9 @@ export default function Faq() {
                 >
                   <input type="radio" name="my-accordion-3" />
                   <div className="collapse-title text-xl font-medium">
-                    {item.question}
+                    {item?.question}
                   </div>
-                  <div className="collapse-content">{item.answer}</div>
+                  <div className="collapse-content">{item?.answer}</div>
                 </div>
               );
             }
@@ -44,9 +44,9 @@ export default function Faq() {
                 >
                   <input type="radio" name="my-accordion-3" />
                   <div className="collapse-title text-xl font-medium">
-                    {item.question}
+                    {item?.question}
                   </div>
-                  <div className="collapse-content">{item.answer}</div>
+                  <div className="collapse-content">{item?.answer}</div>
                 </div>
               );
             }
