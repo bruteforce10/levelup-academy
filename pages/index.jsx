@@ -4,16 +4,20 @@ import ListSoftwareResult from "./components/ListSoftwareResult";
 import Testimoni from "./components/testimoni";
 import Faq from "./components/Faq";
 import CallSection from "./components/CallSection";
+import FeatureSection from "./components/FeatureSection";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
-    <div className="h-[20000px]">
+    <div>
       <Header />
       <CategorySection />
+      <FeatureSection />
       <ListSoftwareResult />
       <Testimoni />
       <Faq />
       <CallSection />
+      <Footer />
     </div>
   );
 }

@@ -178,3 +178,11 @@ export const goalsTarget = [
   "Video Editor",
   "Engineer",
 ];
+
+export const feature = [
+  " Akses Level-Up selamanya",
+  "Free materi update kelas",
+  "Mendapatkan E-Sertifikat",
+  "Jaminan Uang Kembali",
+  "Ramah Untuk Pemula",
+];
