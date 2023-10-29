@@ -16,7 +16,7 @@ export default function CallSection() {
           <h5 className="font-extrabold xl:text-4xl text-3xl">
             Bingung dan ingin bertanya?
           </h5>
-          <p className="leading-relaxed text-lg w-[350px] lg:w-[500px] max-sm:w-[400px]">
+          <p className="leading-relaxed text-lg w-[350px] lg:w-[500px] mx-auto max-sm:w-[320px]">
             Ngga perlu sungkan, hehe. Konsultasi-kan dulu ke kami aja lewat
             WhatsApp ya.
           </p>

@@ -11,7 +11,7 @@ import {
 
 export default function Footer() {
   return (
-    <div className="mt-18 px-[7rem] py-20">
+    <div className="mt-18 md:px-[7rem] px-8 py-20">
       <div className="border-[.2px] mb-[3rem]  border-[#E5E9F2] w-full"></div>
       <footer className="footer   text-deep-content ">
         <aside className="space-y-8">

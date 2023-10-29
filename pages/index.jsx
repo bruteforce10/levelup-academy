@@ -6,6 +6,7 @@ import Faq from "./components/Faq";
 import CallSection from "./components/CallSection";
 import FeatureSection from "./components/FeatureSection";
 import Footer from "./components/Footer";
+import ClassSection from "./components/ClassSection";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <CategorySection />
       <FeatureSection />
       <ListSoftwareResult />
+      <ClassSection />
       <Testimoni />
       <Faq />
       <CallSection />

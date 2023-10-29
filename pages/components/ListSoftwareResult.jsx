@@ -16,7 +16,7 @@ export default function ListSoftwareResult() {
               Materi Paling Update.
             </span>
           }
-          align={"max-sm:text-center"}
+          align={"text-center"}
         />
       </div>
       <Marquee className=" pb-10  " pauseOnHover={true}>
