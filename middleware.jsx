@@ -7,4 +7,4 @@ export function mainMiddleware(req) {
   return res;
 }
 
-export default withAuth(mainMiddleware, ["/kelas", "/testimoni"]);
+export default withAuth(mainMiddleware, ["/testimoni"]);
