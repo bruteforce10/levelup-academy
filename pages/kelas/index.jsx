@@ -8,14 +8,14 @@ import ListClassSection from "./ListClassSection";
 
 export default function KelasOnline() {
   return (
-    <div className="px-4 container mt-[60px] mx-auto h-[3000px] ">
+    <div className="px-4 container mt-[60px] mx-auto">
       <div>
         <Heading
           tag={"#LevelUpYourCareer"}
           judul={<span>Katalog Kelas</span>}
           align={"sm:text-start"}
         />
-        <p className="text-lg font-medium -mt-6 leading-relaxed">
+        <p className="md:text-lg font-medium -mt-6 leading-relaxed">
           Level-Up Academy menyediakan Kelas yang sesuai <br /> bidang kamu
           minati dan dengan kelas ramah untuk pemula
         </p>
@@ -34,7 +34,7 @@ export default function KelasOnline() {
           ))}
         </div>
       </div>
-      <div className="mt-14 space-y-6">
+      <div className="mt-14 space-y-6 max-md:hidden">
         <SubHeading>Terbaru Rilis</SubHeading>
         <div className="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
           <CardClass />

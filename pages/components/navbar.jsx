@@ -8,12 +8,14 @@ import Link from "next/link";
 import { BiMenu } from "react-icons/bi";
 import clsx from "clsx";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function NavbarPage({ params }) {
   const [open, setOpen] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const toggleNavbar = useRef();
   const { data: session } = useSession();
+  const { pathname } = useRouter();
 
   function handleOpen(e) {
     if (!toggleNavbar?.current?.contains(e.target)) {
@@ -48,7 +50,11 @@ export default function NavbarPage({ params }) {
         }
       >
         <Link href={"/"} className="lg:w-1/12 max-sm:w-3/12 w-2/12 ">
-          {isScrolled || params == "/kelas" || params == "/testimonials" ? (
+          {isScrolled ||
+          params == "/kelas" ||
+          params == "/testimonials" ||
+          params ||
+          `/kelas/${pathname.slice(7, 50)}` ? (
             <Image src={Logo} alt="logo" className="w-full" />
           ) : (
             <Image src={LogoWhite} alt="logo" className="w-full" />
@@ -62,7 +68,10 @@ export default function NavbarPage({ params }) {
         >
           <li
             className={
-              isScrolled || params == "/kelas" || params == "/testimonials"
+              isScrolled ||
+              params == "/kelas" ||
+              params == "/testimonials" ||
+              `/kelas/${pathname.slice(7, 50)}`
                 ? "py-8 px-12 lg:p-0 text-black"
                 : "py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -71,7 +80,10 @@ export default function NavbarPage({ params }) {
           </li>
           <li
             className={
-              isScrolled || params == "/kelas" || params == "/testimonials"
+              isScrolled ||
+              params == "/kelas" ||
+              params == "/testimonials" ||
+              `/kelas/${pathname.slice(7, 50)}`
                 ? "flex gap-2 items-center py-8 px-12 lg:p-0 text-black"
                 : "flex gap-2 items-center py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -80,7 +92,10 @@ export default function NavbarPage({ params }) {
           </li>
           <li
             className={
-              isScrolled || params == "/kelas" || params == "/testimonials"
+              isScrolled ||
+              params == "/kelas" ||
+              params == "/testimonials" ||
+              `/kelas/${pathname.slice(7, 50)}`
                 ? "py-8 px-12 lg:p-0 text-black"
                 : "py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -89,7 +104,10 @@ export default function NavbarPage({ params }) {
           </li>
           <li
             className={
-              isScrolled || params == "/kelas" || params == "/testimonials"
+              isScrolled ||
+              params == "/kelas" ||
+              params == "/testimonials" ||
+              `/kelas/${pathname.slice(7, 50)}`
                 ? "py-8 px-12 lg:p-0 text-black"
                 : "py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -119,7 +137,8 @@ export default function NavbarPage({ params }) {
                   className={
                     isScrolled ||
                     params == "/kelas" ||
-                    params == "/testimonials"
+                    params == "/testimonials" ||
+                    `/kelas/${pathname.slice(7, 50)}`
                       ? `text-deep font-medium text-[18px]  ${
                           !open ? "hidden" : ""
                         } `
@@ -178,7 +197,10 @@ export default function NavbarPage({ params }) {
         <div
           ref={toggleNavbar}
           className={
-            isScrolled || params == "/kelas" || params == "/testimonials"
+            isScrolled ||
+            params == "/kelas" ||
+            params == "/testimonials" ||
+            `/kelas/${pathname.slice(7, 50)}`
               ? "p-2 rounded-xl border-2 border-deep/20  lg:hidden cursor-pointer"
               : "p-2 rounded-xl border-2 border-tersier  lg:hidden cursor-pointer"
           }
@@ -190,7 +212,10 @@ export default function NavbarPage({ params }) {
           <BiMenu
             size={32}
             className={
-              isScrolled || params == "/kelas" || params == "/testimonials"
+              isScrolled ||
+              params == "/kelas" ||
+              params == "/testimonials" ||
+              `/kelas/${pathname.slice(7, 50)}`
                 ? "text-deep"
                 : "text-white"
             }
