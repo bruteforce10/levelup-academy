@@ -1,6 +1,7 @@
 import React from "react";
 import HeaderImg from "@/public/img/header.jpg";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -27,12 +28,12 @@ export default function Header() {
                   <button className="px-4 bg-second rounded-full text-deep font-bold py-3">
                     Daftar Sekarang!
                   </button>
-                  <a href="#" className="text-white ">
+                  <Link href="/kelas" className="text-white ">
                     <span className="font-medium underline underline-offset-2">
                       Lihat Seluruh Kelas
                     </span>{" "}
                     ✨
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -13,13 +13,14 @@ export default function GridTestimonials(data) {
           <Image src="/icon/profile.svg" alt="avatar" width={40} height={40} />
         ) : (
           <Image
-            src={data?.data?.account?.image}
+            src={data?.data?.account?.image?.url}
             alt="avatar"
             width={40}
             height={40}
+            className="w-10 h-10 object-cover rounded-full"
           />
         )}
-        <div className="flex flex-col space-y-1 items-center\">
+        <div className="flex flex-col space-y-1 ">
           <p className="text-xs font-extrabold">{data?.data?.account?.name}</p>
           <span className="text-xs text-light opacity-60">
             {data?.data?.account?.goals || "Lifetime Learner"}

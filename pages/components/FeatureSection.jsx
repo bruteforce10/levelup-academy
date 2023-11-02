@@ -29,7 +29,7 @@ export default function FeatureSection() {
           <ul className="-mt-5 space-y-4">
             {feature.map((item, index) => (
               <li
-                className="flex items-center gap-x-2 font-semibold"
+                className="flex items-center gap-x-4 font-semibold"
                 key={index}
               >
                 <Image

@@ -53,8 +53,7 @@ export default function NavbarPage({ params }) {
           {isScrolled ||
           params == "/kelas" ||
           params == "/testimonials" ||
-          params ||
-          `/kelas/${pathname.slice(7, 50)}` ? (
+          params == `/kelas/${pathname.slice(7, 50)}` ? (
             <Image src={Logo} alt="logo" className="w-full" />
           ) : (
             <Image src={LogoWhite} alt="logo" className="w-full" />
@@ -71,7 +70,7 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
-              `/kelas/${pathname.slice(7, 50)}`
+              params == `/kelas/${pathname.slice(7, 50)}`
                 ? "py-8 px-12 lg:p-0 text-black"
                 : "py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -83,7 +82,7 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
-              `/kelas/${pathname.slice(7, 50)}`
+              params == `/kelas/${pathname.slice(7, 50)}`
                 ? "flex gap-2 items-center py-8 px-12 lg:p-0 text-black"
                 : "flex gap-2 items-center py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -95,7 +94,7 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
-              `/kelas/${pathname.slice(7, 50)}`
+              params == `/kelas/${pathname.slice(7, 50)}`
                 ? "py-8 px-12 lg:p-0 text-black"
                 : "py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -107,7 +106,7 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
-              `/kelas/${pathname.slice(7, 50)}`
+              params == `/kelas/${pathname.slice(7, 50)}`
                 ? "py-8 px-12 lg:p-0 text-black"
                 : "py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -138,7 +137,7 @@ export default function NavbarPage({ params }) {
                     isScrolled ||
                     params == "/kelas" ||
                     params == "/testimonials" ||
-                    `/kelas/${pathname.slice(7, 50)}`
+                    params == `/kelas/${pathname.slice(7, 50)}`
                       ? `text-deep font-medium text-[18px]  ${
                           !open ? "hidden" : ""
                         } `
@@ -200,7 +199,7 @@ export default function NavbarPage({ params }) {
             isScrolled ||
             params == "/kelas" ||
             params == "/testimonials" ||
-            `/kelas/${pathname.slice(7, 50)}`
+            params == `/kelas/${pathname.slice(7, 50)}`
               ? "p-2 rounded-xl border-2 border-deep/20  lg:hidden cursor-pointer"
               : "p-2 rounded-xl border-2 border-tersier  lg:hidden cursor-pointer"
           }
@@ -215,7 +214,7 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
-              `/kelas/${pathname.slice(7, 50)}`
+              params == `/kelas/${pathname.slice(7, 50)}`
                 ? "text-deep"
                 : "text-white"
             }

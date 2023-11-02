@@ -13,9 +13,10 @@ export default function CardTestimoni({ data }) {
           <Image src="/icon/profile.svg" alt="avatar" width={40} height={40} />
         ) : (
           <Image
-            src={data?.account?.image}
+            src={data?.account?.image?.url}
             alt="avatar"
             width={40}
+            className="rounded-full w-10 h-10 object-cover"
             height={40}
           />
         )}

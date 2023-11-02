@@ -3,10 +3,17 @@ import React from "react";
 import BoxChecklist from "../components/atoms/BoxChecklist";
 import SubHeading from "../components/atoms/SubHeading";
 import SideBarClass from "../components/organisms/SideBarClass";
+import ImageSliderSection from "../components/organisms/ImageSliderSection";
+import KeyPointSection from "../components/organisms/KeyPointSection";
+import SoftwareListSection from "../components/organisms/SoftwareListSection";
+import CourseLessonsListSection from "../components/organisms/CourseLessonsListSection";
+import ReviewClassSection from "../components/organisms/ReviewClassSection";
+import CardBuySection from "../components/organisms/CardBuySection";
+import DescriptionSection from "../components/organisms/DescriptionSection";
 
 export default function Preview() {
   return (
-    <div className="px-4 container mt-[60px] mx-auto ">
+    <div className="px-4 container mt-[60px] mx-auto  pb-36">
       <section className="flex  gap-8 justify-between max-md:flex-wrap-reverse ">
         <div className="space-y-6 w-7/12 max-md:w-full">
           <div className="flex items-center gap-[32px]">
@@ -57,32 +64,59 @@ export default function Preview() {
           />
         </div>
       </section>
-      <section className="mt-36  flex gap-10">
+      <section className="mt-36 flex gap-10">
         <SideBarClass />
         <div className="space-y-20">
           <div className="space-y-4">
             <SubHeading size="3xl">Develop Your Skills</SubHeading>
-            <div className=" text-gray-800 text-lg font-normal  leading-loose">
-              Faktor pertama yang menjadi alasan pengguna menggunakan aplikasi
-              e-commerce adalah tampilan antarmuka (UI) yang menarik. UI yang
-              dirancang dengan baik dapat menanamkan kepercayaan pada produk
-              yang ditawarkan, yang nantinya berpengaruh penting terhadap
-              kelancaran bisnis produk tersebut. Kelas ini akan membahas proses
-              pengembangan UI pada sisi Front-End secara lengkap, dari mendesain
-              UI dengan Adobe XD sampai slicing desain ke Flutter.
-            </div>
+            <DescriptionSection />
           </div>
-          <div className="space-y-4">
+          <div className="space-y-6">
             <SubHeading size="3xl">Sneak Peak</SubHeading>
-            <div className="grid grid-cols-2 gap-4">
-              <Image
-                className="rounded-2xl object-cover "
-                src="/sample-testi.png"
-                alt="preview"
-                height={600}
-                width={600}
-              />
+            <ImageSliderSection />
+          </div>
+          <div className="space-y-6">
+            <SubHeading size="3xl">Key Points</SubHeading>
+            <KeyPointSection />
+          </div>
+          <div className="space-y-6">
+            <SubHeading size="3xl">Designed For</SubHeading>
+            <KeyPointSection />
+          </div>
+          <div className="space-y-6">
+            <div className="space-y-3">
+              <SubHeading size="3xl">Tools Pendukung</SubHeading>
+              <p className="max-md:text-center">
+                Lengkapi semua pendukung di bawah sebelum belajar
+              </p>
             </div>
+            <SoftwareListSection />
+          </div>
+          <div className="space-y-6">
+            <div className="space-y-3">
+              <SubHeading size="3xl">Course Lessons</SubHeading>
+            </div>
+            <CourseLessonsListSection />
+          </div>
+          <div className="space-y-6">
+            <div className="space-y-3">
+              <SubHeading size="3xl">Our Happy Students</SubHeading>
+              <p className="max-md:text-center">
+                Review setelah bergabung di kelas Full-Stack Web Developer: Toko
+                Online
+              </p>
+            </div>
+            <ReviewClassSection />
+          </div>
+          <div className="space-y-6">
+            <div className="space-y-3 text-center mx-auto">
+              <SubHeading size="3xl">Low Risk, High Return</SubHeading>
+              <p className="w-[400px] mx-auto">
+                Investasi kepada diri kita sendiri memberikan leverage kuat
+                untuk masa depan karir kita
+              </p>
+            </div>
+            <CardBuySection />
           </div>
         </div>
       </section>

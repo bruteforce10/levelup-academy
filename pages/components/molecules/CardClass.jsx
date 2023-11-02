@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import FeatureClass from "../atoms/FeatureClass";
 import StarRating from "../atoms/StarRating";
+import Link from "next/link";
 
 export default function CardClass() {
   return (
@@ -19,9 +20,12 @@ export default function CardClass() {
             <StarRating rating={4} />
             <p className="font-medium text-sm ">(36)</p>
           </div>
-          <h4 className="font-extrabold text-xl line-clamp-2 hover:line-clamp-none cursor-pointer leading-normal ">
+          <Link
+            href={"/kelas/preview"}
+            className="font-extrabold text-xl line-clamp-2 hover:line-clamp-none cursor-pointer leading-normal "
+          >
             Belajar membangun gedung bertingkat dengan Tekla Structures
-          </h4>
+          </Link>
           <FeatureClass sertifikat={true} user={227} level={0} />
         </div>
         <p className="text-lg font-medium">Rp.320.000</p>

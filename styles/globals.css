@@ -32,3 +32,11 @@ h3 {
   justify-content: center;
   align-items: center;
 }
+
+.lg-react-element {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 1rem;
+  flex-direction: row;
+}
