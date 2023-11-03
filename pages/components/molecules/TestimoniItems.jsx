@@ -19,7 +19,7 @@ export default function TestimoniItems({ isReverse, data }) {
       className={clsx(isReverse ? "mt-[0] " : "mt-[-700px] ")}
     >
       <div className="w-full space-y-4  ">
-        {data.map((item, index) => {
+        {data?.map((item, index) => {
           if (index < 5 && isReverse === false) {
             return (
               <div
