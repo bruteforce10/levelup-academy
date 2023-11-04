@@ -5,7 +5,6 @@ import React from "react";
 
 export default function SideBarClass() {
   const { activeSection } = MyContext();
-  console.log(activeSection === "Main Topic");
   const navList = [
     "About",
     "Gallery",

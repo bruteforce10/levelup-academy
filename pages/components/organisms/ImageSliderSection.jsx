@@ -18,7 +18,8 @@ import lgThumbnail from "lightgallery/plugins/thumbnail";
 import lgZoom from "lightgallery/plugins/zoom";
 import useSectionView from "@/lib/hook";
 
-export default function ImageSliderSection() {
+export default function ImageSliderSection({ courosel }) {
+  console.log(courosel);
   const [showImage, setShowImage] = useState(20);
   const { ref } = useSectionView("Gallery", 1);
 
@@ -38,20 +39,20 @@ export default function ImageSliderSection() {
   return (
     <div id="Gallery" className="scroll-mt-[180px]" ref={ref}>
       <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
-        {[...Array(4)].map((_, index) => {
+        {courosel.map((item, index) => {
           if (index < showImage) {
             return (
               <a
-                href="/sample-testi.png"
+                href={item.url}
                 key={index}
-                className="lg:w-3/12  md:w-5/12 border-[3.2px] border-white transition-all hover:border-prime rounded-2xl overflow-hidden"
+                className="lg:w-3/12  md:w-5/12  h-full border-[3.2px] border-white transition-all hover:border-prime rounded-2xl overflow-hidden"
               >
                 <motion.img
                   initial={{ opacity: 0, scale: 0.5 }}
                   animate={{ opacity: 1, scale: 1 }}
                   className="  object-cover "
-                  src="/sample-testi.png"
-                  alt="Gambar 1"
+                  src={item.url}
+                  alt={item.fileName}
                 />
               </a>
             );

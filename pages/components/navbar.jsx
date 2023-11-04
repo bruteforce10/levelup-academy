@@ -15,7 +15,7 @@ export default function NavbarPage({ params }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const toggleNavbar = useRef();
   const { data: session } = useSession();
-  const { pathname } = useRouter();
+  const { pathname, query } = useRouter();
 
   function handleOpen(e) {
     if (!toggleNavbar?.current?.contains(e.target)) {
@@ -53,7 +53,7 @@ export default function NavbarPage({ params }) {
           {isScrolled ||
           params == "/kelas" ||
           params == "/testimonials" ||
-          params == `/kelas/${pathname.slice(7, 50)}` ? (
+          params == `/kelas/${query.slug}` ? (
             <Image src={Logo} alt="logo" className="w-full" />
           ) : (
             <Image src={LogoWhite} alt="logo" className="w-full" />
@@ -70,7 +70,7 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
-              params == `/kelas/${pathname.slice(7, 50)}`
+              params == `/kelas/${query.slug}`
                 ? "py-8 px-12 lg:p-0 text-black"
                 : "py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -82,7 +82,7 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
-              params == `/kelas/${pathname.slice(7, 50)}`
+              params == `/kelas/${query.slug}`
                 ? "flex gap-2 items-center py-8 px-12 lg:p-0 text-black"
                 : "flex gap-2 items-center py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -94,7 +94,7 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
-              params == `/kelas/${pathname.slice(7, 50)}`
+              params == `/kelas/${query.slug}`
                 ? "py-8 px-12 lg:p-0 text-black"
                 : "py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -106,7 +106,7 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
-              params == `/kelas/${pathname.slice(7, 50)}`
+              params == `/kelas/${query.slug}`
                 ? "py-8 px-12 lg:p-0 text-black"
                 : "py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -137,7 +137,7 @@ export default function NavbarPage({ params }) {
                     isScrolled ||
                     params == "/kelas" ||
                     params == "/testimonials" ||
-                    params == `/kelas/${pathname.slice(7, 50)}`
+                    params == `/kelas/${query.slug}`
                       ? `text-deep font-medium text-[18px]  ${
                           !open ? "hidden" : ""
                         } `
@@ -199,7 +199,7 @@ export default function NavbarPage({ params }) {
             isScrolled ||
             params == "/kelas" ||
             params == "/testimonials" ||
-            params == `/kelas/${pathname.slice(7, 50)}`
+            params == `/kelas/${query.slug}`
               ? "p-2 rounded-xl border-2 border-deep/20  lg:hidden cursor-pointer"
               : "p-2 rounded-xl border-2 border-tersier  lg:hidden cursor-pointer"
           }
@@ -214,7 +214,7 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
-              params == `/kelas/${pathname.slice(7, 50)}`
+              params == `/kelas/${query.slug}`
                 ? "text-deep"
                 : "text-white"
             }

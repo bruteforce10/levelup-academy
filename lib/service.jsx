@@ -290,3 +290,60 @@ export const getClass = async () => {
   );
   return result.courses;
 };
+
+export const getClassById = async (id) => {
+  const query =
+    gql`
+    query MyQuery {
+      course(where: { id: "` +
+    id +
+    `" }) {
+        createdAt
+        judul
+        id
+        keyPoints
+        level
+        price
+        couroselGambar {
+          url
+          fileName
+        }
+        gambar {
+          url
+        }
+        sertifikat
+        about {
+          html
+        }
+        designedFor
+        softwareList {
+          software
+          link
+          free
+          softwareName
+        }
+        sillabusList {
+          judulBab
+          subBab
+        }
+        reviews {
+          ulasan
+          rating
+          accounts {
+            gambar {
+              url
+            }
+            goals
+            name
+          }
+        }
+        introduction
+      }
+    }
+  `;
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result.course;
+};

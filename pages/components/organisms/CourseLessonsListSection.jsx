@@ -3,14 +3,15 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import useSectionView from "@/lib/hook";
 
-export default function CourseLessonsListSection() {
+export default function CourseLessonsListSection({ styllabus }) {
+  console.log(styllabus);
   const [showLessons, setShowLessons] = useState(3);
   const { ref } = useSectionView("Lessons", 1);
 
   return (
     <div className="space-y-8 ">
       <div className="space-y-4 scroll-mt-[180px]" ref={ref} id="Lessons">
-        {[...Array(7)].map((_, index) => {
+        {styllabus.map((item, index) => {
           if (index < showLessons) {
             return (
               <motion.details
@@ -24,28 +25,23 @@ export default function CourseLessonsListSection() {
                     <div className="text-gray-800 text-xl w-10 h-10 font-bold bg-white rounded-[22px] flex-col justify-center items-center gap-2 inline-flex">
                       {index + 1}
                     </div>
-                    <span className="text-xl font-medium">Design Handoff</span>
+                    <span className="text-xl font-medium">{item.judulBab}</span>
                   </div>
                 </summary>
                 <div className="collapse-content space-y-4 mt-2 ">
-                  <div className="flex gap-3 ml-3">
-                    <Image
-                      src={"/icon/play.svg"}
-                      alt="play"
-                      width={20}
-                      height={20}
-                    />
-                    <span>Memulai Kelas</span>
-                  </div>
-                  <div className="flex gap-3 ml-3">
-                    <Image
-                      src={"/icon/play.svg"}
-                      alt="play"
-                      width={20}
-                      height={20}
-                    />
-                    <span>Memulai Kelas</span>
-                  </div>
+                  {item.subBab.map((sub, index) => {
+                    return (
+                      <div key={index} className="flex gap-3 ml-3">
+                        <Image
+                          src={"/icon/play.svg"}
+                          alt="play"
+                          width={20}
+                          height={20}
+                        />
+                        <span>{sub}</span>
+                      </div>
+                    );
+                  })}
                 </div>
               </motion.details>
             );

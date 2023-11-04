@@ -1,8 +1,9 @@
+import { Currency } from "@/lib/Currency";
 import useSectionView from "@/lib/hook";
 import Image from "next/image";
 import React from "react";
 
-export default function CardBuySection() {
+export default function CardBuySection({ price }) {
   const { ref } = useSectionView("buy", 1);
   return (
     <div
@@ -15,8 +16,8 @@ export default function CardBuySection() {
         <div className="text-red-500 text-xl font-bold  line-through animate-pulse ">
           Rp 400,000
         </div>
-        <div className="text-black text-3xl font-extrabold font-['Plus Jakarta Sans'] ">
-          Rp 50,000
+        <div className="text-black text-3xl font-extrabold">
+          {Currency(price)}
         </div>
       </div>
       <div
