@@ -9,11 +9,11 @@ export default function GridTestimonials(data) {
         <p className="text-sm">{data?.data?.description}</p>
       </div>
       <div className="flex gap-2 items-center">
-        {!data?.data?.account?.image ? (
+        {!data?.data?.account?.gambar ? (
           <Image src="/icon/profile.svg" alt="avatar" width={40} height={40} />
         ) : (
           <Image
-            src={data?.data?.account?.image?.url}
+            src={data?.data?.account?.gambar?.url}
             alt="avatar"
             width={40}
             height={40}

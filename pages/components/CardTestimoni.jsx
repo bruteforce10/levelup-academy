@@ -9,11 +9,11 @@ export default function CardTestimoni({ data }) {
         <p className="text-sm">{data?.description}</p>
       </div>
       <div className="flex gap-2 items-center">
-        {!data?.account?.image ? (
+        {!data?.account?.gambar ? (
           <Image src="/icon/profile.svg" alt="avatar" width={40} height={40} />
         ) : (
           <Image
-            src={data?.account?.image?.url}
+            src={data?.account?.gambar?.url}
             alt="avatar"
             width={40}
             className="rounded-full w-10 h-10 object-cover"

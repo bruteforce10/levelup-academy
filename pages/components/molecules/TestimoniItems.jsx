@@ -29,7 +29,7 @@ export default function TestimoniItems({ isReverse, data }) {
                 <h4 className="text-lg font-extrabold">{item?.title}</h4>
                 <p className="text-md">{item?.description}</p>
                 <div className="flex gap-2 items-center">
-                  {!item?.account?.image ? (
+                  {!item?.account?.gambar ? (
                     <Image
                       src="/icon/profile.svg"
                       alt="avatar"
@@ -38,7 +38,7 @@ export default function TestimoniItems({ isReverse, data }) {
                     />
                   ) : (
                     <Image
-                      src={item?.account?.image?.url}
+                      src={item?.account?.gambar?.url}
                       alt="avatar"
                       width={40}
                       className="rounded-full w-10 h-10 object-cover"
@@ -65,7 +65,7 @@ export default function TestimoniItems({ isReverse, data }) {
                 <h4 className="text-lg font-extrabold">{item?.title}</h4>
                 <p className="text-md">{item?.description}</p>
                 <div className="flex gap-2 items-center">
-                  {!item?.account?.image ? (
+                  {!item?.account?.gambar ? (
                     <Image
                       src="/icon/profile.svg"
                       alt="avatar"
@@ -74,7 +74,7 @@ export default function TestimoniItems({ isReverse, data }) {
                     />
                   ) : (
                     <Image
-                      src={item?.account?.image?.url}
+                      src={item?.account?.gambar?.url}
                       alt="avatar"
                       width={40}
                       className="rounded-full w-10 h-10 object-cover"

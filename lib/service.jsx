@@ -248,7 +248,7 @@ export const getComments = async () => {
         title
         description
         account {
-          image {
+          gambar {
             url
           }
           name
@@ -262,4 +262,31 @@ export const getComments = async () => {
     query
   );
   return result.testimoniLevelups;
+};
+
+export const getClass = async () => {
+  const query = gql`
+    query MyQuery {
+      courses {
+        createdAt
+        judul
+        category
+        id
+        level
+        gambar {
+          url
+        }
+        price
+        sertifikat
+        reviews {
+          rating
+        }
+      }
+    }
+  `;
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result.courses;
 };

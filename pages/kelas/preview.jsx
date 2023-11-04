@@ -10,6 +10,7 @@ import CourseLessonsListSection from "../components/organisms/CourseLessonsListS
 import ReviewClassSection from "../components/organisms/ReviewClassSection";
 import CardBuySection from "../components/organisms/CardBuySection";
 import DescriptionSection from "../components/organisms/DescriptionSection";
+import CallSection from "../components/CallSection";
 
 export default function Preview() {
   return (
@@ -118,6 +119,7 @@ export default function Preview() {
             </div>
             <CardBuySection />
           </div>
+          <CallSection />
         </div>
       </section>
     </div>

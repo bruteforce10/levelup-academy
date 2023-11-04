@@ -4,9 +4,11 @@ import { motion } from "framer-motion";
 import SubHeading from "../components/atoms/SubHeading";
 import CardClass from "../components/molecules/CardClass";
 import ModalFilter from "../components/organisms/ModalFilter";
+import { MyContext } from "@/lib/context/AppContext";
 
 export default function ListClassSection() {
   const refObject = useRef(null);
+  const { dataClass } = MyContext();
   const [isScroll, setIsScroll] = React.useState("");
 
   React.useEffect(() => {
@@ -54,22 +56,17 @@ export default function ListClassSection() {
                 <input type="checkbox" className="checkbox checkbox-warning" />
                 <p>Coding</p>
               </div>
-            </div>
-          </div>
-          <div className="space-y-6">
-            <h5 className="text-xl font-extrabold">Sort</h5>
-            <div className="space-y-4">
               <div className="flex items-center gap-4">
                 <input type="checkbox" className="checkbox checkbox-warning" />
-                <p>Baru Rilis</p>
+                <p>Video Editor</p>
               </div>
               <div className="flex items-center gap-4">
                 <input type="checkbox" className="checkbox checkbox-warning" />
-                <p>Terpopuler</p>
+                <p>Industrial</p>
               </div>
               <div className="flex items-center gap-4">
                 <input type="checkbox" className="checkbox checkbox-warning" />
-                <p>Sedang Promo</p>
+                <p>Self Improvement</p>
               </div>
             </div>
           </div>
@@ -95,8 +92,8 @@ export default function ListClassSection() {
           ref={refObject}
           className="grid w-9/12 max-md:w-full gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
         >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index) => (
-            <CardClass key={index} />
+          {dataClass.map((item, index) => (
+            <CardClass key={index} data={item} />
           ))}
         </div>
       </div>

@@ -5,6 +5,7 @@ import React from "react";
 
 export default function SideBarClass() {
   const { activeSection } = MyContext();
+  console.log(activeSection === "Main Topic");
   const navList = [
     "About",
     "Gallery",
@@ -21,7 +22,7 @@ export default function SideBarClass() {
           href={`#${item}`}
           key={index}
           className={clsx(
-            "text-black text-opacity-40 text-md font-semibold ",
+            "text-black text-opacity-100 text-md font-semibold ",
             activeSection === item ? "text-opacity-100" : "text-opacity-40"
           )}
         >

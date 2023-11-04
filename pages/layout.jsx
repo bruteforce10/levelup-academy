@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavbarPage from "./components/navbar";
 import { usePathname } from "next/navigation";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import ModalLogin from "./components/organisms/ModalLogin";
+import Footer from "./components/Footer";
+import { FaArrowUp } from "react-icons/fa6";
+import { motion } from "framer-motion";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -10,6 +13,19 @@ const jakarta = Plus_Jakarta_Sans({
 
 export default function Layout({ children }) {
   const params = usePathname();
+  const [isShow, setShow] = React.useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 768) {
+        setShow(true);
+      } else {
+        setShow(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className={`bg-[#F6F8FD]  ${jakarta.className} `}>
       {params !== "/auth/login" &&
@@ -19,6 +35,26 @@ export default function Layout({ children }) {
         )}
       <ModalLogin />
       {children}
+      <Footer />
+
+      {(params == "/kelas/preview" || params == "/kelas") && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isShow ? 1 : 0 }}
+          onClick={() => {
+            {
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+                duration: 500,
+              });
+            }
+          }}
+          className="fixed bottom-16 right-16 cursor-pointer  bg-[#fff] p-4 rounded-full shadow-md"
+        >
+          <FaArrowUp size={24} className="text-gray-700" />
+        </motion.div>
+      )}
     </div>
   );
 }

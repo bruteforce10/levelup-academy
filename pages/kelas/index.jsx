@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Heading from "../components/heading";
 import SubHeading from "../components/atoms/SubHeading";
 import Image from "next/image";
 import { categoryClass } from "@/lib/data";
 import CardClass from "../components/molecules/CardClass";
 import ListClassSection from "./ListClassSection";
+import { MyContext } from "@/lib/context/AppContext";
 
 export default function KelasOnline() {
+  const { dataClass } = MyContext();
+  const [classList, setClassList] = useState(dataClass);
+  const waktuDiskon = new Date();
+  waktuDiskon.setDate(waktuDiskon.getDate() - 7);
+
+  useEffect(() => {
+    if (dataClass) {
+      const classNew = dataClass.filter((item) => {
+        return new Date(item.createdAt).getTime() > waktuDiskon.getTime();
+      });
+      setClassList(classNew);
+    }
+  }, [dataClass]);
+
   return (
     <div className="px-4 container mt-[60px] mx-auto">
       <div>
@@ -37,10 +52,9 @@ export default function KelasOnline() {
       <div className="mt-14 space-y-6 max-md:hidden">
         <SubHeading>Terbaru Rilis</SubHeading>
         <div className="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
-          <CardClass />
-          <CardClass />
-          <CardClass />
-          <CardClass />
+          {classList.map((item, index) => (
+            <CardClass key={index} data={item} />
+          ))}
         </div>
       </div>
       <ListClassSection />
