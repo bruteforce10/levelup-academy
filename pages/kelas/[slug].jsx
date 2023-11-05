@@ -31,7 +31,7 @@ export default function Preview() {
 
   return (
     data && (
-      <div className="px-4 container mt-[60px] mx-auto  pb-36">
+      <div className="px-4 container mt-[60px] mx-auto pb-36">
         <section className="flex  gap-8 justify-between max-md:flex-wrap-reverse ">
           <div className="space-y-6 w-7/12 max-md:w-full">
             <div className="flex items-center gap-[32px]">
@@ -142,7 +142,7 @@ export default function Preview() {
             <div className="space-y-6">
               <div className="space-y-3 text-center mx-auto">
                 <SubHeading size="3xl">Low Risk, High Return</SubHeading>
-                <p className="w-[400px] mx-auto">
+                <p className="w-[400px] max-sm:w-full mx-auto">
                   Investasi kepada diri kita sendiri memberikan leverage kuat
                   untuk masa depan karir kita
                 </p>

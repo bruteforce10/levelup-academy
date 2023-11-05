@@ -19,7 +19,6 @@ import lgZoom from "lightgallery/plugins/zoom";
 import useSectionView from "@/lib/hook";
 
 export default function ImageSliderSection({ courosel }) {
-  console.log(courosel);
   const [showImage, setShowImage] = useState(20);
   const { ref } = useSectionView("Gallery", 1);
 
@@ -45,7 +44,7 @@ export default function ImageSliderSection({ courosel }) {
               <a
                 href={item.url}
                 key={index}
-                className="lg:w-3/12  md:w-5/12  h-full border-[3.2px] border-white transition-all hover:border-prime rounded-2xl overflow-hidden"
+                className="lg:w-3/12  md:w-5/12 h-full border-[3.2px] border-white transition-all hover:border-prime rounded-2xl overflow-hidden"
               >
                 <motion.img
                   initial={{ opacity: 0, scale: 0.5 }}

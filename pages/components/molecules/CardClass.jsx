@@ -4,6 +4,7 @@ import FeatureClass from "../atoms/FeatureClass";
 import StarRating from "../atoms/StarRating";
 import Link from "next/link";
 import { Currency } from "@/lib/Currency";
+import { Discount } from "@/lib/Discount";
 
 export default function CardClass({ data }) {
   return (
@@ -35,7 +36,12 @@ export default function CardClass({ data }) {
             level={data?.level}
           />
         </div>
-        <p className="text-lg font-medium">{Currency(data?.price)}</p>
+        <div className="flex gap-x-2 items-center">
+          <div className="text-red-500 text-sm font-bold  line-through animate-pulse ">
+            {Currency(data?.price)}
+          </div>
+          <p className="text-lg font-medium">{Discount(data?.price)}</p>
+        </div>
       </div>
     </div>
   );

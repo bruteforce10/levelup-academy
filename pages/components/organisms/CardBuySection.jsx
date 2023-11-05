@@ -1,4 +1,5 @@
 import { Currency } from "@/lib/Currency";
+import { Discount } from "@/lib/Discount";
 import useSectionView from "@/lib/hook";
 import Image from "next/image";
 import React from "react";
@@ -8,16 +9,16 @@ export default function CardBuySection({ price }) {
   return (
     <div
       id="buy"
-      className="space-y-6 bg-[#fff] rounded-2xl scroll-mt-[200px] px-[38px] py-8 w-[400px] mx-auto"
+      className="space-y-6 bg-[#fff] rounded-2xl scroll-mt-[200px] px-[38px] py-8 w-[400px] max-sm:w-full mx-auto"
     >
       <Image src={"/img/icon-disc.svg"} alt="discount" width={70} height={70} />
       <div className="space-y-2">
         <div className="text-gray-800 text-lg font-normal ">Selamanya</div>
         <div className="text-red-500 text-xl font-bold  line-through animate-pulse ">
-          Rp 400,000
+          {Currency(price)}
         </div>
         <div className="text-black text-3xl font-extrabold">
-          {Currency(price)}
+          {Discount(price)}
         </div>
       </div>
       <div

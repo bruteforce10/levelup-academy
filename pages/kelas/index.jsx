@@ -8,7 +8,7 @@ import ListClassSection from "./ListClassSection";
 import { MyContext } from "@/lib/context/AppContext";
 
 export default function KelasOnline() {
-  const { dataClass } = MyContext();
+  const { dataClass, dataFilter } = MyContext();
   const [classList, setClassList] = useState(dataClass);
   const waktuDiskon = new Date();
   waktuDiskon.setDate(waktuDiskon.getDate() - 7);

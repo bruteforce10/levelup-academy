@@ -19,6 +19,7 @@ const AppContextProvider = (props) => {
         setActiveSection,
         activeSection,
         dataClass,
+        setDataClass,
       }}
     >
       {props.children}
