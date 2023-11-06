@@ -338,6 +338,15 @@ export const getClassById = async (id) => {
           }
         }
         introduction
+        authorCourse {
+          ... on AuthorCourse {
+            image {
+              url
+            }
+            label
+            author
+          }
+        }
       }
     }
   `;

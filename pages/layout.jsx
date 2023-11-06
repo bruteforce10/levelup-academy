@@ -6,6 +6,7 @@ import ModalLogin from "./components/organisms/ModalLogin";
 import Footer from "./components/Footer";
 import { FaArrowUp } from "react-icons/fa6";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -13,6 +14,7 @@ const jakarta = Plus_Jakarta_Sans({
 
 export default function Layout({ children }) {
   const params = usePathname();
+  const { query } = useRouter();
   const [isShow, setShow] = React.useState(false);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ export default function Layout({ children }) {
       {children}
       <Footer />
 
-      {(params == "/kelas/preview" || params == "/kelas") && (
+      {(params == `/kelas/${query.slug}` || params == "/kelas") && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: isShow ? 1 : 0 }}

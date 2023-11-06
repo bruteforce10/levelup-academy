@@ -14,6 +14,8 @@ import CallSection from "../components/CallSection";
 import { useRouter } from "next/router";
 import { getClassById } from "@/lib/service";
 import moment from "moment/moment";
+import AuthorCourse from "../components/organisms/AuthorCourse";
+import CallSectionCourse from "../components/organisms/CallSectionCourse";
 
 export default function Preview() {
   const [data, setData] = useState(null);
@@ -124,6 +126,12 @@ export default function Preview() {
               <SoftwareListSection software={data?.softwareList} />
             </div>
             <div className="space-y-6">
+              <SubHeading size="3xl">
+                Recording Course ini dibuat oleh
+              </SubHeading>
+              <AuthorCourse author={data?.authorCourse} />
+            </div>
+            <div className="space-y-6">
               <div className="space-y-3">
                 <SubHeading size="3xl">Course Lessons</SubHeading>
               </div>
@@ -149,7 +157,7 @@ export default function Preview() {
               </div>
               <CardBuySection price={data?.price} />
             </div>
-            <CallSection />
+            <CallSectionCourse />
           </div>
         </section>
       </div>
