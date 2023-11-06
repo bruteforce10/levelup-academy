@@ -38,7 +38,7 @@ export default function ImageSliderSection({ courosel }) {
   return (
     <div id="Gallery" className="scroll-mt-[180px]" ref={ref}>
       <LightGallery speed={500} plugins={[lgThumbnail, lgZoom]}>
-        {courosel.map((item, index) => {
+        {courosel?.map((item, index) => {
           if (index < showImage) {
             return (
               <a

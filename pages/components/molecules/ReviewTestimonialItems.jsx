@@ -8,8 +8,8 @@ export default function ReviewTestimonialItems({ data }) {
   return (
     <div className="space-y-6">
       <div className="grid xl:grid-cols-3 lg:grid-cols-2 max-md:grid-cols-1 gap-4  mt-8">
-        {data.length === 0 && <p className=" text-deep">Belum ada review</p>}
-        {data.map((item, index) => {
+        {data?.length === 0 && <p className=" text-deep">Belum ada review</p>}
+        {data?.map((item, index) => {
           if (index < isReview) {
             return (
               <motion.div

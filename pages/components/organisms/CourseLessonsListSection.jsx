@@ -4,14 +4,13 @@ import { motion } from "framer-motion";
 import useSectionView from "@/lib/hook";
 
 export default function CourseLessonsListSection({ styllabus }) {
-  console.log(styllabus);
   const [showLessons, setShowLessons] = useState(3);
   const { ref } = useSectionView("Lessons", 1);
 
   return (
     <div className="space-y-8 ">
       <div className="space-y-4 scroll-mt-[180px]" ref={ref} id="Lessons">
-        {styllabus.map((item, index) => {
+        {styllabus?.map((item, index) => {
           if (index < showLessons) {
             return (
               <motion.details

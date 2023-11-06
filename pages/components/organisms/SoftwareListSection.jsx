@@ -11,7 +11,7 @@ export default function SoftwareListSection({ software }) {
       ref={ref}
       id="Tools"
     >
-      {software.map((item) => (
+      {software?.map((item) => (
         <div
           key={item.software}
           className="bg-[#fff] w-[250px] max-md:w-full px-[38px] max-md:flex max-md:items-center  max-md:gap-x-8  py-[32px] md:space-y-6 rounded-2xl"
