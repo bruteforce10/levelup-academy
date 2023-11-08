@@ -23,14 +23,14 @@ export default function Testimoni() {
     <div className="bg-tersierbase h-fit max-lg:py-[60px]  lg:h-[600px] overflow-y-hidden mt-20">
       <section className=" lg:flex justify-center container lg:pl-8  px-4 mx-auto gap-8 pr-4  ">
         <div className="lg:w-5/12  lg:py-[100px] ">
-          <Tippy theme="light" content="Rating Google Level-Up Academy">
+          <Tippy theme="light" content="🎖️ Rating Google Level-Up Academy">
             <Link
               href={"https://maps.app.goo.gl/EwtKQVjjd4qnmh1r9"}
               target="_blank"
               className="flex text-white gap-x-2 max-md:origin-left max-md:scale-75 "
             >
               <p>5,0</p>
-              <StarRating rating={5} />
+              <StarRating review={5} />
               <p className="underline underline-offset-2">45 ulasan google</p>
             </Link>
           </Tippy>
