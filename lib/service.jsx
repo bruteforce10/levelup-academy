@@ -90,7 +90,6 @@ export const signUpWithGoogle = async (userData) => {
       "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
       query
     );
-    console.log(result.updateAccount);
     return result.updateAccount;
   } else {
     const result = await signUp(userData);
@@ -109,7 +108,8 @@ export const getUser = async (userData) => {
         email
         name
         id
-        image {
+        goals
+        gambar {
           url
         }
         role
@@ -355,4 +355,59 @@ export const getClassById = async (id) => {
     query
   );
   return result.course;
+};
+
+export const paymentRequest = async (data) => {
+  const query =
+    gql`
+    mutation MyMutation {
+      updateAccount(
+        data: {payment: {create: {data: {coursePayment: {connect: {Course: {id: "` +
+    data.id +
+    `"}}}, statusPayment: paymentPending}}}}
+        where: {email: "` +
+    data.email +
+    `"}
+      ) {
+        id
+        name
+      }
+      publishAccount(where: {email: "audifirdi@gmail.com"}) {
+        id
+      }
+    }
+  `;
+
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result;
+};
+
+export const getPaymentUser = async (email) => {
+  const query = gql`
+    query MyQuery {
+      account(where: { email: "audifirdi@gmail.com" }) {
+        payment {
+          coursePayment {
+            ... on Course {
+              judul
+              gambar {
+                url
+              }
+            }
+          }
+          statusPayment
+        }
+      }
+    }
+  `;
+
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+
+  return result.account.payment;
 };

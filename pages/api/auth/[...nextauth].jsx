@@ -46,7 +46,8 @@ export const authOptions = {
         token.email = user.email;
         token.name = user.name;
         token.role = user.role;
-        token.image = user?.image?.url;
+        token.goals = user.goals;
+        token.image = user?.gambar?.url;
       }
 
       if (account?.provider === "google") {
@@ -74,6 +75,9 @@ export const authOptions = {
       }
       if ("image" in token) {
         session.user.image = token.image;
+      }
+      if ("goals" in token) {
+        session.user.goals = token.goals;
       }
       return session;
     },

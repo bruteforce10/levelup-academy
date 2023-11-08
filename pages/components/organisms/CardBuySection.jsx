@@ -1,11 +1,46 @@
 import { Currency } from "@/lib/Currency";
 import { Discount } from "@/lib/Discount";
 import useSectionView from "@/lib/hook";
+import { getPaymentUser, paymentRequest } from "@/lib/service";
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import { FiArrowRight } from "react-icons/fi";
 
-export default function CardBuySection({ price }) {
+export default function CardBuySection({ price, payment, email, title }) {
   const { ref } = useSectionView("buy", 1);
+  const [isPending, setIsPending] = useState(false);
+
+  useEffect(() => {
+    getPaymentUser(email).then((result) => {
+      const filterClass = result?.filter(
+        (item) => item.coursePayment[0].judul === title
+      );
+      if (filterClass[0]?.statusPayment === "paymentPending") {
+        setIsPending(true);
+      } else {
+        setIsPending(false);
+      }
+    });
+  }, [email, setIsPending, isPending]);
+
+  const handleBuy = async () => {
+    const payResult = await paymentRequest({
+      id: payment,
+      email: email,
+    });
+
+    if (payResult) {
+      setIsPending(true);
+      window.open(
+        `https://api.whatsapp.com/send?phone=628816101512&text=hi%20mimin%20saya%20dengan%20email:%20${email}%20ingin%20membeli%20produk%20${title}%20ini%20dengan%20harga%20${Discount(
+          price
+        )}`,
+        "_blank"
+      );
+    }
+  };
+
   return (
     <div
       id="buy"
@@ -84,9 +119,25 @@ export default function CardBuySection({ price }) {
           Free akses kelas Freemium
         </li>
       </ul>
-      <button className="px-6 bg-prime rounded-full text-[#fff] w-full hover:scale-105 transition-all  font-bold py-3">
-        Beli Kelas
-      </button>
+      {isPending ? (
+        <Link
+          href={"/"}
+          className="px-6 flex bg-[#facb5e] justify-center gap-x-2 group text-center rounded-full text-[#fff] w-full transition-all  font-bold py-3"
+        >
+          Menunggu Pembayaran
+          <FiArrowRight
+            className="group-hover:translate-x-4 transition"
+            size={28}
+          />
+        </Link>
+      ) : (
+        <button
+          onClick={handleBuy}
+          className="px-6 bg-prime rounded-full text-[#fff] w-full hover:scale-105 transition-all  font-bold py-3"
+        >
+          Beli Kelas
+        </button>
+      )}
     </div>
   );
 }

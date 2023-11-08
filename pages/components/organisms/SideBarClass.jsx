@@ -1,10 +1,12 @@
 import { MyContext } from "@/lib/context/AppContext";
 import clsx from "clsx";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function SideBarClass() {
   const { activeSection } = MyContext();
+  const [isScroll, setIsScroll] = React.useState("");
   const navList = [
     "About",
     "Gallery",
@@ -14,8 +16,31 @@ export default function SideBarClass() {
     "Reviews",
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setTimeout(() => {
+          setIsScroll(true);
+        }, 300);
+        setIsScroll(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isScroll, setIsScroll]);
+
   return (
-    <div className="min-w-[200px] max-md:hidden sticky top-20 h-fit max-w-[500px] py-[38px] px-[32px] bg-[#fff] rounded-2xl flex-col justify-start items-start gap-[34px] inline-flex">
+    <motion.div
+      layout
+      transition={{ duration: 1, delay: 0.2 }}
+      className={clsx(
+        "min-w-[200px] max-md:hidden  h-fit max-w-[500px] py-[38px] px-[32px] bg-[#fff] rounded-2xl flex-col justify-start items-start gap-[34px] inline-flex",
+        isScroll && "sticky top-32"
+      )}
+    >
       {navList.map((item, index) => (
         <Link
           href={`#${item}`}
@@ -34,6 +59,6 @@ export default function SideBarClass() {
       >
         <div className="text-white text-md font-bold  ">Beli Kelas</div>
       </Link>
-    </div>
+    </motion.div>
   );
 }

@@ -10,23 +10,23 @@ import CourseLessonsListSection from "../components/organisms/CourseLessonsListS
 import ReviewClassSection from "../components/organisms/ReviewClassSection";
 import CardBuySection from "../components/organisms/CardBuySection";
 import DescriptionSection from "../components/organisms/DescriptionSection";
-import CallSection from "../components/CallSection";
 import { useRouter } from "next/router";
 import { getClassById } from "@/lib/service";
 import moment from "moment/moment";
 import AuthorCourse from "../components/organisms/AuthorCourse";
 import CallSectionCourse from "../components/organisms/CallSectionCourse";
+import { useSession } from "next-auth/react";
 
 export default function Preview() {
   const [data, setData] = useState(null);
   const router = useRouter();
   const { slug } = router.query;
+  const { data: session } = useSession();
 
   useEffect(() => {
     if (slug) {
       getClassById(slug).then((result) => {
         setData(result);
-        console.log(result);
       });
     }
   }, [slug]);
@@ -155,7 +155,12 @@ export default function Preview() {
                   untuk masa depan karir kita
                 </p>
               </div>
-              <CardBuySection price={data?.price} />
+              <CardBuySection
+                price={data?.price}
+                payment={data?.id}
+                email={session?.user?.email}
+                title={data?.judul}
+              />
             </div>
             <CallSectionCourse />
           </div>

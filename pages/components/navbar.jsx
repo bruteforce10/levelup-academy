@@ -46,14 +46,15 @@ export default function NavbarPage({ params }) {
     >
       <nav
         className={
-          "flex items-center gap-4 justify-center container mx-auto  max-lg:justify-between relative "
+          "flex  items-center gap-4  container mx-auto justify-between max-lg:justify-between relative "
         }
       >
         <Link href={"/"} className="lg:w-1/12 max-sm:w-3/12 w-2/12 ">
           {isScrolled ||
           params == "/kelas" ||
           params == "/testimonials" ||
-          params == `/kelas/${query.slug}` ? (
+          params == `/kelas/${query.slug}` ||
+          params == `/dashboard/${pathname.slice(11)}` ? (
             <Image src={Logo} alt="logo" className="w-full" />
           ) : (
             <Image src={LogoWhite} alt="logo" className="w-full" />
@@ -61,7 +62,9 @@ export default function NavbarPage({ params }) {
         </Link>
         <ul
           className={clsx(
-            "items-center lg:space-x-8 lg:w-8/12 max-lg:fixed lg:flex max-lg:top-[80px]  transition-all max-lg:left-0 max-lg:bg-tersier w-[300px] lg:h-0 h-screen ",
+            `items-center lg:space-x-8  ${
+              params !== `/dashboard/${pathname.slice(11)}` && `lg:w-8/12`
+            }   max-lg:fixed lg:flex max-lg:top-[80px]  transition-all max-lg:left-0 max-lg:bg-tersier  w-[300px] lg:h-0 h-screen `,
             open && "max-lg:left-[-400px]  "
           )}
         >
@@ -70,9 +73,10 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
-              params == `/kelas/${query.slug}`
-                ? "py-8 px-12 lg:p-0 text-black"
-                : "py-8 px-12 lg:p-0 lg:text-white"
+              params == `/kelas/${query.slug}` ||
+              params == `/dashboard/${pathname.slice(11)}`
+                ? "py-8 px-12 lg:p-0 text-black whitespace-nowrap"
+                : "py-8 px-12 lg:p-0 lg:text-white whitespace-nowrap"
             }
           >
             <Link href="#sale">Fresh Sale</Link>
@@ -82,7 +86,8 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
-              params == `/kelas/${query.slug}`
+              params == `/kelas/${query.slug}` ||
+              params == `/dashboard/${pathname.slice(11)}`
                 ? "flex gap-2 items-center py-8 px-12 lg:p-0 text-black"
                 : "flex gap-2 items-center py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -94,7 +99,8 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
-              params == `/kelas/${query.slug}`
+              params == `/kelas/${query.slug}` ||
+              params == `/dashboard/${pathname.slice(11)}`
                 ? "py-8 px-12 lg:p-0 text-black"
                 : "py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -106,7 +112,8 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
-              params == `/kelas/${query.slug}`
+              params == `/kelas/${query.slug}` ||
+              params == `/dashboard/${pathname.slice(11)}`
                 ? "py-8 px-12 lg:p-0 text-black"
                 : "py-8 px-12 lg:p-0 lg:text-white"
             }
@@ -117,7 +124,7 @@ export default function NavbarPage({ params }) {
         <div
           className={
             !open
-              ? "items-center   text-deep lg:space-x-4 max-lg:space-y-4 max-lg:fixed max-lg:top-[470px] max-lg:left-[30px] lg:flex max-lg:w-[200px] w-3/12 transition-all "
+              ? "items-center  text-deep lg:space-x-4 max-lg:space-y-4 max-lg:fixed max-lg:top-[470px] max-lg:left-[30px] lg:flex max-lg:w-[200px]  w-3/12 transition-all "
               : "items-center justify-end text-deep lg:space-x-4 max-lg:space-y-4 max-lg:fixed max-lg:top-[470px] max-lg:left-[30px] lg:flex max-lg:w-[200px] w-3/12 transition-all max-lg:hidden"
           }
         >
@@ -137,7 +144,8 @@ export default function NavbarPage({ params }) {
                     isScrolled ||
                     params == "/kelas" ||
                     params == "/testimonials" ||
-                    params == `/kelas/${query.slug}`
+                    params == `/kelas/${query.slug}` ||
+                    params == `/dashboard/${pathname.slice(11)}`
                       ? `text-deep font-medium text-[18px]  ${
                           !open ? "hidden" : ""
                         } `
@@ -178,6 +186,9 @@ export default function NavbarPage({ params }) {
                 className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 text-[16px]"
               >
                 <li>
+                  <Link href={"/dashboard/myclass"}>My Courses</Link>
+                </li>
+                <li>
                   <a onClick={() => signOut()}>Logout</a>
                 </li>
               </ul>
@@ -199,7 +210,8 @@ export default function NavbarPage({ params }) {
             isScrolled ||
             params == "/kelas" ||
             params == "/testimonials" ||
-            params == `/kelas/${query.slug}`
+            params == `/kelas/${query.slug}` ||
+            params == `/dashboard/${pathname.slice(11)}`
               ? "p-2 rounded-xl border-2 border-deep/20  lg:hidden cursor-pointer"
               : "p-2 rounded-xl border-2 border-tersier  lg:hidden cursor-pointer"
           }
@@ -214,7 +226,8 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
-              params == `/kelas/${query.slug}`
+              params == `/kelas/${query.slug}` ||
+              params == `/dashboard/${pathname.slice(11)}`
                 ? "text-deep"
                 : "text-white"
             }
