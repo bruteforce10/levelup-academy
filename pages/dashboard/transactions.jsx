@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { getPaymentUser } from "@/lib/service";
 import { Discount } from "@/lib/Discount";
 import moment from "moment";
+import SubHeading from "../components/atoms/SubHeading";
 
 export default function Transactions() {
   const [data, setData] = useState([]);
@@ -31,7 +32,13 @@ export default function Transactions() {
     <div className="h-[10000px]  flex gap-x-8  container mx-auto ">
       <SideBarCourse />
       <section className="mt-[60px] w-full">
-        <div className="overflow-x-scroll   ">
+        <div className="space-y-3">
+          <SubHeading size="3xl">Transactions</SubHeading>
+          <p className="max-md:text-center  leading-relaxed">
+            Daftar pembelian kelas dan ebook premium anda
+          </p>
+        </div>
+        <div className="overflow-x-scroll mt-8  ">
           <table className="table  ">
             <thead>
               <tr>
