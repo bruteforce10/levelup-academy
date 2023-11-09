@@ -364,7 +364,9 @@ export const paymentRequest = async (data) => {
       updateAccount(
         data: {payment: {create: {data: {coursePayment: {connect: {Course: {id: "` +
     data.id +
-    `"}}}, statusPayment: paymentPending}}}}
+    `"}}}, statusPayment: paymentPending, time: "` +
+    data.time +
+    `"}}}}
         where: {email: "` +
     data.email +
     `"}
@@ -396,10 +398,15 @@ export const getPaymentUser = async (email) => {
               gambar {
                 url
               }
+              price
+              discount
+              updatedAt
             }
           }
           statusPayment
+          time
         }
+        updatedAt
       }
     }
   `;

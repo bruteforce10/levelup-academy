@@ -2,7 +2,6 @@ import IconDesign from "@/public/img/course-design.svg";
 import IconCoding from "@/public/img/course-coding.svg";
 import IconImprovement from "@/public/img/course-improvement.svg";
 import IconIndustries from "@/public/img/course-industries.svg";
-import Image from "next/image";
 
 export const categoryClass = [
   {

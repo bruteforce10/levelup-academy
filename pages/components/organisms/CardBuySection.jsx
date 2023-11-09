@@ -28,6 +28,7 @@ export default function CardBuySection({ price, payment, email, title }) {
     const payResult = await paymentRequest({
       id: payment,
       email: email,
+      time: new Date().toISOString(),
     });
 
     if (payResult) {

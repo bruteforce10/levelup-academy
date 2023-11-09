@@ -1,10 +1,32 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SideBarCourse from "../components/organisms/SideBarCourse";
-import Image from "next/image";
 import { FiArrowRight } from "react-icons/fi";
+import { useSession } from "next-auth/react";
+import { getPaymentUser } from "@/lib/service";
+import { Discount } from "@/lib/Discount";
+import moment from "moment";
 
 export default function Transactions() {
+  const [data, setData] = useState([]);
+  const { data: session } = useSession();
+  const email = session?.user?.email;
+
+  useEffect(() => {
+    getPaymentUser(email).then((result) => {
+      if (result) {
+        setData(result);
+      }
+    });
+  }, []);
+
+  const handleFollowUp = (title, price) => {
+    window.open(
+      `https://api.whatsapp.com/send?phone=628816101512&text=hi%20mimin%20saya%20dengan%20email:%20${email}%20ingin%20follow%20up%20pembayaran%20produk%20${title}%20ini%20dengan%20harga%20${price}`,
+      "_blank"
+    );
+  };
+
   return (
     <div className="h-[10000px]  flex gap-x-8  container mx-auto ">
       <SideBarCourse />
@@ -22,30 +44,50 @@ export default function Transactions() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <img
-                    src="/img/dummy-class.webp"
-                    className="rounded-xl min-w-[90px] w-[100px]"
-                    alt="cover"
-                  />
-                </td>
-                <td>
-                  Full-Stack Website Developer: Website Jualan Tiket Event
-                </td>
-                <td>514,910</td>
-                <td>2023-11-07 07:42:09</td>
-                <td>
-                  <div className="badge badge-warning whitespace-nowrap">
-                    Payment Pending
-                  </div>
-                </td>
-                <td>
-                  <button className="px-6 whitespace-nowrap bg-prime rounded-full text-[#fff] w-full hover:scale-90 transition-all  font-bold py-3">
-                    Bantuan Admin
-                  </button>
-                </td>
-              </tr>
+              {data?.map((item, index) => (
+                <tr key={index}>
+                  <td>
+                    <img
+                      src={item?.coursePayment[0]?.gambar?.url}
+                      className="rounded-xl min-w-[90px] w-[100px]"
+                      alt="cover"
+                    />
+                  </td>
+                  <td>{item?.coursePayment[0]?.judul}</td>
+                  <td>{Discount(item?.coursePayment[0]?.price)}</td>
+                  <td>{moment(item?.time).format(" MMMM DD YYYY HH:mm")}</td>
+                  <td>
+                    {item?.statusPayment === "paymentPending" ? (
+                      <div className="badge badge-warning whitespace-nowrap">
+                        Payment Pending
+                      </div>
+                    ) : item?.statusPayment === "paymentSuccess" ? (
+                      <div className="badge badge-success whitespace-nowrap">
+                        Payment Success
+                      </div>
+                    ) : (
+                      <div className="badge badge-error whitespace-nowrap">
+                        Payment Abort
+                      </div>
+                    )}
+                  </td>
+                  <td>
+                    {item?.statusPayment === "paymentPending" && (
+                      <button
+                        onClick={() =>
+                          handleFollowUp(
+                            item?.coursePayment[0]?.judul,
+                            Discount(item?.coursePayment[0]?.price)
+                          )
+                        }
+                        className="px-6 whitespace-nowrap bg-prime rounded-full text-[#fff] w-full hover:scale-90 transition-all  font-bold py-3"
+                      >
+                        Bantuan Admin
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

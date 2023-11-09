@@ -3,7 +3,6 @@ import Link from "next/link";
 import React from "react";
 
 export default function CardMyCourse({ data }) {
-  console.log(data);
   return (
     <div className="rounded-3xl bg-[#fff] overflow-hidden">
       <Image

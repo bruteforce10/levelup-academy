@@ -36,7 +36,7 @@ export default function SideBarCourse() {
         layout
         transition={{ duration: 1, delay: 0.2 }}
         className={clsx(
-          "w-3/12  bg-[#fff] p-8 rounded-3xl max-lg:hidden  h-[550px]",
+          "max-w-[600px]  bg-[#fff] p-8 rounded-3xl max-lg:hidden  h-[550px]",
           isScroll && "sticky top-28"
         )}
       >
