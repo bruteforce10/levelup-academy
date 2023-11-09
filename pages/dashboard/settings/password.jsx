@@ -13,16 +13,6 @@ export default function Password() {
     newPassword: "",
     confirmPassword: "",
   });
-  const onChange = (e) => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    });
-    setError({
-      ...error,
-      [e.target.name]: "",
-    });
-  };
 
   const validate = () => {
     const newError = { ...error };
@@ -37,6 +27,17 @@ export default function Password() {
     }
 
     return newError;
+  };
+
+  const onChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+    setError({
+      ...error,
+      [e.target.name]: "",
+    });
   };
 
   const handleSubmit = (e) => {
@@ -73,7 +74,9 @@ export default function Password() {
                 className="input bg-[#E5E9F2] w-full rounded-full"
               />
               <label className="label">
-                <span className="label-text-alt text-red-500"></span>
+                <span className="label-text-alt text-red-500">
+                  {error.oldPassword}
+                </span>
                 <span className="label-text-alt text-white">.</span>
               </label>
             </div>
@@ -92,7 +95,9 @@ export default function Password() {
                 className="input bg-[#E5E9F2] w-full rounded-full"
               />
               <label className="label">
-                <span className="label-text-alt text-red-500"></span>
+                <span className="label-text-alt text-red-500">
+                  {error.newPassword}
+                </span>
                 <span className="label-text-alt text-white">.</span>
               </label>
             </div>
@@ -111,7 +116,9 @@ export default function Password() {
                 className="input bg-[#E5E9F2] w-full rounded-full"
               />
               <label className="label">
-                <span className="label-text-alt text-red-500"></span>
+                <span className="label-text-alt text-red-500">
+                  {error.confirmPassword}
+                </span>
                 <span className="label-text-alt text-white">.</span>
               </label>
             </div>
