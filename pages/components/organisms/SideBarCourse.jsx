@@ -14,6 +14,8 @@ export default function SideBarCourse() {
   const [isActive, setActive] = React.useState(pathname.slice(11));
   const { data: session } = useSession();
 
+  console.log(pathname.slice(11));
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -140,7 +142,7 @@ export default function SideBarCourse() {
               <SlSettings
                 className={clsx(
                   "text-2xl text-prime",
-                  isActive === "settings"
+                  isActive === "settings" || isActive === "settings/password"
                     ? "text-opacity-100"
                     : "text-opacity-60"
                 )}
@@ -148,7 +150,7 @@ export default function SideBarCourse() {
               <p
                 className={clsx(
                   " text-deep",
-                  isActive === "settings"
+                  isActive === "settings" || isActive === "settings/password"
                     ? "text-opacity-100"
                     : "text-opacity-60"
                 )}

@@ -388,9 +388,12 @@ export const paymentRequest = async (data) => {
 };
 
 export const getPaymentUser = async (email) => {
-  const query = gql`
+  const query =
+    gql`
     query MyQuery {
-      account(where: { email: "audifirdi@gmail.com" }) {
+      account(where: { email: "` +
+    email +
+    `" }) {
         payment {
           coursePayment {
             ... on Course {
@@ -417,4 +420,31 @@ export const getPaymentUser = async (email) => {
   );
 
   return result.account.payment;
+};
+
+export const updatePassword = async (data) => {
+  const query =
+    gql`
+    mutation MyMutation {
+      updateAccount(data: { password: "` +
+    data.password +
+    `" }, where: { email: "` +
+    data.email +
+    `" }) {
+        id
+      }
+      publishAccount(where: {email:  "` +
+    data.email +
+    `"}) {
+        id
+      }
+    }
+  `;
+
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+
+  return result;
 };

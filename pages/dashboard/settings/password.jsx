@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import SideBarCourse from "../../components/organisms/SideBarCourse";
 import SubHeading from "@/pages/components/atoms/SubHeading";
+import { getUser, updatePassword } from "@/lib/service";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Password() {
   const [data, setData] = useState({
@@ -13,17 +16,33 @@ export default function Password() {
     newPassword: "",
     confirmPassword: "",
   });
+  const { data: session } = useSession();
+
+  const router = useRouter();
 
   const validate = () => {
     const newError = { ...error };
     if (!data.oldPassword) {
-      newError.email = "Email harus diisi";
-    } else if (
-      data.oldPassword.length <= 6 ||
-      data.oldPassword.length <= 6 ||
-      data.confirmPassword.length <= 6
-    ) {
-      newError.password = "Password minimal 6 karakter";
+      newError.oldPassword = "Old Password, harus diisi";
+    } else if (data.oldPassword.length <= 6) {
+      newError.oldPassword = "Old Password minimal 6 karakter";
+    }
+    if (!data.newPassword) {
+      newError.newPassword = "New Password, harus diisi";
+    } else if (data.newPassword.length <= 6) {
+      newError.newPassword = "New Password minimal 6 karakter";
+    }
+    if (!data.confirmPassword) {
+      newError.confirmPassword = "Confirm New Password, harus diisi";
+    } else if (data.confirmPassword.length <= 6) {
+      newError.confirmPassword = "Confirm Password minimal 6 karakter";
+    }
+    if (data.oldPassword === data.newPassword) {
+      newError.newPassword =
+        "New Password Tidak Boleh Sama dengan Old Password";
+    }
+    if (data.newPassword !== data.confirmPassword) {
+      newError.confirmPassword = "Confirm Password Tidak Sama";
     }
 
     return newError;
@@ -40,13 +59,39 @@ export default function Password() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const findErrors = validate();
     if (Object.values(findErrors).some((err) => err !== "")) {
       setError(findErrors);
     } else {
-      console.log(data);
+      const getUserResult = await getUser({
+        email: session?.user?.email,
+      });
+
+      if (
+        getUserResult?.password === data.oldPassword ||
+        getUserResult?.password === undefined
+      ) {
+        const updatePasswordResult = await updatePassword({
+          email: session?.user?.email,
+          password: data.newPassword,
+        });
+        if (updatePasswordResult?.updateAccount?.id) {
+          setData({
+            oldPassword: "",
+            newPassword: "",
+            confirmPassword: "",
+          });
+          router.push("/dashboard/settings/update");
+        }
+      } else {
+        setError({
+          ...error,
+          oldPassword:
+            "Maaf, Old Password yang anda masukkan tidak cocok. Silahkan coba kembali",
+        });
+      }
     }
   };
 
@@ -69,6 +114,7 @@ export default function Password() {
               <input
                 type="password"
                 maxLength={12}
+                value={data.oldPassword}
                 name="oldPassword"
                 onChange={onChange}
                 className="input bg-[#E5E9F2] w-full rounded-full"
@@ -91,6 +137,7 @@ export default function Password() {
                 type="password"
                 maxLength={12}
                 name="newPassword"
+                value={data.newPassword}
                 onChange={onChange}
                 className="input bg-[#E5E9F2] w-full rounded-full"
               />
@@ -111,6 +158,7 @@ export default function Password() {
               <input
                 type="password"
                 maxLength={12}
+                value={data.confirmPassword}
                 name="confirmPassword"
                 onChange={onChange}
                 className="input bg-[#E5E9F2] w-full rounded-full"
@@ -124,7 +172,7 @@ export default function Password() {
             </div>
             <button
               type="submit"
-              className="bg-prime w-full p-3 rounded-full text-md  font-extrabold text-white border-4 border-white
+              className="bg-prime w-full mt-4 p-3 rounded-full text-md  font-extrabold text-white border-4 border-white
       hover:border-[#a1b7e7] transition-all  "
             >
               Update Now

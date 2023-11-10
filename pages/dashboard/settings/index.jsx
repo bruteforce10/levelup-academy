@@ -29,9 +29,12 @@ export default function Settings() {
                 Ubah data diri kamu
               </p>
             </div>
-            <button className="px-6 bg-tersier rounded-full  w-full hover:scale-105 transition-all  font-bold py-3">
+            <Link
+              href={"/dashboard/settings/profile"}
+              className="px-6 bg-tersier block text-center rounded-full  w-full hover:scale-105 transition-all  font-bold py-3"
+            >
               Edit Now
-            </button>
+            </Link>
           </div>
           <div className="w-[300px] flex-auto  rounded-3xl p-6 space-y-6 bg-[#fff]">
             <Image
