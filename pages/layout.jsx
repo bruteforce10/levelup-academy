@@ -37,7 +37,9 @@ export default function Layout({ children }) {
         )}
       <ModalLogin />
       {children}
-      <Footer />
+      {params !== "/auth/login" &&
+        params !== "/auth/register" &&
+        params !== "/auth/register/upload-profile" && <Footer />}
 
       {(params == `/kelas/${query.slug}` || params == "/kelas") && (
         <motion.div

@@ -5,7 +5,11 @@ import React from "react";
 export default function CardMyCourse({ data }) {
   return (
     <Link
-      href={`/dashboard/transactions`}
+      href={
+        data?.statusPayment === "paymentPending"
+          ? "/dashboard/transactions"
+          : `/course?class=${data?.coursePayment[0]?.id}`
+      }
       className="rounded-3xl block bg-[#fff] overflow-hidden"
     >
       <Image

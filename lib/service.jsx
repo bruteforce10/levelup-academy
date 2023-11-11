@@ -20,7 +20,7 @@ export const signUp = async (userData) => {
         id
         name
         email
-        image {
+        gambar {
           url
         }
         password
@@ -134,7 +134,7 @@ export const getUserName = async (id) => {
         id
         name
         email
-        image {
+        gambar {
           url
         }
         password
@@ -483,6 +483,7 @@ export const getPaymentUser = async (email) => {
         payment {
           coursePayment {
             ... on Course {
+              id
               judul
               gambar {
                 url
@@ -506,6 +507,67 @@ export const getPaymentUser = async (email) => {
   );
 
   return result?.account?.payment;
+};
+
+export const createReview = async (data) => {
+  const query =
+    gql`
+    mutation MyMutation {
+      createReview(
+        data: {
+          accounts: { connect: { email: "` +
+    data?.email +
+    `" } }
+          course: { connect: { id: "` +
+    data?.class +
+    `" } }
+          rating: ` +
+    `${parseInt(data?.rating)}` +
+    `
+          ulasan: "` +
+    data?.desc +
+    `"
+        }
+      ) {
+        id
+      }
+      publishAccount(where: {email:  "` +
+    data.email +
+    `"}) {
+          id
+        }
+    }
+  `;
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result;
+};
+
+export const getManyReview = (data) => {
+  const query =
+    gql`
+    query MyQuery {
+      reviews(
+        where: {
+          course: { id: "` +
+    data?.class +
+    `" }
+          accounts_some: { email: "` +
+    data?.email +
+    `" }
+        }
+      ) {
+        id
+      }
+    }
+  `;
+  const result = request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result;
 };
 
 export const updatePassword = async (data) => {

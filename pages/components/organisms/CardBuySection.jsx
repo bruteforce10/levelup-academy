@@ -10,19 +10,27 @@ import { FiArrowRight } from "react-icons/fi";
 export default function CardBuySection({ price, payment, email, title }) {
   const { ref } = useSectionView("buy", 1);
   const [isPending, setIsPending] = useState(false);
+  const [isSuccess, setSuccess] = useState(false);
 
   useEffect(() => {
     getPaymentUser(email).then((result) => {
-      const filterClass = result?.filter(
-        (item) => item.coursePayment[0].judul === title
-      );
-      if (filterClass[0]?.statusPayment === "paymentPending") {
-        setIsPending(true);
-      } else {
-        setIsPending(false);
+      if (result !== undefined) {
+        console.log(result);
+        const filterClass = result?.filter(
+          (item) => item?.coursePayment[0]?.judul === title
+        );
+        if (filterClass[0]?.statusPayment === "paymentPending") {
+          setIsPending(true);
+        } else {
+          setIsPending(false);
+        }
+
+        if (filterClass[0]?.statusPayment === "paymentSuccess") {
+          setSuccess(true);
+        }
       }
     });
-  }, [email, setIsPending, isPending]);
+  }, []);
 
   const handleBuy = async () => {
     const payResult = await paymentRequest({
@@ -134,9 +142,14 @@ export default function CardBuySection({ price, payment, email, title }) {
       ) : (
         <button
           onClick={handleBuy}
-          className="px-6 bg-prime rounded-full text-[#fff] w-full hover:scale-105 transition-all  font-bold py-3"
+          disabled={isSuccess}
+          className={
+            isSuccess
+              ? " bg-prime/60 text-white w-full p-3 rounded-full text-md font-extrabold  border-4 border-white  transition-all"
+              : " bg-prime w-full p-3 rounded-full text-md font-extrabold text-white border-4 border-white hover:border-[#a1b7e7] transition-all"
+          }
         >
-          Beli Kelas
+          {isSuccess ? "Sudah Membeli Kelas" : "Beli Kelas"}
         </button>
       )}
     </div>

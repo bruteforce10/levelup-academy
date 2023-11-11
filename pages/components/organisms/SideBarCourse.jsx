@@ -71,7 +71,7 @@ export default function SideBarCourse() {
               <RxFileText
                 className={clsx(
                   "text-2xl text-prime",
-                  isActive === "myclass"
+                  isActive === "myclass" || pathname === "/course"
                     ? "text-opacity-100"
                     : "text-opacity-60"
                 )}
@@ -79,7 +79,7 @@ export default function SideBarCourse() {
               <p
                 className={clsx(
                   " text-deep",
-                  isActive === "myclass"
+                  isActive === "myclass" || pathname === "/course"
                     ? "text-opacity-100"
                     : "text-opacity-60"
                 )}

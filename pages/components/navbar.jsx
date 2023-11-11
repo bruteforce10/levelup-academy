@@ -65,7 +65,8 @@ export default function NavbarPage({ params }) {
           params == "/kelas" ||
           params == "/testimonials" ||
           params == `/kelas/${query.slug}` ||
-          params == `/dashboard/${pathname.slice(11)}` ? (
+          params == `/dashboard/${pathname.slice(11)}` ||
+          pathname === "/course" ? (
             <Image src={Logo} alt="logo" className="w-full" />
           ) : (
             <Image src={LogoWhite} alt="logo" className="w-full" />
@@ -74,7 +75,9 @@ export default function NavbarPage({ params }) {
         <ul
           className={clsx(
             `items-center lg:space-x-8  ${
-              params !== `/dashboard/${pathname.slice(11)}` && `lg:w-8/12`
+              params !== `/dashboard/${pathname.slice(11)}` &&
+              pathname !== "/course" &&
+              `lg:w-8/12`
             }   max-lg:fixed lg:flex max-lg:top-[80px]  transition-all max-lg:left-0 max-lg:bg-tersier  w-[300px] lg:h-0 h-screen `,
             open && "max-lg:left-[-400px]  "
           )}
@@ -84,6 +87,7 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
+              pathname == "/course" ||
               params == `/kelas/${query.slug}` ||
               params == `/dashboard/${pathname.slice(11)}`
                 ? "py-8 px-12 lg:p-0 text-black whitespace-nowrap"
@@ -97,6 +101,7 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
+              pathname == "/course" ||
               params == `/kelas/${query.slug}` ||
               params == `/dashboard/${pathname.slice(11)}`
                 ? "flex gap-2 items-center py-8 px-12 lg:p-0 text-black"
@@ -110,18 +115,20 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
+              pathname == "/course" ||
               params == `/kelas/${query.slug}` ||
               params == `/dashboard/${pathname.slice(11)}`
                 ? "py-8 px-12 lg:p-0 text-black"
                 : "py-8 px-12 lg:p-0 lg:text-white"
             }
           >
-            <Link href="#benefit">Benefit</Link>
+            <Link href="/#benefit">Benefit</Link>
           </li>
           <li
             className={
               isScrolled ||
               params == "/kelas" ||
+              pathname == "/course" ||
               params == "/testimonials" ||
               params == `/kelas/${query.slug}` ||
               params == `/dashboard/${pathname.slice(11)}`
@@ -154,6 +161,7 @@ export default function NavbarPage({ params }) {
                   className={
                     isScrolled ||
                     params == "/kelas" ||
+                    pathname == "/course" ||
                     params == "/testimonials" ||
                     params == `/kelas/${query.slug}` ||
                     params == `/dashboard/${pathname.slice(11)}`
