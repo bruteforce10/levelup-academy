@@ -29,7 +29,7 @@ export default function Transactions() {
   };
 
   return (
-    <div className="h-[10000px]  flex gap-x-8  container mx-auto ">
+    <div className=" flex gap-x-8  container mx-auto ">
       <SideBarCourse />
       <section className="mt-[60px] w-full">
         <div className="space-y-3">

@@ -96,16 +96,16 @@ export default function Password() {
   };
 
   return (
-    <div className="h-[10000px] flex gap-x-8 relative container mx-auto ">
+    <div className=" flex gap-x-8 relative container max-lg:px-8 mx-auto ">
       <SideBarCourse />
-      <section className="mt-[60px] max-sm:px-8">
+      <section className="mt-[60px]">
         <div className="space-y-3">
           <SubHeading size="3xl">Edit Password</SubHeading>
-          <p className="max-md:text-center max-w-[18rem] leading-relaxed">
+          <p className="max-md:text-center max-md:mx-auto max-w-xs leading-relaxed">
             Amankan akun Anda dengan kombinasi password yang baik
           </p>
         </div>
-        <div className=" mt-8 p-6 rounded-3xl w-[400px] bg-[#fff]   ">
+        <div className=" mt-8 p-6 rounded-3xl w-[400px] max-sm:w-full bg-[#fff]   ">
           <form onSubmit={handleSubmit}>
             <div className="form-control w-full -mt-2">
               <label className="label">

@@ -6,12 +6,12 @@ import Link from "next/link";
 
 export default function Settings() {
   return (
-    <div className="h-[10000px] flex gap-x-8 relative container mx-auto ">
+    <div className=" flex gap-x-8 relative max-lg:px-8 container mx-auto ">
       <SideBarCourse />
-      <section className="mt-[60px] max-sm:px-8">
+      <section className="mt-[60px] ">
         <div className="space-y-3">
           <SubHeading size="3xl">Settings</SubHeading>
-          <p className="max-md:text-center max-w-xs leading-relaxed">
+          <p className="max-md:text-center max-md:mx-auto max-w-xs leading-relaxed">
             Pengaturan akun yang mungkin dibutuhkan selama proses belajar
           </p>
         </div>
@@ -24,7 +24,7 @@ export default function Settings() {
               height="100"
             />
             <div className="space-y-3">
-              <SubHeading size="2xl">My Profile</SubHeading>
+              <h4 className={`text-2xl font-bold`}>My Profile</h4>
               <p className="text-md text-deep text-opacity-50">
                 Ubah data diri kamu
               </p>
@@ -44,7 +44,7 @@ export default function Settings() {
               height="100"
             />
             <div className="space-y-3">
-              <SubHeading size="2xl">My Password</SubHeading>
+              <h4 className={`text-2xl font-bold`}>My Password</h4>
               <p className="text-md text-deep text-opacity-50">
                 Ganti kata sandimu
               </p>

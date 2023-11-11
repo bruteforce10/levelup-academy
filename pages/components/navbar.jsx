@@ -7,8 +7,9 @@ import { AiFillCaretDown } from "react-icons/ai";
 import Link from "next/link";
 import { BiMenu } from "react-icons/bi";
 import clsx from "clsx";
-import { signOut, useSession } from "next-auth/react";
+import { signOut, useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import { getUser } from "@/lib/service";
 
 export default function NavbarPage({ params }) {
   const [open, setOpen] = useState(true);
@@ -16,6 +17,16 @@ export default function NavbarPage({ params }) {
   const toggleNavbar = useRef();
   const { data: session } = useSession();
   const { pathname, query } = useRouter();
+
+  useEffect(() => {
+    getUser({ email: session?.user?.email }).then(async (result) => {
+      await signIn("credentials", {
+        redirect: false,
+        email: result?.email,
+        password: result?.password,
+      });
+    });
+  }, [session?.user?.email]);
 
   function handleOpen(e) {
     if (!toggleNavbar?.current?.contains(e.target)) {
@@ -187,6 +198,15 @@ export default function NavbarPage({ params }) {
               >
                 <li>
                   <Link href={"/dashboard/myclass"}>My Courses</Link>
+                </li>
+                <li>
+                  <Link href={"/dashboard/myebook"}>My Ebook</Link>
+                </li>
+                <li>
+                  <Link href={"/dashboard/transactions"}>Transactions</Link>
+                </li>
+                <li>
+                  <Link href={"/dashboard/settings"}>Settings</Link>
                 </li>
                 <li>
                   <a onClick={() => signOut()}>Logout</a>

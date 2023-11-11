@@ -153,7 +153,7 @@ export const updateUser = async (data) => {
     gql`
     mutation MyMutation {
       updateAccount(
-        data: { image: { connect: { id: "` +
+        data: { gambar: { connect: { id: "` +
     data.id +
     `" } } }
         where: { id: "` +
@@ -161,7 +161,7 @@ export const updateUser = async (data) => {
     `" }
       ) {
         id
-        image {
+        gambar {
           url
         }
       }
@@ -172,6 +172,90 @@ export const updateUser = async (data) => {
       }
       publishAccount(where: { id: "` +
     data.name +
+    `" }) {
+        id
+      }
+    }
+  `;
+
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result;
+};
+
+export const updateUserWithImage = async (data) => {
+  const query =
+    gql`
+    mutation MyMutation {
+      updateAccount(
+        data: {name: "` +
+    data.name +
+    `", email: "` +
+    data.email +
+    `", gambar: {connect: {id: "` +
+    data.id +
+    `"}}, goals:  "` +
+    data.goals +
+    `"}
+        where: {email: "` +
+    data.email +
+    `"}
+      ) {
+        id
+        gambar {
+          url
+        }
+      }
+      publishAsset(where: { id: "` +
+    data.id +
+    `" }) {
+        id
+      }
+      publishAccount(where: { id: "` +
+    data.userId +
+    `" }) {
+        id
+      }
+    }
+  `;
+
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result;
+};
+
+export const updateUserWithNoImage = async (data) => {
+  const query =
+    gql`
+    mutation MyMutation {
+      updateAccount(
+        data: {name: "` +
+    data.name +
+    `", email: "` +
+    data.email +
+    `", goals:  "` +
+    data.goals +
+    `"}
+        where: {email: "` +
+    data.email +
+    `"}
+      ) {
+        id
+        gambar {
+          url
+        }
+      }
+      publishAsset(where: { id: "` +
+    data.id +
+    `" }) {
+        id
+      }
+      publishAccount(where: { id: "` +
+    data.userId +
     `" }) {
         id
       }
@@ -374,7 +458,9 @@ export const paymentRequest = async (data) => {
         id
         name
       }
-      publishAccount(where: {email: "audifirdi@gmail.com"}) {
+      publishAccount(where: {email: "` +
+    data.email +
+    `"}) {
         id
       }
     }
@@ -419,7 +505,7 @@ export const getPaymentUser = async (email) => {
     query
   );
 
-  return result.account.payment;
+  return result?.account?.payment;
 };
 
 export const updatePassword = async (data) => {

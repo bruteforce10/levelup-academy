@@ -122,7 +122,7 @@ export default function CardBuySection({ price, payment, email, title }) {
       </ul>
       {isPending ? (
         <Link
-          href={"/"}
+          href={"/dashboard/transactions"}
           className="px-6 flex bg-[#facb5e] justify-center gap-x-2 group text-center rounded-full text-[#fff] w-full transition-all  font-bold py-3"
         >
           Menunggu Pembayaran
