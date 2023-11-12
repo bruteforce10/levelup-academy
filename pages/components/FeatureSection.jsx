@@ -5,7 +5,10 @@ import { feature } from "@/lib/data";
 
 export default function FeatureSection() {
   return (
-    <section id="benefit" className="container lg:px-8 px-4 mx-auto mt-20">
+    <section
+      id="benefit"
+      className="container scroll-mt-[100px] lg:px-8 px-4 mx-auto mt-20"
+    >
       <div className="flex gap-12 max-lg:flex-wrap">
         <Image
           src="/img/feature.png"

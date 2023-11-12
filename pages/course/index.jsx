@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { createReview, getManyReview } from "@/lib/service";
+import { createReview, getManyReview, getPaymentUser } from "@/lib/service";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
@@ -20,11 +20,25 @@ export default function Course() {
   const [isReview, setReview] = useState(false);
   const email = session?.user?.email;
   const MySwal = withReactContent(Swal);
+  const [isBuy, setBuy] = useState(false);
 
   useEffect(() => {
     getManyReview({ class: query?.class, email: email }).then((result) => {
       if (result?.reviews?.length > 0) {
         setReview(true);
+      }
+    });
+  }, [email]);
+
+  useEffect(() => {
+    getPaymentUser(email).then((result) => {
+      if (result) {
+        const filterClass = result?.filter(
+          (item) => item?.coursePayment[0]?.id === query?.class
+        );
+        if (filterClass[0]?.statusPayment === "paymentSuccess") {
+          setBuy(true);
+        }
       }
     });
   }, [email]);
@@ -75,16 +89,20 @@ export default function Course() {
         <div className="space-y-6">
           <SubHeading size="2xl">Kelas Tekla Struktur</SubHeading>
           <div className="bg-[#fff] py-4 px-6 rounded-3xl">
-            <p className="text-md font-medium mb-1">
-              Link Support dibawah ini 🔥
-            </p>
-            <Link
-              href={"https://www.google.co.id"}
-              target="_blank"
-              className="text-blue-500 block underline underline-offset-2"
-            >
-              www.google.co.id
-            </Link>
+            {isBuy && (
+              <>
+                <p className="text-md font-medium mb-1">
+                  Link Support dibawah ini 🔥
+                </p>
+                <Link
+                  href={"https://www.google.co.id"}
+                  target="_blank"
+                  className="text-blue-500 block underline underline-offset-2"
+                >
+                  www.google.co.id
+                </Link>
+              </>
+            )}
           </div>
         </div>
         {!isReview && (

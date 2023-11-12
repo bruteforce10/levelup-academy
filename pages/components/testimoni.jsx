@@ -20,7 +20,10 @@ export default function Testimoni() {
   }, []);
 
   return (
-    <div className="bg-tersierbase h-fit max-lg:py-[60px]  lg:h-[600px] overflow-y-hidden mt-20">
+    <div
+      id="testimoni"
+      className="bg-tersierbase h-fit max-lg:py-[60px] scroll-mt-[100px] lg:h-[600px] overflow-y-hidden mt-20"
+    >
       <section className=" lg:flex justify-center container lg:pl-8  px-4 mx-auto gap-8 pr-4  ">
         <div className="lg:w-5/12  lg:py-[100px] ">
           <Tippy theme="light" content="🎖️ Rating Google Level-Up Academy">
@@ -48,16 +51,16 @@ export default function Testimoni() {
             Kisah sukses students Level-Up Bagaimana dapat meningkatkan skills &
             membantu meraih tujuan Mereka
           </p>
-          <div className="flex gap-4">
+          <div className="flex gap-4 max-sm:gap-2 max-sm:justify-center">
             <Link
               href="/kelas"
-              className="px-8 mt-6 bg-prime border-4 border-tersierbase box-content hover:border-[#18123063] transition-all rounded-full text-white font-bold py-3"
+              className="px-8 mt-6 bg-prime whitespace-nowrap border-4 border-tersierbase box-content hover:border-[#18123063] transition-all rounded-full text-white font-bold py-3"
             >
               Katalog Kelas
             </Link>
             <Link
               href="/testimonials"
-              className="px-8 mt-6 bg-tersier border-4 border-tersierbase box-content hover:border-[#18123063] transition-all rounded-full text-deep font-bold py-3"
+              className="px-8 mt-6 bg-tersier border-4 whitespace-nowrap border-tersierbase box-content hover:border-[#18123063] transition-all rounded-full text-deep font-bold py-3"
             >
               Share Ceritamu
             </Link>

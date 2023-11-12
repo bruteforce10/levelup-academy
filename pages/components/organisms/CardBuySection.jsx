@@ -2,8 +2,10 @@ import { Currency } from "@/lib/Currency";
 import { Discount } from "@/lib/Discount";
 import useSectionView from "@/lib/hook";
 import { getPaymentUser, paymentRequest } from "@/lib/service";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
 
@@ -11,11 +13,12 @@ export default function CardBuySection({ price, payment, email, title }) {
   const { ref } = useSectionView("buy", 1);
   const [isPending, setIsPending] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
+  const { data: session } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     getPaymentUser(email).then((result) => {
       if (result !== undefined) {
-        console.log(result);
         const filterClass = result?.filter(
           (item) => item?.coursePayment[0]?.judul === title
         );
@@ -33,20 +36,24 @@ export default function CardBuySection({ price, payment, email, title }) {
   }, []);
 
   const handleBuy = async () => {
-    const payResult = await paymentRequest({
-      id: payment,
-      email: email,
-      time: new Date().toISOString(),
-    });
+    if (session === null) {
+      router.push(`/auth/login?callbackUrl=/kelas/${payment}`);
+    } else {
+      const payResult = await paymentRequest({
+        id: payment,
+        email: email,
+        time: new Date().toISOString(),
+      });
 
-    if (payResult) {
-      setIsPending(true);
-      window.open(
-        `https://api.whatsapp.com/send?phone=628816101512&text=hi%20mimin%20saya%20dengan%20email:%20${email}%20ingin%20membeli%20produk%20${title}%20ini%20dengan%20harga%20${Discount(
-          price
-        )}`,
-        "_blank"
-      );
+      if (payResult) {
+        setIsPending(true);
+        window.open(
+          `https://api.whatsapp.com/send?phone=628816101512&text=hi%20mimin%20saya%20dengan%20email:%20${email}%20ingin%20membeli%20produk%20${title}%20ini%20dengan%20harga%20${Discount(
+            price
+          )}`,
+          "_blank"
+        );
+      }
     }
   };
 

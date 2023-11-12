@@ -7,4 +7,13 @@ export function mainMiddleware(req) {
   return res;
 }
 
-export default withAuth(mainMiddleware, ["/testimoni"]);
+export default withAuth(mainMiddleware, [
+  "/course",
+  "/dashboard/myclass",
+  "/dashboard/transactions",
+  "/dashboard/myebook",
+  "/dashboard/settings",
+  "/dashboard/settings/profile",
+  "/dashboard/settings/update",
+  "/dashboard/settings/password",
+]);

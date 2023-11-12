@@ -24,15 +24,17 @@ export default function Header() {
                   Anda.
                   <span className="font-bold"> #BelajarKapanSaja</span>
                 </p>
-                <div className="grid grid-cols-2 items-center sm:w-[400px]  gap-4 max-sm:mx-auto ">
-                  <button className="px-4 bg-second rounded-full text-deep font-bold py-3">
+                <div className="grid grid-cols-2 items-center  sm:w-[400px]  gap-4 max-sm:mx-auto ">
+                  <Link
+                    href="/auth/register"
+                    className="px-6 bg-second whitespace-nowrap mx-auto rounded-full text-deep font-bold py-3"
+                  >
                     Daftar Sekarang!
-                  </button>
+                  </Link>
                   <Link href="/kelas" className="text-white ">
-                    <span className="font-medium underline underline-offset-2">
-                      Lihat Seluruh Kelas
+                    <span className="font-medium underline whitespace-nowrap  underline-offset-2">
+                      Lihat Seluruh Kelas ✨
                     </span>{" "}
-                    ✨
                   </Link>
                 </div>
               </div>
