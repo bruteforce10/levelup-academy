@@ -8,7 +8,7 @@ import { Discount } from "@/lib/Discount";
 
 export default function CardClass({ data }) {
   return (
-    <div className=" rounded-3xl overflow-auto flex-auto w-full max-md:w-82  bg-[#fff]">
+    <div className=" rounded-3xl overflow-hidden flex-shrink-0 max-lg:w-[250px] lg:w-[280px] max-sm:w-full  bg-[#fff]">
       <Image
         src={data?.gambar?.url}
         alt="class"

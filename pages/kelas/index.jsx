@@ -6,6 +6,7 @@ import { categoryClass } from "@/lib/data";
 import CardClass from "../components/molecules/CardClass";
 import ListClassSection from "./ListClassSection";
 import { MyContext } from "@/lib/context/AppContext";
+import Link from "next/link";
 
 export default function KelasOnline() {
   const { dataClass, dataFilter } = MyContext();
@@ -28,35 +29,42 @@ export default function KelasOnline() {
         <Heading
           tag={"#LevelUpYourCareer"}
           judul={<span>Katalog Kelas</span>}
-          align={"sm:text-start"}
+          align={"max-sm:text-center"}
         />
-        <p className="md:text-lg font-medium -mt-6 leading-relaxed">
-          Level-Up Academy menyediakan Kelas yang sesuai <br /> bidang kamu
-          minati dan dengan kelas ramah untuk pemula
+        <p className="md:text-lg font-medium -mt-6 max-sm:text-center leading-relaxed">
+          Level-Up Academy menyediakan Kelas yang sesuai{" "}
+          <br className="max-md:hidden" /> bidang kamu minati dan dengan kelas
+          ramah untuk pemula
         </p>
       </div>
       <div className="mt-14 space-y-6 ">
         <SubHeading>Popular Category</SubHeading>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 grid-cols-1  max-sm:gap-y-4 md:gap-4 ">
           {categoryClass.map((item, index) => (
-            <div
+            <Link
+              href={`/kelas/category?category=${item.id}`}
               key={index}
               className="bg-[#fff] shadow-sm rounded-3xl flex cursor-pointer  items-center justify-start gap-x-6  px-6 py-5 "
             >
               <Image src={item.icon} alt="icon" className="w-[75px]" />
               <h4 className="font-extrabold text-xl">{item.name}</h4>
+            </Link>
+          ))}
+        </div>
+      </div>
+      {classList.length > 0 && (
+        <div className="mt-14 space-y-6 max-md:hidden">
+          <SubHeading>Terbaru Rilis</SubHeading>
+          <div className="w-full overflow-x-scroll pb-8">
+            <div className="gap-6 flex ">
+              {dataClass &&
+                classList.map((item, index) => (
+                  <CardClass key={index} data={item} />
+                ))}
             </div>
-          ))}
+          </div>
         </div>
-      </div>
-      <div className="mt-14 space-y-6 max-md:hidden">
-        <SubHeading>Terbaru Rilis</SubHeading>
-        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
-          {classList.map((item, index) => (
-            <CardClass key={index} data={item} />
-          ))}
-        </div>
-      </div>
+      )}
       <ListClassSection />
     </div>
   );

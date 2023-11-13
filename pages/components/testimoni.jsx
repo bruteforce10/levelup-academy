@@ -41,8 +41,8 @@ export default function Testimoni() {
             judul={
               <span className="text-[#fff]">
                 {" "}
-                Pengalaman Luar Biasa di <br className="max-lg:block hidden" />{" "}
-                Level-Up🚀
+                Pengalaman Luar Biasa di{" "}
+                <br className="max-lg:block max-sm:hidden hidden" /> Level-Up🚀
               </span>
             }
             align={"text-start"}

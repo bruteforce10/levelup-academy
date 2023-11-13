@@ -8,7 +8,7 @@ import {
 import SubHeading from "@/pages/components/atoms/SubHeading";
 import SideBarCourse from "@/pages/components/organisms/SideBarCourse";
 import clsx from "clsx";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import * as EmailValidator from "email-validator";
@@ -135,7 +135,14 @@ export default function Profile() {
           email: data.email,
           goals: data.goals,
         }).then((result) => {
-          router.push("/dashboard/settings/update");
+          getUser({ email: session?.user?.email }).then(async (result) => {
+            await signIn("credentials", {
+              redirect: false,
+              email: result?.email,
+              password: result?.password,
+            });
+            router.push("/dashboard/settings/update");
+          });
         });
       } else {
         form.append("fileUpload", image);
@@ -155,7 +162,14 @@ export default function Profile() {
             email: data.email,
             goals: data.goals,
           }).then((result) => {
-            router.push("/dashboard/settings/update");
+            getUser({ email: session?.user?.email }).then(async (result) => {
+              await signIn("credentials", {
+                redirect: false,
+                email: result?.email,
+                password: result?.password,
+              });
+              router.push("/dashboard/settings/update");
+            });
           });
         }
       }

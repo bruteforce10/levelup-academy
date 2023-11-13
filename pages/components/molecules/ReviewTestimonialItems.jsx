@@ -4,6 +4,7 @@ import StarRating from "../atoms/StarRating";
 import { motion } from "framer-motion";
 
 export default function ReviewTestimonialItems({ data }) {
+  console.log(data);
   const [isReview, setReview] = useState(3);
   return (
     <div className="space-y-6">
@@ -48,7 +49,7 @@ export default function ReviewTestimonialItems({ data }) {
                   </div>
                 </div>
                 <p>{item.ulasan}</p>
-                <StarRating review={5} />
+                <StarRating review={item?.rating} />
               </motion.div>
             );
           }

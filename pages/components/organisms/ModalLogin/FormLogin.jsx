@@ -9,6 +9,7 @@ export default function FormLogin() {
     email: "",
     password: "",
   });
+  const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState({
     email: "",
     password: "",
@@ -45,6 +46,7 @@ export default function FormLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const findErrors = validate();
+    setLoading(true);
 
     if (Object.values(findErrors).some((err) => err !== "")) {
       setData({
@@ -52,6 +54,7 @@ export default function FormLogin() {
         email: "",
         password: "",
       });
+      setLoading(false);
       setError(findErrors);
     } else {
       try {
@@ -63,10 +66,12 @@ export default function FormLogin() {
         });
 
         if (res.ok) {
+          setLoading(false);
           push(callBackUrl);
           const modal = document.getElementById("my_modal_1");
           modal.close();
         } else {
+          setLoading(false);
           setData({
             email: "",
             password: "",
@@ -119,13 +124,24 @@ export default function FormLogin() {
         </label>
       </div>
       <div className="space-y-4">
-        <button
-          type="submit"
-          className="bg-prime w-full p-3 rounded-full text-md font-extrabold text-white border-4 border-white
-      hover:border-[#a1b7e7] transition-all  "
-        >
-          Sign In
-        </button>
+        {isLoading ? (
+          <button
+            disabled="disabled"
+            className="btn  text-white  w-full  rounded-full text-md font-extrabold  border-4 border-white  transition-all"
+          >
+            <span className="loading loading-spinner"></span>
+            loading
+          </button>
+        ) : (
+          <button
+            type="submit"
+            className="bg-prime w-full p-3 rounded-full text-md font-extrabold text-white border-4 border-white
+  hover:border-[#a1b7e7] transition-all  "
+          >
+            Sign In
+          </button>
+        )}
+
         <button
           onClick={() => {
             push("auth/register");

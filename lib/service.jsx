@@ -395,6 +395,9 @@ export const getClassById = async (id) => {
         gambar {
           url
         }
+        gambarClass {
+          url
+        }
         sertifikat
         about {
           html
@@ -489,6 +492,7 @@ export const getPaymentUser = async (email) => {
                 url
               }
               price
+              linkClass
               discount
               updatedAt
             }
@@ -545,6 +549,25 @@ export const createReview = async (data) => {
   return result;
 };
 
+export const publishReview = async (id) => {
+  console.log(id);
+  const query =
+    gql`
+    mutation MyMutation {
+      publishReview(where: { id: "` +
+    id +
+    `" }) {
+        id
+      }
+    }
+  `;
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result;
+};
+
 export const getManyReview = (data) => {
   const query =
     gql`
@@ -561,6 +584,7 @@ export const getManyReview = (data) => {
       ) {
         id
       }
+
     }
   `;
   const result = request(

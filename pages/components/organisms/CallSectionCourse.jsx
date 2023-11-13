@@ -12,7 +12,7 @@ export default function CallSectionCourse() {
           width={300}
           height={300}
         />
-        <div className="space-y-6 md:mt-[10px] max-md:text-center max-md:pb-20">
+        <div className="space-y-6 md:mt-[10px] max-md:text-center ">
           <h5 className="font-extrabold xl:text-4xl text-3xl">
             Bingung dan ingin bertanya?
           </h5>

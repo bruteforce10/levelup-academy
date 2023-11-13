@@ -4,6 +4,7 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 export default function StarRating({ review }) {
   const [rating, setRating] = React.useState(review);
   useEffect(() => {
+    setRating(review);
     if (typeof review === "object") {
       const sum = Math.round(
         review.reduce((accumulator, currentValue) => {

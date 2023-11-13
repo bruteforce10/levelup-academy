@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion, useInView } from "framer-motion";
+import { MyContext } from "@/lib/context/AppContext";
 
 export default function ModalFilter({ refComponent }) {
   const isInView = useInView(refComponent);
+  const [isDesignChecked, setIsDesignChecked] = React.useState(false);
+  const { dataClass, dataFilter, setDataFilter } = MyContext();
+  useEffect(() => {
+    if (dataClass) {
+      setDataFilter(dataClass);
+    }
+  }, [dataClass]);
+
   return (
     <>
       <motion.button
@@ -30,12 +39,25 @@ export default function ModalFilter({ refComponent }) {
                 <div className="flex items-center gap-4">
                   <input
                     type="checkbox"
+                    onChange={() => {
+                      setDataFilter(dataClass);
+                    }}
                     className="checkbox checkbox-warning"
                   />
                   <p>All</p>
                 </div>
                 <div className="flex items-center gap-4">
                   <input
+                    onChange={() => {
+                      setIsDesignChecked(!isDesignChecked);
+                      isDesignChecked
+                        ? setDataFilter(dataClass)
+                        : setDataFilter(
+                            dataClass.filter(
+                              (item) => item.category === "design"
+                            )
+                          );
+                    }}
                     type="checkbox"
                     className="checkbox checkbox-warning"
                   />
@@ -43,10 +65,37 @@ export default function ModalFilter({ refComponent }) {
                 </div>
                 <div className="flex items-center gap-4">
                   <input
+                    onChange={() => {
+                      setIsDesignChecked(!isDesignChecked);
+                      isDesignChecked
+                        ? setDataFilter(dataClass)
+                        : setDataFilter(
+                            dataClass.filter(
+                              (item) => item.category === "coding"
+                            )
+                          );
+                    }}
                     type="checkbox"
                     className="checkbox checkbox-warning"
                   />
                   <p>Coding</p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <input
+                    onChange={() => {
+                      setIsDesignChecked(!isDesignChecked);
+                      isDesignChecked
+                        ? setDataFilter(dataClass)
+                        : setDataFilter(
+                            dataClass.filter(
+                              (item) => item.category === "videoEditor"
+                            )
+                          );
+                    }}
+                    type="checkbox"
+                    className="checkbox checkbox-warning"
+                  />
+                  <p>Video Editor</p>
                 </div>
               </div>
             </div>
@@ -56,32 +105,16 @@ export default function ModalFilter({ refComponent }) {
                 <div className="flex items-center gap-4">
                   <input
                     type="checkbox"
-                    className="checkbox checkbox-warning"
-                  />
-                  <p>Baru Rilis</p>
-                </div>
-                <div className="flex items-center gap-4">
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-warning"
-                  />
-                  <p>Terpopuler</p>
-                </div>
-                <div className="flex items-center gap-4">
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-warning"
-                  />
-                  <p>Sedang Promo</p>
-                </div>
-              </div>
-            </div>
-            <div className="space-y-6">
-              <h5 className="text-xl font-extrabold">Level</h5>
-              <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <input
-                    type="checkbox"
+                    onChange={() => {
+                      setIsDesignChecked(!isDesignChecked);
+                      isDesignChecked
+                        ? setDataFilter(dataClass)
+                        : setDataFilter(
+                            dataClass.filter(
+                              (item) => item.level === 0 || item.level === 1
+                            )
+                          );
+                    }}
                     className="checkbox checkbox-warning"
                   />
                   <p>Beginner Friendly</p>
@@ -89,16 +122,32 @@ export default function ModalFilter({ refComponent }) {
                 <div className="flex items-center gap-4">
                   <input
                     type="checkbox"
+                    onChange={() => {
+                      setIsDesignChecked(!isDesignChecked);
+                      isDesignChecked
+                        ? setDataFilter(dataClass)
+                        : setDataFilter(
+                            dataClass.filter((item) => item.level === 2)
+                          );
+                    }}
                     className="checkbox checkbox-warning"
                   />
                   <p>Intermediate</p>
                 </div>
                 <div className="flex items-center gap-4">
                   <input
+                    onChange={() => {
+                      setIsDesignChecked(!isDesignChecked);
+                      isDesignChecked
+                        ? setDataFilter(dataClass)
+                        : setDataFilter(
+                            dataClass.filter((item) => item.level === 3)
+                          );
+                    }}
                     type="checkbox"
                     className="checkbox checkbox-warning"
                   />
-                  <p>All Levels</p>
+                  <p>Expert</p>
                 </div>
               </div>
             </div>

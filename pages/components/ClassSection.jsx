@@ -6,7 +6,7 @@ import { MyContext } from "@/lib/context/AppContext";
 export default function ClassSection() {
   const { dataClass } = MyContext();
   return (
-    <section className="container lg:px-8 px-4 mx-auto mt-20 ">
+    <section className="container lg:px-8 px-4 mx-auto mt-20">
       <Heading
         tag={"Become Freelancer"}
         judul={
@@ -14,12 +14,14 @@ export default function ClassSection() {
             Kelas Terfavorit <br /> Berbasis Industri.
           </span>
         }
-        align={"max-sm:text-start"}
+        align={"max-sm:text-center"}
       />
-      <div className="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
-        {dataClass.map((item, index) => (
-          <CardClass key={index} data={item} />
-        ))}
+      <div className="w-full overflow-x-scroll pb-8">
+        <div className="gap-6 flex ">
+          {dataClass.map((item, index) => (
+            <CardClass key={index} data={item} />
+          ))}
+        </div>
       </div>
     </section>
   );

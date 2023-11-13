@@ -8,16 +8,15 @@ import { MyContext } from "@/lib/context/AppContext";
 
 export default function ListClassSection() {
   const refObject = useRef(null);
-  const { dataClass } = MyContext();
+  const { dataClass, dataFilter, setDataFilter } = MyContext();
   const [isScroll, setIsScroll] = React.useState("");
   const [isDesignChecked, setIsDesignChecked] = React.useState(false);
-  const [dataFilter, setDataFilter] = React.useState(dataClass);
 
   useEffect(() => {
     if (dataClass) {
       setDataFilter(dataClass);
     }
-  }, []);
+  }, [dataClass]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,20 +35,20 @@ export default function ListClassSection() {
   }, [isScroll, setIsScroll]);
 
   return (
-    <div className="mt-14 space-y-20 max-md:space-y-10  h-full">
+    <div className="mt-28 space-y-20 max-md:space-y-10  h-full">
       <SubHeading>
         Browse Kelas <br /> Sesuai Karir Kamu
       </SubHeading>
       <div className="flex gap-8 justify-center">
         <motion.div
           layout
-          transition={{ duration: 1, delay: 0.2 }}
+          transition={{ duration: 1, delay: 0.6 }}
           className={clsx(
-            "w-3/12 space-y-10 h-[450px] max-md:hidden overflow-y-scroll ",
-            isScroll && "sticky top-20"
+            "w-3/12 space-y-10 h-[450px] pb-8 max-md:hidden  overflow-y-scroll ",
+            isScroll && "sticky top-24"
           )}
         >
-          <div className="space-y-6">
+          <div className="space-y-6 ">
             <h5 className="text-xl font-extrabold">Category</h5>
             <div className="space-y-4">
               <div className="flex items-center gap-4">
@@ -200,7 +199,7 @@ export default function ListClassSection() {
         </motion.div>
         <div
           ref={refObject}
-          className="grid w-9/12 max-md:w-full gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
+          className="w-9/12 max-md:w-full gap-6 flex flex-wrap"
         >
           {dataFilter.length === 0 && (
             <div className="w-full col-span-2 text-center">

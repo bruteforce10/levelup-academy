@@ -5,24 +5,32 @@ import IconIndustries from "@/public/img/course-industries.svg";
 
 export const categoryClass = [
   {
+    id: "design",
     name: "Kelas Design",
     icon: IconDesign,
     desc: "UI/UX Graphic Design",
+    info: "Mempelajari Design untuk membangun projek website atau mobile app dari dasar sampai tingkat atas bersama mentor berpengalaman di Level-Up Academy.",
   },
   {
+    id: "coding",
     name: "Kelas Koding",
     icon: IconCoding,
     desc: "Bikin Website & Aplikasi",
+    info: "Mempelajari Coding untuk membangun projek website atau mobile app dari dasar sampai tingkat atas bersama mentor berpengalaman di Level-Up Academy.",
   },
   {
+    id: "selfImprovement",
     name: "Perdalam Softskills",
     icon: IconImprovement,
     desc: "Improve your business",
+    info: "Mempelajari Career Preparation untuk membangun projek website atau mobile app dari dasar sampai tingkat atas bersama mentor berpengalaman di Level-Up Academy.",
   },
   {
+    id: "industrial",
     name: "Kelas Industries",
     icon: IconIndustries,
     desc: "Alur belajar terbaik",
+    info: "Mempelajari Bidang Industries untuk membangun sofskill dengan kebutuhan industri dari dasar sampai tingkat atas bersama mentor berpengalaman di Level-Up Academy.",
   },
 ];
 

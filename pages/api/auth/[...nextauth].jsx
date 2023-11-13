@@ -51,22 +51,26 @@ export const authOptions = {
       }
 
       if (account?.provider === "google") {
+        console.log(user);
         const data = {
           name: user.name,
           email: user.email,
-          image: user.image,
+          gambar: user.image,
           type: "google",
         };
+        console.log(data);
+
         const dataGoogle = await signUpWithGoogle(data);
+        console.log(dataGoogle);
         token.email = dataGoogle.email;
         token.name = dataGoogle.name;
         token.type = dataGoogle.type;
-        token.image = dataGoogle.image;
+        token.image = user.image;
       }
       return token;
     },
     async session({ session, token }) {
-      console.log(session, token);
+      console.log(token, session);
       if ("email" in token) {
         session.user.email = token.email;
       }

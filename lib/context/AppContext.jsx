@@ -7,9 +7,12 @@ const MyContext = () => useContext(AppContext);
 const AppContextProvider = (props) => {
   const [activeSection, setActiveSection] = useState(null);
   const [dataClass, setDataClass] = useState([]);
+  const [dataFilter, setDataFilter] = React.useState(dataClass);
   useEffect(() => {
     getClass().then((res) => {
-      setDataClass(res);
+      if (res) {
+        setDataClass(res);
+      }
     });
   }, []);
 
@@ -20,6 +23,8 @@ const AppContextProvider = (props) => {
         activeSection,
         dataClass,
         setDataClass,
+        dataFilter,
+        setDataFilter,
       }}
     >
       {props.children}

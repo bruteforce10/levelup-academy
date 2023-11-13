@@ -7,9 +7,8 @@ import { AiFillCaretDown } from "react-icons/ai";
 import Link from "next/link";
 import { BiMenu } from "react-icons/bi";
 import clsx from "clsx";
-import { signOut, useSession, signIn } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { getUser } from "@/lib/service";
 
 export default function NavbarPage({ params }) {
   const [open, setOpen] = useState(true);
@@ -17,16 +16,6 @@ export default function NavbarPage({ params }) {
   const toggleNavbar = useRef();
   const { data: session } = useSession();
   const { pathname, query } = useRouter();
-
-  useEffect(() => {
-    getUser({ email: session?.user?.email }).then(async (result) => {
-      await signIn("credentials", {
-        redirect: false,
-        email: result?.email,
-        password: result?.password,
-      });
-    });
-  }, [session?.user?.email]);
 
   function handleOpen(e) {
     if (!toggleNavbar?.current?.contains(e.target)) {
@@ -64,9 +53,11 @@ export default function NavbarPage({ params }) {
           {isScrolled ||
           params == "/kelas" ||
           params == "/testimonials" ||
+          params == "/kelas/fresh-sale" ||
           params == `/kelas/${query.slug}` ||
           params == `/dashboard/${pathname.slice(11)}` ||
-          pathname === "/course" ? (
+          pathname === "/course" ||
+          pathname === "/kelas/category" ? (
             <Image src={Logo} alt="logo" className="w-full" />
           ) : (
             <Image src={LogoWhite} alt="logo" className="w-full" />
@@ -86,22 +77,26 @@ export default function NavbarPage({ params }) {
             className={
               isScrolled ||
               params == "/kelas" ||
+              params == "/kelas/fresh-sale" ||
               params == "/testimonials" ||
               pathname == "/course" ||
               params == `/kelas/${query.slug}` ||
+              pathname === "/kelas/category" ||
               params == `/dashboard/${pathname.slice(11)}`
                 ? "py-8 px-12 lg:p-0 text-black whitespace-nowrap"
                 : "py-8 px-12 lg:p-0 lg:text-white whitespace-nowrap"
             }
           >
-            <Link href="#sale">Fresh Sale</Link>
+            <Link href="/kelas/fresh-sale">Fresh Sale</Link>
           </li>
           <li
             className={
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
+              params == "/kelas/fresh-sale" ||
               pathname == "/course" ||
+              pathname === "/kelas/category" ||
               params == `/kelas/${query.slug}` ||
               params == `/dashboard/${pathname.slice(11)}`
                 ? "flex gap-2 items-center py-8 px-12 lg:p-0 text-black"
@@ -115,7 +110,9 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               params == "/testimonials" ||
+              params == "/kelas/fresh-sale" ||
               pathname == "/course" ||
+              pathname === "/kelas/category" ||
               params == `/kelas/${query.slug}` ||
               params == `/dashboard/${pathname.slice(11)}`
                 ? "py-8 px-12 lg:p-0 text-black"
@@ -129,7 +126,9 @@ export default function NavbarPage({ params }) {
               isScrolled ||
               params == "/kelas" ||
               pathname == "/course" ||
+              params == "/kelas/fresh-sale" ||
               params == "/testimonials" ||
+              pathname === "/kelas/category" ||
               params == `/kelas/${query.slug}` ||
               params == `/dashboard/${pathname.slice(11)}`
                 ? "py-8 px-12 lg:p-0 text-black"
@@ -162,7 +161,9 @@ export default function NavbarPage({ params }) {
                     isScrolled ||
                     params == "/kelas" ||
                     pathname == "/course" ||
+                    params == "/kelas/fresh-sale" ||
                     params == "/testimonials" ||
+                    pathname === "/kelas/category" ||
                     params == `/kelas/${query.slug}` ||
                     params == `/dashboard/${pathname.slice(11)}`
                       ? `text-deep font-medium text-[18px]  ${
@@ -238,6 +239,8 @@ export default function NavbarPage({ params }) {
             isScrolled ||
             params == "/kelas" ||
             params == "/testimonials" ||
+            params == "/kelas/fresh-sale" ||
+            pathname === "/kelas/category" ||
             params == `/kelas/${query.slug}` ||
             params == `/dashboard/${pathname.slice(11)}`
               ? "p-2 rounded-xl border-2 border-deep/20  lg:hidden cursor-pointer"
@@ -253,7 +256,9 @@ export default function NavbarPage({ params }) {
             className={
               isScrolled ||
               params == "/kelas" ||
+              params == "/kelas/fresh-sale" ||
               params == "/testimonials" ||
+              pathname === "/kelas/category" ||
               params == `/kelas/${query.slug}` ||
               params == `/dashboard/${pathname.slice(11)}`
                 ? "text-deep"

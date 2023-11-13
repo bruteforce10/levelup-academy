@@ -5,7 +5,12 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { createReview, getManyReview, getPaymentUser } from "@/lib/service";
+import {
+  createReview,
+  getManyReview,
+  getPaymentUser,
+  publishReview,
+} from "@/lib/service";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
@@ -21,6 +26,7 @@ export default function Course() {
   const email = session?.user?.email;
   const MySwal = withReactContent(Swal);
   const [isBuy, setBuy] = useState(false);
+  const [getData, setGetData] = useState({});
 
   useEffect(() => {
     getManyReview({ class: query?.class, email: email }).then((result) => {
@@ -38,6 +44,7 @@ export default function Course() {
         );
         if (filterClass[0]?.statusPayment === "paymentSuccess") {
           setBuy(true);
+          setGetData(filterClass[0]?.coursePayment[0]);
         }
       }
     });
@@ -67,6 +74,7 @@ export default function Course() {
       email: email,
     });
     if (!createReviewResult?.id) {
+      publishReview(createReviewResult?.createReview?.id);
       setData({
         ...data,
         desc: "",
@@ -87,7 +95,7 @@ export default function Course() {
 
       <section className="mt-[60px] w-full space-y-12">
         <div className="space-y-6">
-          <SubHeading size="2xl">Kelas Tekla Struktur</SubHeading>
+          <SubHeading size="2xl">Kelas {getData?.judul}</SubHeading>
           <div className="bg-[#fff] py-4 px-6 rounded-3xl">
             {isBuy && (
               <>
@@ -95,11 +103,11 @@ export default function Course() {
                   Link Support dibawah ini 🔥
                 </p>
                 <Link
-                  href={"https://www.google.co.id"}
+                  href={getData?.linkClass}
                   target="_blank"
                   className="text-blue-500 block underline underline-offset-2"
                 >
-                  www.google.co.id
+                  {getData?.linkClass}
                 </Link>
               </>
             )}

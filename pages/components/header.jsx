@@ -24,15 +24,15 @@ export default function Header() {
                   Anda.
                   <span className="font-bold"> #BelajarKapanSaja</span>
                 </p>
-                <div className="grid grid-cols-2 items-center  sm:w-[400px]  gap-4 max-sm:mx-auto ">
+                <div className="grid grid-cols-2  items-center  sm:w-[400px]  gap-4 max-sm:justify-center max-sm:gap-6 max-sm:mx-auto ">
                   <Link
                     href="/auth/register"
-                    className="px-6 bg-second whitespace-nowrap mx-auto rounded-full text-deep font-bold py-3"
+                    className="px-6 max-sm:px-4 bg-second whitespace-nowrap block mx-auto  rounded-full text-deep font-bold py-3"
                   >
                     Daftar Sekarang!
                   </Link>
                   <Link href="/kelas" className="text-white ">
-                    <span className="font-medium underline whitespace-nowrap  underline-offset-2">
+                    <span className="font-medium underline whitespace-nowrap block   underline-offset-2">
                       Lihat Seluruh Kelas ✨
                     </span>{" "}
                   </Link>

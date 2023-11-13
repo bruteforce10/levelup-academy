@@ -2,6 +2,7 @@ import React from "react";
 import Heading from "./heading";
 import Image from "next/image";
 import { feature } from "@/lib/data";
+import Link from "next/link";
 
 export default function FeatureSection() {
   return (
@@ -45,9 +46,12 @@ export default function FeatureSection() {
               </li>
             ))}
           </ul>
-          <button className="px-8 mt-6 bg-prime border-4 border-white box-content hover:border-[#99b7f0] transition-all rounded-full text-white font-bold py-3">
+          <Link
+            href={"/auth/login"}
+            className="px-8 mt-6 bg-prime border-4 inline-block border-white box-content hover:border-[#99b7f0] transition-all rounded-full text-white font-bold py-3"
+          >
             Join Now
-          </button>
+          </Link>
         </div>
       </div>
     </section>

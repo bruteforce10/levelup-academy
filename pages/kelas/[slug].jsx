@@ -27,13 +27,14 @@ export default function Preview() {
     if (slug) {
       getClassById(slug).then((result) => {
         setData(result);
+        console.log(result);
       });
     }
   }, [slug]);
 
   return (
     data && (
-      <div className="px-4 container mt-[60px] mx-auto pb-36">
+      <div className="px-4 container mt-[60px] mx-auto pb-18">
         <section className="flex  gap-8 justify-between max-md:flex-wrap-reverse ">
           <div className="space-y-6 w-7/12 max-md:w-full">
             <div className="flex items-center gap-[32px]">
@@ -90,14 +91,14 @@ export default function Preview() {
           <div className="w-5/12 flex justify-end max-md:justify-start max-md:w-full">
             <Image
               className="rounded-2xl w-[400px] object-cover "
-              src={data?.gambar?.url}
+              src={data?.gambarClass?.url}
               alt="preview"
               height={600}
               width={600}
             />
           </div>
         </section>
-        <section className="mt-36 flex gap-10">
+        <section className="mt-36 max-sm:mt-[200px] flex gap-10">
           <SideBarClass />
           <div className="space-y-20">
             <div className="space-y-4">

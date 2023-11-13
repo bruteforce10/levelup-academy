@@ -35,7 +35,7 @@ export default function SideBarClass() {
   return (
     <motion.div
       layout
-      transition={{ duration: 1, delay: 0.2 }}
+      transition={{ duration: 1, delay: 0.5 }}
       className={clsx(
         "min-w-[200px] max-md:hidden  h-fit max-w-[500px] py-[38px] px-[32px] bg-[#fff] rounded-2xl flex-col justify-start items-start gap-[34px] inline-flex",
         isScroll && "sticky top-32"

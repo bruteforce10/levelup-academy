@@ -118,7 +118,7 @@ export default function Testimonials() {
   };
 
   return (
-    <div className="   px-8  pb-20 ">
+    <div className="  md:px-8  pb-20 ">
       <div className="flex gap-[50px] container mx-auto max-lg:flex-wrap justify-center max-xl:px-6  mt-[50px] lg:h-full">
         <form onSubmit={handleSubmit} className="w-5/12 max-lg:w-full ">
           <h4 className="text-3xl font-extrabold mb-6 max-sm:w-full  w-[430px]">

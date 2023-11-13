@@ -39,7 +39,7 @@ export default function ReviewClassSection({ reviews }) {
             onClick={() => {
               setActive(5 - index);
               const filterRating = reviews.filter(
-                (item) => item.rating == 5 - index
+                (item) => item.rating === 5 - index
               );
               console.log(filterRating);
               setDataReviews(filterRating);
