@@ -7,6 +7,7 @@ import CardClass from "../components/molecules/CardClass";
 import ListClassSection from "./ListClassSection";
 import { MyContext } from "@/lib/context/AppContext";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function KelasOnline() {
   const { dataClass, dataFilter } = MyContext();
@@ -25,6 +26,9 @@ export default function KelasOnline() {
 
   return (
     <div className="px-4 container mt-[60px] mx-auto">
+      <Head>
+        <title>Katalog Kelas - Level-Up Academy</title>
+      </Head>
       <div>
         <Heading
           tag={"#LevelUpYourCareer"}

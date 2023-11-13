@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { postComment } from "@/lib/service";
 import TestimonialSection from "../components/molecules/TestimonialSection";
+import Head from "next/head";
 
 export default function Testimonials() {
   const [isLoading, setLoading] = useState(false);
@@ -119,6 +120,9 @@ export default function Testimonials() {
 
   return (
     <div className="  md:px-8  pb-20 ">
+      <Head>
+        <title>Ceritakan Pengalaman Positif Kamu di Level-Up Academy</title>
+      </Head>
       <div className="flex gap-[50px] container mx-auto max-lg:flex-wrap justify-center max-xl:px-6  mt-[50px] lg:h-full">
         <form onSubmit={handleSubmit} className="w-5/12 max-lg:w-full ">
           <h4 className="text-3xl font-extrabold mb-6 max-sm:w-full  w-[430px]">

@@ -39,7 +39,7 @@ export default function NavbarPage({ params }) {
   return (
     <header
       className={clsx(
-        " py-4 px-8 top-[-100px] transition-all sticky z-10 ",
+        " py-4 px-8 top-[-100px]  transition-all sticky z-10 ",
         isScrolled &&
           "sticky top-[-12px] delay-500 bg-white/90 backdrop-blur-sm  z-[99]  "
       )}
@@ -103,7 +103,7 @@ export default function NavbarPage({ params }) {
                 : "flex gap-2 items-center py-8 px-12 lg:p-0 lg:text-white"
             }
           >
-            <Link href="#kelas">Kelas</Link> <AiFillCaretDown size={12} />{" "}
+            <Link href="/kelas">Kelas</Link>
           </li>
           <li
             className={
@@ -142,13 +142,14 @@ export default function NavbarPage({ params }) {
           className={
             !open
               ? "items-center  text-deep lg:space-x-4 max-lg:space-y-4 max-lg:fixed max-lg:top-[470px] max-lg:left-[30px] lg:flex max-lg:w-[200px]  w-3/12 transition-all "
-              : "items-center justify-end text-deep lg:space-x-4 max-lg:space-y-4 max-lg:fixed max-lg:top-[470px] max-lg:left-[30px] lg:flex max-lg:w-[200px] w-3/12 transition-all max-lg:hidden"
+              : "items-center justify-end text-deep lg:space-x-4 max-lg:space-y-4 max-lg:fixed max-lg:top-[470px] max-lg:left-[30px] lg:flex max-lg:w-[200px] w-3/12  transition-all max-lg:hidden"
           }
         >
-          <div className="bg-tersier p-4  rounded-full cursor-pointer flex items-center gap-2">
+          {/* nanti diaktifkan kalau searchnya sudah banyak */}
+          {/* <div className="bg-tersier p-4  rounded-full cursor-pointer flex items-center gap-2">
             <BsSearch />
             <p className="lg:hidden">Search...</p>
-          </div>
+          </div> */}
 
           {session ? (
             <div className="dropdown">

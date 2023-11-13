@@ -1,10 +1,16 @@
 import FormLogin from "@/pages/components/organisms/ModalLogin/FormLogin";
+import Head from "next/head";
 import Image from "next/image";
 import React from "react";
 
 export default function Login() {
   return (
     <div className="bg-[#F6F8FD]  h-[800px]">
+      <Head>
+        <title>
+          Dapatkan Kelas Premium dengan Login In | Level-Up Academy{" "}
+        </title>
+      </Head>
       <Image
         src={"/img/logo.png"}
         alt="logo"

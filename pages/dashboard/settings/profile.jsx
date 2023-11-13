@@ -12,6 +12,7 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import * as EmailValidator from "email-validator";
+import Head from "next/head";
 
 export default function Profile() {
   const [data, setData] = useState([]);
@@ -178,6 +179,9 @@ export default function Profile() {
 
   return (
     <div className="flex gap-x-8 relative container max-lg:px-8 mx-auto ">
+      <Head>
+        <title>Edit My Profile | Level-Up Academy</title>
+      </Head>
       <SideBarCourse />
       <section className="mt-[60px]">
         <div className="space-y-3">

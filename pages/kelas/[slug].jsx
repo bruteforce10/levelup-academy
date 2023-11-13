@@ -16,6 +16,8 @@ import moment from "moment/moment";
 import AuthorCourse from "../components/organisms/AuthorCourse";
 import CallSectionCourse from "../components/organisms/CallSectionCourse";
 import { useSession } from "next-auth/react";
+import FooterBuy from "../components/molecules/FooterBuy";
+import Head from "next/head";
 
 export default function Preview() {
   const [data, setData] = useState(null);
@@ -27,14 +29,16 @@ export default function Preview() {
     if (slug) {
       getClassById(slug).then((result) => {
         setData(result);
-        console.log(result);
       });
     }
   }, [slug]);
 
   return (
     data && (
-      <div className="px-4 container mt-[60px] mx-auto pb-18">
+      <div className="px-4 container mt-[60px] max-sm:mt-8 mx-auto pb-18">
+        <Head>
+          <title>{data?.judul} | Level-Up Academy</title>
+        </Head>
         <section className="flex  gap-8 justify-between max-md:flex-wrap-reverse ">
           <div className="space-y-6 w-7/12 max-md:w-full">
             <div className="flex items-center gap-[32px]">
@@ -88,9 +92,9 @@ export default function Preview() {
               </BoxChecklist>
             </div>
           </div>
-          <div className="w-5/12 flex justify-end max-md:justify-start max-md:w-full">
+          <div className="w-5/12 flex  items-start max-md:justify-start max-md:w-full">
             <Image
-              className="rounded-2xl w-[400px] object-cover "
+              className="rounded-2xl w-[400px] object-contain "
               src={data?.gambarClass?.url}
               alt="preview"
               height={600}
@@ -164,6 +168,7 @@ export default function Preview() {
               />
             </div>
             <CallSectionCourse />
+            <FooterBuy price={data?.price} />
           </div>
         </section>
       </div>

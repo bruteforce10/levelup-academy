@@ -143,8 +143,9 @@ export default function FormLogin() {
         )}
 
         <button
-          onClick={() => {
-            push("auth/register");
+          onClick={(e) => {
+            e.preventDefault();
+            push("/auth/register");
             const modal = document.getElementById("my_modal_1");
             modal.close();
           }}

@@ -7,6 +7,7 @@ import { getPaymentUser } from "@/lib/service";
 import { Discount } from "@/lib/Discount";
 import moment from "moment";
 import SubHeading from "../components/atoms/SubHeading";
+import Head from "next/head";
 
 export default function Transactions() {
   const [data, setData] = useState([]);
@@ -30,6 +31,9 @@ export default function Transactions() {
 
   return (
     <div className=" flex gap-x-8  container mx-auto ">
+      <Head>
+        <title>Transactions | Level-Up Academy</title>
+      </Head>
       <SideBarCourse />
       <section className="mt-[60px] w-full">
         <div className="space-y-3">

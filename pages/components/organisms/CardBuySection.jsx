@@ -68,7 +68,7 @@ export default function CardBuySection({ price, payment, email, title }) {
         <div className="text-red-500 text-xl font-bold  line-through animate-pulse ">
           {Currency(price)}
         </div>
-        <div className="text-black text-3xl font-extrabold">
+        <div id="hookBuy" className="text-black text-3xl font-extrabold">
           {Discount(price)}
         </div>
       </div>

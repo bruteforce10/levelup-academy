@@ -3,11 +3,15 @@ import React from "react";
 import Heading from "../components/heading";
 import CardClass from "../components/molecules/CardClass";
 import { MyContext } from "@/lib/context/AppContext";
+import Head from "next/head";
 
 export default function FreshSale() {
   const { dataClass } = MyContext();
   return (
     <section className="container lg:px-8 px-4 -mt-16 mx-auto">
+      <Head>
+        <title>Promo Grand Opening Kelas Online Level-Up Academy</title>
+      </Head>
       <div className="-space-y-16">
         <Image
           src="/img/sale.png"

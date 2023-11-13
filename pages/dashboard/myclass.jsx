@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { getPaymentUser } from "@/lib/service";
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function MyClass() {
   const [data, setData] = useState([]);
@@ -22,6 +23,9 @@ export default function MyClass() {
 
   return (
     <div className=" flex gap-x-8 relative container max-lg:px-8 mx-auto ">
+      <Head>
+        <title>My Courses | Level-Up Academy</title>
+      </Head>
       <SideBarCourse />
 
       <section className="mt-[60px] w-full">
