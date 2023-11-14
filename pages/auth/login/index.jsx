@@ -1,9 +1,12 @@
 import FormLogin from "@/pages/components/organisms/ModalLogin/FormLogin";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
+import { IoIosArrowBack } from "react-icons/io";
 
 export default function Login() {
+  const router = useRouter();
   return (
     <div className="bg-[#F6F8FD]  h-[800px]">
       <Head>
@@ -11,6 +14,13 @@ export default function Login() {
           Dapatkan Kelas Premium dengan Login In | Level-Up Academy{" "}
         </title>
       </Head>
+      <button
+        className="flex absolute top-8 left-[1.2rem] text-semibold bg-[#fff] px-3 py-2 rounded-full"
+        onClick={() => router.back()}
+      >
+        <IoIosArrowBack size={24} />
+        Back
+      </button>
       <Image
         src={"/img/logo.png"}
         alt="logo"

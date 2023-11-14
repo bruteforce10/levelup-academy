@@ -7,6 +7,7 @@ import { getUserName, updateGoal, updateUser } from "@/lib/service";
 import clsx from "clsx";
 import { signIn } from "next-auth/react";
 import { goalsTarget } from "@/lib/data";
+import { IoIosArrowBack } from "react-icons/io";
 
 export default function UploadProfile() {
   const [getData, setGetData] = useState({
@@ -157,6 +158,13 @@ export default function UploadProfile() {
         <title>Lengkapi Profile Belajar Level-Up</title>
       </Head>
       <div className="bg-[#F6F8FD] h-[800px]">
+        <button
+          className="flex absolute top-8 left-[1.2rem] text-semibold bg-[#fff] px-3 py-2 rounded-full"
+          onClick={() => router.back()}
+        >
+          <IoIosArrowBack size={24} />
+          Back
+        </button>
         <Image
           src={"/img/logo.png"}
           alt="logo"

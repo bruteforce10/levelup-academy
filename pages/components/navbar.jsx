@@ -289,39 +289,6 @@ export default function NavbarPage({ params }) {
             </button>
           )}
         </div>
-        <div
-          ref={toggleNavbar}
-          className={
-            isScrolled ||
-            params == "/kelas" ||
-            params == "/testimonials" ||
-            params == "/kelas/fresh-sale" ||
-            pathname === "/kelas/category" ||
-            params == `/kelas/${query.slug}` ||
-            params == `/dashboard/${pathname.slice(11)}`
-              ? "p-2 rounded-xl border-2 border-deep/20  lg:hidden cursor-pointer"
-              : "p-2 rounded-xl border-2 border-tersier  lg:hidden cursor-pointer"
-          }
-          onClick={(event) => {
-            event.stopPropagation();
-            setOpen(!open);
-          }}
-        >
-          <BiMenu
-            size={32}
-            className={
-              isScrolled ||
-              params == "/kelas" ||
-              params == "/kelas/fresh-sale" ||
-              params == "/testimonials" ||
-              pathname === "/kelas/category" ||
-              params == `/kelas/${query.slug}` ||
-              params == `/dashboard/${pathname.slice(11)}`
-                ? "text-deep"
-                : "text-white"
-            }
-          />
-        </div>
       </nav>
     </header>
   );

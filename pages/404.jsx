@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function Costum404() {
@@ -11,7 +12,17 @@ export default function Costum404() {
         height={300}
         className="mx-auto"
       />
-      <h4 className="text-3xl font-extrabold">404 - Page Not Found</h4>
+      <p className="text-lg text-center">
+        Maaf Halaman yang anda akses tidak ditemukan
+      </p>
+      <Link
+        href={"/"}
+        type="submit"
+        className="bg-prime mt-6 px-8 py-3 rounded-full text-md font-extrabold text-white border-4 border-white
+  hover:border-[#a1b7e7] transition-all  "
+      >
+        Back to Home
+      </Link>
     </div>
   );
 }

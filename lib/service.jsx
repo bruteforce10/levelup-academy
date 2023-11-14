@@ -280,7 +280,7 @@ export const updateGoal = async (data) => {
     `" }) {
         id
         email
-        image {
+        gambar {
           url
         }
         password

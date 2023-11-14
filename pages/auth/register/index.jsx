@@ -1,15 +1,25 @@
 import FormRegister from "@/pages/components/organisms/FormRegister";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
+import { IoIosArrowBack } from "react-icons/io";
 
 export default function Register() {
+  const router = useRouter();
   return (
     <div>
       <Head>
         <title>Daftar Akun Untuk Belajar di Level-Up Academy</title>
       </Head>
       <div className="max-sm:pb-8">
+        <button
+          className="flex absolute top-8 left-[1.2rem] text-semibold bg-[#fff] px-3 py-2 rounded-full"
+          onClick={() => router.back()}
+        >
+          <IoIosArrowBack size={24} />
+          Back
+        </button>
         <Image
           src={"/img/logo.png"}
           alt="logo"
