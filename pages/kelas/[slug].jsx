@@ -92,7 +92,7 @@ export default function Preview() {
               </BoxChecklist>
             </div>
           </div>
-          <div className="w-5/12 flex  items-start max-md:justify-start max-md:w-full">
+          <div className="w-5/12 flex justify-end items-start max-md:justify-start max-md:w-full">
             <Image
               className="rounded-2xl w-[400px] object-contain "
               src={data?.gambarClass?.url}

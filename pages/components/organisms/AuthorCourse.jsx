@@ -9,7 +9,7 @@ export default function AuthorCourse({ author }) {
         alt="author"
         width={80}
         height={80}
-        className="p-2 border-[1.5px] border-prime rounded-full"
+        className="p-1 border-[1.5px] w-16 h-16 object-cover border-prime rounded-full"
       />
       <div className="space-y-2">
         <p className="text-xl font-bold">{author?.author}</p>

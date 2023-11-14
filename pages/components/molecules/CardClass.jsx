@@ -12,7 +12,7 @@ export default function CardClass({ data }) {
       <Image
         src={data?.gambar?.url}
         alt="class"
-        className="w-full object-contain"
+        className="w-full md:h-[12rem] md:object-cover object-contain"
         width={320}
         height={320}
       />

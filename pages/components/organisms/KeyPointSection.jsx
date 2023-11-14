@@ -11,7 +11,7 @@ export default function KeyPointSection({ keyPoints }) {
         {keyPoints &&
           keyPoints.map((item, index) => (
             <li
-              className="flex items-start gap-x-3 w-5/12 max-lg:w-full"
+              className="flex items-center gap-x-3 w-5/12 max-lg:w-full"
               key={index}
             >
               <Image
