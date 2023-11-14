@@ -4,6 +4,7 @@ import SubHeading from "@/pages/components/atoms/SubHeading";
 import { getUser, updatePassword } from "@/lib/service";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Head from "next/head";
 
 export default function Password() {
   const [data, setData] = useState({
@@ -97,6 +98,9 @@ export default function Password() {
 
   return (
     <div className=" flex gap-x-8 relative container max-lg:px-8 mx-auto ">
+      <Head>
+        <title>Edit Password | Level-Up Academy</title>
+      </Head>
       <SideBarCourse />
       <section className="mt-[60px]">
         <div className="space-y-3">

@@ -28,7 +28,7 @@ export default function CallSectionCourse() {
           </button>
         </div>
       </div>
-      <div className="bg-[#fff] xl:w-[100%] w-full max-lg:w-[96%] h-[300px] xl:h-[350px] max-lg:h-[450px] max-md:h-[400px] max-lg:-bottom-10  absolute z-[1] max-md:bottom-12 -bottom-10 xl:bottom-0 rounded-3xl inset-x-0 mx-auto"></div>
+      <div className="bg-[#fff] xl:w-[100%] shadow-sm w-full max-lg:w-[96%] h-[300px] xl:h-[350px] max-lg:h-[450px] max-md:h-[400px] max-lg:-bottom-10  absolute z-[1] max-md:-bottom-10 -bottom-10 xl:bottom-0 rounded-3xl inset-x-0 mx-auto"></div>
     </div>
   );
 }

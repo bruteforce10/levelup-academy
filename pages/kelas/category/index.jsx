@@ -2,6 +2,7 @@ import { MyContext } from "@/lib/context/AppContext";
 import { categoryClass } from "@/lib/data";
 import Heading from "@/pages/components/heading";
 import CardClass from "@/pages/components/molecules/CardClass";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -25,6 +26,9 @@ export default function CategoryClass() {
 
   return (
     <div className="px-4 container mt-[60px] mx-auto">
+      <Head>
+        <title>Katalog {data[0]?.name} - Level-Up Academy</title>
+      </Head>
       <div>
         <Heading
           tag={"#LevelUpYourCareer"}

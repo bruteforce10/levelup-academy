@@ -1,4 +1,5 @@
 import SubHeading from "@/pages/components/atoms/SubHeading";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -6,6 +7,9 @@ import React from "react";
 export default function Update() {
   return (
     <div className="bg-white flex justify-center flex-col gap-12 items-center mt-8">
+      <Head>
+        <title>Happy Learning | Level-Up Academy</title>
+      </Head>
       <Image
         src="/icon/success_update.svg"
         width={550}

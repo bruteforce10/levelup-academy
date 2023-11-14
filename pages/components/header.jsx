@@ -17,7 +17,7 @@ export default function Header() {
                 </span>{" "}
                 Keahlian Kamu Disini!
               </h1>
-              <div className=" lg:w-4/12 w-full space-y-4 max-sm:pb-14">
+              <div className=" xl:w-4/12 lg:w-5/12  w-full space-y-4 max-sm:pb-14">
                 <p className=" text-sm leading-relaxed text-white/80 max-sm:text-center ">
                   Bersiaplah untuk dunia kerja dengan terus belajar dan berlatih
                   konsisten. Pilih kelas sesuai minat, tingkatkan keterampilan

@@ -54,7 +54,7 @@ export default function Layout({ children }) {
               });
             }
           }}
-          className="fixed bottom-16 right-16 max-sm:right-8 cursor-pointer  bg-[#fff] p-4 rounded-full shadow-md"
+          className="fixed bottom-28 right-16 max-sm:right-8 cursor-pointer  bg-[#fff] p-4 rounded-full shadow-md"
         >
           <FaArrowUp size={24} className="text-gray-700" />
         </motion.div>

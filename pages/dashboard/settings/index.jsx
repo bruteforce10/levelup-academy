@@ -3,10 +3,14 @@ import SideBarCourse from "../../components/organisms/SideBarCourse";
 import SubHeading from "@/pages/components/atoms/SubHeading";
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function Settings() {
   return (
     <div className=" flex gap-x-8 relative max-lg:px-8 container mx-auto ">
+      <Head>
+        <title>Settings | Level-Up Academy</title>
+      </Head>
       <SideBarCourse />
       <section className="mt-[60px] ">
         <div className="space-y-3">

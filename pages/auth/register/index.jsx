@@ -1,11 +1,15 @@
 import FormRegister from "@/pages/components/organisms/FormRegister";
+import Head from "next/head";
 import Image from "next/image";
 import React from "react";
 
 export default function Register() {
   return (
     <div>
-      <div>
+      <Head>
+        <title>Daftar Akun Untuk Belajar di Level-Up Academy</title>
+      </Head>
+      <div className="max-sm:pb-8">
         <Image
           src={"/img/logo.png"}
           alt="logo"
@@ -27,7 +31,7 @@ export default function Register() {
           <div className=" mt-20 max-lg:mx-auto lg:ml-[600px] w-8/12 h-screen">
             <div className="space-y-4 mb-10">
               <h4 className="font-extrabold text-3xl">New Account</h4>
-              <p className="w-8/12">
+              <p className="w-8/12 max-md:w-full">
                 Lengkapi form di bawah dengan menggunakan data Anda yang valid
               </p>
             </div>
