@@ -36,6 +36,8 @@ export default function NavbarPage({ params }) {
     }
   };
 
+  console.log(pathname);
+
   return (
     <header
       className={clsx(
@@ -57,6 +59,7 @@ export default function NavbarPage({ params }) {
           params == `/kelas/${query.slug}` ||
           params == `/dashboard/${pathname.slice(11)}` ||
           pathname === "/course" ||
+          pathname !== "/" ||
           pathname === "/kelas/category" ? (
             <Image src={Logo} alt="logo" className="w-full" />
           ) : (
@@ -80,6 +83,7 @@ export default function NavbarPage({ params }) {
               params == "/kelas/fresh-sale" ||
               params == "/testimonials" ||
               pathname == "/course" ||
+              pathname !== "/" ||
               params == `/kelas/${query.slug}` ||
               pathname === "/kelas/category" ||
               params == `/dashboard/${pathname.slice(11)}`
@@ -96,6 +100,7 @@ export default function NavbarPage({ params }) {
               params == "/testimonials" ||
               params == "/kelas/fresh-sale" ||
               pathname == "/course" ||
+              pathname !== "/" ||
               pathname === "/kelas/category" ||
               params == `/kelas/${query.slug}` ||
               params == `/dashboard/${pathname.slice(11)}`
@@ -112,6 +117,7 @@ export default function NavbarPage({ params }) {
               params == "/testimonials" ||
               params == "/kelas/fresh-sale" ||
               pathname == "/course" ||
+              pathname !== "/" ||
               pathname === "/kelas/category" ||
               params == `/kelas/${query.slug}` ||
               params == `/dashboard/${pathname.slice(11)}`
@@ -128,6 +134,7 @@ export default function NavbarPage({ params }) {
               pathname == "/course" ||
               params == "/kelas/fresh-sale" ||
               params == "/testimonials" ||
+              pathname !== "/" ||
               pathname === "/kelas/category" ||
               params == `/kelas/${query.slug}` ||
               params == `/dashboard/${pathname.slice(11)}`
@@ -163,6 +170,7 @@ export default function NavbarPage({ params }) {
                     pathname == "/course" ||
                     params == "/kelas/fresh-sale" ||
                     params == "/testimonials" ||
+                    pathname !== "/" ||
                     pathname === "/kelas/category" ||
                     params == `/kelas/${query.slug}` ||
                     params == `/dashboard/${pathname.slice(11)}`
@@ -240,6 +248,7 @@ export default function NavbarPage({ params }) {
             params == "/kelas" ||
             params == "/testimonials" ||
             params == "/kelas/fresh-sale" ||
+            pathname !== "/" ||
             pathname === "/kelas/category" ||
             params == `/kelas/${query.slug}` ||
             params == `/dashboard/${pathname.slice(11)}`
@@ -258,6 +267,7 @@ export default function NavbarPage({ params }) {
               params == "/kelas" ||
               params == "/kelas/fresh-sale" ||
               params == "/testimonials" ||
+              pathname !== "/" ||
               pathname === "/kelas/category" ||
               params == `/kelas/${query.slug}` ||
               params == `/dashboard/${pathname.slice(11)}`
