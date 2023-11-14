@@ -46,7 +46,7 @@ export default function NavbarPage({ params }) {
     >
       <nav
         className={
-          "flex  items-center gap-4  container mx-auto justify-between max-lg:justify-between relative "
+          "flex  items-center gap-7  container mx-auto justify-between max-lg:justify-between relative "
         }
       >
         <Link href={"/"} className="lg:w-1/12 max-sm:w-3/12 w-2/12 ">
@@ -73,6 +73,25 @@ export default function NavbarPage({ params }) {
             open && "max-lg:left-[-400px]  "
           )}
         >
+          {session && (
+            <li
+              className={
+                isScrolled ||
+                params == "/kelas" ||
+                params == "/kelas/fresh-sale" ||
+                params == "/testimonials" ||
+                pathname == "/course" ||
+                params == `/kelas/${query.slug}` ||
+                pathname === "/kelas/category" ||
+                params == `/dashboard/${pathname.slice(11)}`
+                  ? "py-8 px-12 lg:p-0 text-black whitespace-nowrap "
+                  : "py-8 px-12 lg:p-0 lg:text-white whitespace-nowrap "
+              }
+            >
+              <Link href="/dashboard/myclass">Dashboard</Link>
+            </li>
+          )}
+
           <li
             className={
               isScrolled ||
@@ -135,7 +154,7 @@ export default function NavbarPage({ params }) {
                 : "py-8 px-12 lg:p-0 lg:text-white"
             }
           >
-            <Link href="#testimoni">Testimoni</Link>
+            <Link href="/#testimoni">Testimoni</Link>
           </li>
         </ul>
         <div
@@ -150,7 +169,41 @@ export default function NavbarPage({ params }) {
             <BsSearch />
             <p className="lg:hidden">Search...</p>
           </div> */}
-
+        </div>
+        <div className="flex items-center md:flex-row-reverse">
+          <div
+            ref={toggleNavbar}
+            className={
+              isScrolled ||
+              params == "/kelas" ||
+              params == "/testimonials" ||
+              params == "/kelas/fresh-sale" ||
+              pathname === "/kelas/category" ||
+              params == `/kelas/${query.slug}` ||
+              params == `/dashboard/${pathname.slice(11)}`
+                ? "p-2 rounded-xl   lg:hidden cursor-pointer"
+                : "p-2 rounded-xl  lg:hidden cursor-pointer"
+            }
+            onClick={(event) => {
+              event.stopPropagation();
+              setOpen(!open);
+            }}
+          >
+            <BiMenu
+              size={32}
+              className={
+                isScrolled ||
+                params == "/kelas" ||
+                params == "/kelas/fresh-sale" ||
+                params == "/testimonials" ||
+                pathname === "/kelas/category" ||
+                params == `/kelas/${query.slug}` ||
+                params == `/dashboard/${pathname.slice(11)}`
+                  ? "text-deep"
+                  : "text-white"
+              }
+            />
+          </div>
           {session ? (
             <div className="dropdown">
               <div
@@ -167,23 +220,17 @@ export default function NavbarPage({ params }) {
                     pathname === "/kelas/category" ||
                     params == `/kelas/${query.slug}` ||
                     params == `/dashboard/${pathname.slice(11)}`
-                      ? `text-deep font-medium text-[18px]  ${
+                      ? `text-deep font-medium text-[18px] whitespace-nowrap max-md:hidden  ${
                           !open ? "hidden" : ""
                         } `
-                      : `text-tersier font-medium text-[18px] ${
+                      : `text-tersier font-medium text-[18px] whitespace-nowrap max-md:hidden ${
                           !open ? "hidden" : ""
                         } `
                   }
                 >
                   Halo, {session?.user?.name}
                 </p>
-                <p
-                  className={
-                    open ? "hidden" : "text-black font-medium text-[18px] "
-                  }
-                >
-                  Halo, {session?.user?.name}
-                </p>
+
                 {session?.user?.image ? (
                   <Image
                     src={session?.user?.image}
@@ -204,7 +251,7 @@ export default function NavbarPage({ params }) {
               </div>
               <ul
                 tabIndex={0}
-                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 text-[16px]"
+                className="dropdown-content z-[1] menu p-2  max-md:-ml-32 shadow bg-base-100 rounded-box w-52 text-[16px]"
               >
                 <li>
                   <Link href={"/dashboard/myclass"}>My Courses</Link>
@@ -233,39 +280,6 @@ export default function NavbarPage({ params }) {
               Masuk/Daftar
             </button>
           )}
-        </div>
-        <div
-          ref={toggleNavbar}
-          className={
-            isScrolled ||
-            params == "/kelas" ||
-            params == "/testimonials" ||
-            params == "/kelas/fresh-sale" ||
-            pathname === "/kelas/category" ||
-            params == `/kelas/${query.slug}` ||
-            params == `/dashboard/${pathname.slice(11)}`
-              ? "p-2 rounded-xl border-2 border-deep/20  lg:hidden cursor-pointer"
-              : "p-2 rounded-xl border-2 border-tersier  lg:hidden cursor-pointer"
-          }
-          onClick={(event) => {
-            event.stopPropagation();
-            setOpen(!open);
-          }}
-        >
-          <BiMenu
-            size={32}
-            className={
-              isScrolled ||
-              params == "/kelas" ||
-              params == "/kelas/fresh-sale" ||
-              params == "/testimonials" ||
-              pathname === "/kelas/category" ||
-              params == `/kelas/${query.slug}` ||
-              params == `/dashboard/${pathname.slice(11)}`
-                ? "text-deep"
-                : "text-white"
-            }
-          />
         </div>
       </nav>
     </header>
