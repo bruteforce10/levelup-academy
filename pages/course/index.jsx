@@ -13,6 +13,7 @@ import {
 } from "@/lib/service";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import Head from "next/head";
 
 export default function Course() {
   const [data, setData] = useState({
@@ -34,7 +35,7 @@ export default function Course() {
         setReview(true);
       }
     });
-  }, [email]);
+  }, [email, data, setData, query?.class, setReview, MySwal, isSubmitting]);
 
   useEffect(() => {
     getPaymentUser(email).then((result) => {
@@ -48,7 +49,7 @@ export default function Course() {
         }
       }
     });
-  }, [email, data, setData]);
+  }, [email, data, setData, query?.class]);
 
   const onChange = (e) => {
     setData({
@@ -86,11 +87,15 @@ export default function Course() {
         title: "Sukses!",
         text: "Terima kasih sudah memberikan komentar",
       });
+      setReview(true);
     }
   };
 
   return (
     <div className=" flex gap-x-8 relative container max-lg:px-8 mx-auto ">
+      <Head>
+        <title>{getData?.judul} | Level-Up Academy</title>
+      </Head>
       <SideBarCourse />
 
       <section className="mt-[60px] w-full space-y-12">

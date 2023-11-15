@@ -20,7 +20,7 @@ export default function ReviewTestimonialItems({ data }) {
                 className="bg-[#fff] p-6 rounded-2xl space-y-8"
               >
                 <div className="flex gap-4 items-center">
-                  {item.accounts[0].gambar ? (
+                  {item?.accounts[0]?.gambar ? (
                     <Image
                       src={item.accounts[0].gambar.url}
                       alt="avatar"
@@ -39,16 +39,16 @@ export default function ReviewTestimonialItems({ data }) {
 
                   <div className="flex flex-col space-y-1">
                     <p className="text-lg font-extrabold">
-                      {item.accounts[0].name}
+                      {item?.accounts[0]?.name}
                     </p>
                     <span className="text-sm text-light opacity-60">
-                      {item.accounts[0].goals
-                        ? item.accounts[0].goals
+                      {item?.accounts[0]?.goals
+                        ? item?.accounts[0]?.goals
                         : "Lifetime Learner"}
                     </span>
                   </div>
                 </div>
-                <p>{item.ulasan}</p>
+                <p>{item?.ulasan}</p>
                 <StarRating review={item?.rating} />
               </motion.div>
             );
