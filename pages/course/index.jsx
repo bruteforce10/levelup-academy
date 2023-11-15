@@ -48,7 +48,7 @@ export default function Course() {
         }
       }
     });
-  }, [email]);
+  }, [email, data, setData]);
 
   const onChange = (e) => {
     setData({

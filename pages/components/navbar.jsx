@@ -36,14 +36,12 @@ export default function NavbarPage({ params }) {
     }
   };
 
-  console.log(pathname);
-
   return (
     <header
       className={clsx(
         " py-4 px-8 top-[-100px]  transition-all sticky z-10 ",
         isScrolled &&
-          "sticky top-[-12px] delay-500 bg-white/90 backdrop-blur-sm  z-[99]  "
+          "sticky top-[-8px] delay-500 bg-white/90 backdrop-blur-sm  z-[99]  "
       )}
     >
       <nav
