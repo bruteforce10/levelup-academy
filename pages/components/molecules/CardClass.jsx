@@ -7,13 +7,12 @@ import { Currency } from "@/lib/Currency";
 import { Discount } from "@/lib/Discount";
 
 export default function CardClass({ data }) {
-  console.log(data);
   return (
     <div className=" rounded-3xl overflow-hidden flex-shrink-0 max-lg:w-[250px] lg:w-[280px] max-sm:w-full  bg-[#fff]">
       <Image
         src={data?.gambar?.url}
         alt="class"
-        className="w-full md:h-[12rem] md:object-cover object-contain"
+        className="w-full md:h-[12rem] h-[16rem] object-cover"
         width={320}
         height={320}
       />
