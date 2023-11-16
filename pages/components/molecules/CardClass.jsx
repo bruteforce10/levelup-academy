@@ -7,6 +7,7 @@ import { Currency } from "@/lib/Currency";
 import { Discount } from "@/lib/Discount";
 
 export default function CardClass({ data }) {
+  console.log(data);
   return (
     <div className=" rounded-3xl overflow-hidden flex-shrink-0 max-lg:w-[250px] lg:w-[280px] max-sm:w-full  bg-[#fff]">
       <Image
@@ -21,7 +22,7 @@ export default function CardClass({ data }) {
           <div className="flex gap-1 items-center">
             <StarRating review={data?.reviews} />
             <p className="font-medium text-sm ">
-              ({data?.reviews.length + 12})
+              ({data?.reviews.length + parseInt(Math.random() + 10)})
             </p>
           </div>
           <Link
@@ -32,7 +33,10 @@ export default function CardClass({ data }) {
           </Link>
           <FeatureClass
             sertifikat={data?.sertifikat}
-            user={43}
+            user={
+              data?.reviews.length +
+              parseInt(Math.random() + Math.random() * 11 + 200)
+            }
             level={data?.level}
           />
         </div>

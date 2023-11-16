@@ -75,7 +75,10 @@ export default function Preview() {
             </div>
             <div className="flex h-12 gap-4 flex-wrap">
               <BoxChecklist>
-                <span className="font-bold mr-1">43</span>
+                <span className="font-bold mr-1">
+                  {data?.reviews.length +
+                    parseInt(Math.random() + Math.random() * 11 + 200)}
+                </span>
                 Member Enrolled
               </BoxChecklist>
               {data?.sertifikat && (
