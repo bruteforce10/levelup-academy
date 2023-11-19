@@ -29,7 +29,7 @@ export default function Header() {
                     href="/auth/register"
                     className="px-6 max-sm:px-4 bg-second whitespace-nowrap block mx-auto  rounded-full text-deep font-bold py-3"
                   >
-                    Promo Bundle 🔥
+                    Daftar Sekarang
                   </Link>
                   <Link href="/kelas" className="text-white ">
                     <span className="font-medium underline whitespace-nowrap block   underline-offset-2">

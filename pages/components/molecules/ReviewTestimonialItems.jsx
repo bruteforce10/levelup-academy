@@ -24,7 +24,7 @@ export default function ReviewTestimonialItems({ data }) {
                     <Image
                       src={item.accounts[0].gambar.url}
                       alt="avatar"
-                      className="rounded-full"
+                      className="rounded-full w-18 h-18 object-cover"
                       width={55}
                       height={55}
                     />

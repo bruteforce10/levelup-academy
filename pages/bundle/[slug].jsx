@@ -12,12 +12,15 @@ import { useSession } from "next-auth/react";
 import { Currency } from "@/lib/Currency";
 import { Discount } from "@/lib/Discount";
 import FooterBuy from "../components/molecules/FooterBuy";
+import useSectionView from "@/lib/hook";
+import CallSection from "../components/CallSection";
 
 export default function Bundle() {
   const [data, setData] = useState(null);
   const router = useRouter();
   const { slug } = router.query;
   const { data: session } = useSession();
+  const { ref } = useSectionView("buy", 1);
 
   useEffect(() => {
     if (slug) {
@@ -127,7 +130,7 @@ export default function Bundle() {
       </section>
       <div
         id="buy"
-        className="space-y-6 bg-[#fff] rounded-2xl scroll-mt-[200px] px-[38px] py-8 w-[400px] max-sm:w-full mx-auto"
+        className="space-y-6 mt-8 bg-[#fff] rounded-2xl scroll-mt-[200px] px-[38px] py-8 w-[400px] max-sm:w-full mx-auto"
       >
         <Image
           src={"/img/icon-disc.svg"}
@@ -148,7 +151,7 @@ export default function Bundle() {
           Miliki kelas Premium secara permanen dan bangun sebuah projek nyata
         </div>
         <hr />
-        <ul className="space-y-4">
+        <ul id="buy" className="space-y-4">
           <li className="flex items-center gap-x-3 w-full">
             <Image
               src="/icon/checklist-green.svg"
@@ -158,7 +161,7 @@ export default function Bundle() {
             />
             Akses selamanya
           </li>
-          <li className="flex items-center gap-x-3 w-full">
+          <li ref={ref} className="flex items-center gap-x-3 w-full">
             <Image
               src="/icon/checklist-green.svg"
               width={28}
@@ -219,6 +222,7 @@ export default function Bundle() {
           Dapatkan Promonya
         </Link>
       </div>
+      <CallSection />
       <FooterBuy price={data?.harga} />
     </div>
   );
