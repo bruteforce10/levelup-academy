@@ -8,6 +8,7 @@ const AppContextProvider = (props) => {
   const [activeSection, setActiveSection] = useState(null);
   const [dataClass, setDataClass] = useState([]);
   const [dataFilter, setDataFilter] = React.useState(dataClass);
+
   useEffect(() => {
     getClass().then((res) => {
       if (res) {

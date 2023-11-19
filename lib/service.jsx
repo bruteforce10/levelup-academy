@@ -1,3 +1,4 @@
+import { data } from "autoprefixer";
 import { parseValue } from "graphql";
 import request, { gql } from "graphql-request";
 
@@ -619,4 +620,77 @@ export const updatePassword = async (data) => {
   );
 
   return result;
+};
+
+export const getBundle = async (data) => {
+  if (data) {
+    console.log(data);
+    const query =
+      gql`
+      query Assets {
+        bundles(where: { slug: "` +
+      data +
+      `" }) {
+          coverGambar {
+            url
+          }
+          desc
+          gambar {
+            url
+          }
+          harga
+          id
+          slug
+          secondJudul
+          judul
+          listCareer
+          listCocok
+          courses {
+            judul
+            id
+            descBundle
+            gambar {
+              url
+            }
+          }
+        }
+      }
+    `;
+    const result = await request(
+      "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+      query
+    );
+    return result.bundles[0];
+  } else {
+    const query = gql`
+      query Assets {
+        bundles {
+          coverGambar {
+            url
+          }
+          desc
+          gambar {
+            url
+          }
+          harga
+          id
+          secondJudul
+          slug
+          judul
+          listCareer
+          listCocok
+          courses {
+            judul
+            id
+            descBundle
+          }
+        }
+      }
+    `;
+    const result = await request(
+      "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+      query
+    );
+    return result;
+  }
 };

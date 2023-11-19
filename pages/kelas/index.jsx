@@ -8,9 +8,12 @@ import ListClassSection from "./ListClassSection";
 import { MyContext } from "@/lib/context/AppContext";
 import Link from "next/link";
 import Head from "next/head";
+import { getBundle } from "@/lib/service";
+import CardBundle from "../components/molecules/CardBundle";
 
 export default function KelasOnline() {
   const { dataClass, dataFilter } = MyContext();
+  const [dataBundle, setBundle] = useState([]);
   const [classList, setClassList] = useState(dataClass);
   const waktuDiskon = new Date();
   waktuDiskon.setDate(waktuDiskon.getDate() - 7);
@@ -22,6 +25,10 @@ export default function KelasOnline() {
       });
       setClassList(classNew);
     }
+    getBundle().then((res) => {
+      setBundle(res.bundles);
+      console.log(res.bundles);
+    });
   }, [dataClass]);
 
   return (
@@ -54,6 +61,22 @@ export default function KelasOnline() {
               <h4 className="font-extrabold text-xl">{item.name}</h4>
             </Link>
           ))}
+        </div>
+      </div>
+      <div className="mt-14 space-y-6 max-md:hidden">
+        <SubHeading>
+          Promo Bundle Kelas{" "}
+          <span className="py-1 px-2 text-sm rounded-3xl ml-1  bg-[#F4A42B] ">
+            New
+          </span>
+        </SubHeading>
+        <div className="w-full overflow-x-scroll pb-8">
+          <div className="gap-6 flex ">
+            {dataBundle &&
+              dataBundle.map((item, index) => (
+                <CardBundle key={index} data={item} />
+              ))}
+          </div>
         </div>
       </div>
       {classList.length > 0 && (

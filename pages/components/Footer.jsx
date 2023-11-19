@@ -38,26 +38,10 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href={"/"}
-                  className="flex items-center gap-3 font-medium hover:text-second transition-all"
-                >
-                  <AiOutlineFacebook size={24} /> Facebook
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={"/"}
+                  href={"https://api.whatsapp.com/send?phone=628816101512"}
                   className="flex items-center gap-3 font-medium hover:text-second transition-all"
                 >
                   <AiOutlineWhatsApp size={24} /> Whatsapp
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={"/"}
-                  className="flex items-center gap-3 font-medium hover:text-second transition-all"
-                >
-                  <AiOutlineMail size={24} /> Email
                 </Link>
               </li>
             </ul>

@@ -82,6 +82,7 @@ export default function NavbarPage({ params }) {
                 params == "/kelas/fresh-sale" ||
                 params == "/testimonials" ||
                 pathname == "/course" ||
+                pathname !== "/" ||
                 params == `/kelas/${query.slug}` ||
                 pathname === "/kelas/category" ||
                 params == `/dashboard/${pathname.slice(11)}`
@@ -199,6 +200,7 @@ export default function NavbarPage({ params }) {
               className={
                 isScrolled ||
                 params == "/kelas" ||
+                pathname !== "/" ||
                 params == "/kelas/fresh-sale" ||
                 params == "/testimonials" ||
                 pathname === "/kelas/category" ||

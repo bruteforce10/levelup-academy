@@ -21,7 +21,7 @@ export default function CardClass({ data }) {
           <div className="flex gap-1 items-center">
             <StarRating review={data?.reviews} />
             <p className="font-medium text-sm ">
-              ({data?.reviews.length + parseInt(Math.random() + 10)})
+              ({data?.reviews?.length + parseInt(Math.random() + 10)})
             </p>
           </div>
           <Link
@@ -32,10 +32,7 @@ export default function CardClass({ data }) {
           </Link>
           <FeatureClass
             sertifikat={data?.sertifikat}
-            user={
-              data?.reviews.length +
-              parseInt(Math.random() + Math.random() * 11 + 200)
-            }
+            user={data?.reviews?.length + 200}
             level={data?.level}
           />
         </div>

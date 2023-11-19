@@ -15,7 +15,9 @@ export default function FeatureClass({ sertifikat, user, level }) {
       )}
       <div className="flex items-center gap-2 bg-white py-1 px-2 rounded-full">
         <FiUsers size={14} />
-        <span className="text-xs font-medium">{user}</span>
+        <span className="text-xs font-medium">
+          {user + parseInt(Math.random() + 10)}
+        </span>
       </div>
     </div>
   );
