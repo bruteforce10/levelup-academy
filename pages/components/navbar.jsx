@@ -126,7 +126,12 @@ export default function NavbarPage({ params }) {
                 : "flex gap-2 items-center py-8 px-12 lg:p-0 lg:text-white"
             }
           >
-            <Link href="/kelas">Kelas</Link>
+            <Link href="/kelas">
+              Promo Bundle{" "}
+              <span className="py-1 px-2 text-sm rounded-lg ml-1  bg-[#F4A42B] ">
+                New
+              </span>
+            </Link>
           </li>
           <li
             className={

@@ -205,12 +205,15 @@ export default function Bundle() {
           </li>
         </ul>
         <Link
-          target="_blank"
-          href={`https://api.whatsapp.com/send?phone=628816101512&text=hi%20mimin%20saya%20dengan%20email:%20${
-            session?.user?.email
-          }%20ingin%20klaim%20promo%20${
-            data?.secondJudul
-          }%20ini%20dengan%20harga%20${Discount(data?.harga)}`}
+          href={
+            session
+              ? `https://api.whatsapp.com/send?phone=628816101512&text=hi%20mimin%20saya%20dengan%20email:%20${
+                  session?.user?.email
+                }%20ingin%20klaim%20promo%20${
+                  data?.secondJudul
+                }%20ini%20dengan%20harga%20${Discount(data?.harga)}`
+              : "/auth/login?callbackUrl=/bundle/ui-ux"
+          }
           className=" bg-prime w-full inline-block text-center p-3 rounded-full text-md font-extrabold text-white border-4 border-white hover:border-[#a1b7e7] transition-all"
         >
           Dapatkan Promonya
