@@ -34,7 +34,7 @@ export default function Testimoni() {
             >
               <p>5,0</p>
               <StarRating review={5} />
-              <p className="underline underline-offset-2">45 ulasan google</p>
+              <p className="underline underline-offset-2">10+ ulasan google</p>
             </Link>
           </Tippy>
           <Heading

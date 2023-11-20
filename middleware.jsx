@@ -15,5 +15,6 @@ export default withAuth(mainMiddleware, [
   "/dashboard/settings",
   "/dashboard/settings/profile",
   "/dashboard/settings/update",
+  "/admin",
   "/dashboard/settings/password",
 ]);
