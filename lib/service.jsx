@@ -694,3 +694,144 @@ export const getBundle = async (data) => {
     return result;
   }
 };
+
+export const getSearchUser = async (email) => {
+  const query =
+    gql`
+    query MyQuery {
+      account(where: { email: "` +
+    email +
+    `" }) {
+        email
+      }
+    }
+  `;
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result?.account?.email;
+};
+
+export const getAllClass = async () => {
+  const query = gql`
+    query MyQuery {
+      courses {
+        gambar {
+          url
+        }
+        id
+        judul
+      }
+    }
+  `;
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result?.courses;
+};
+
+export const getStatusClass = async (email) => {
+  const query =
+    gql`
+    query MyQuery {
+      account(where: { email: "` +
+    email +
+    `" }) {
+        payment {
+          statusPayment
+          coursePayment {
+            ... on Course {
+              id
+              gambar {
+                url
+              }
+              judul
+            }
+          }
+          id
+        }
+      }
+    }
+  `;
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result?.account?.payment;
+};
+
+export const setUserCourse = async (data) => {
+  const query =
+    gql`
+    mutation MyMutation {
+      updateAccount(
+        data: {
+          payment: {
+            create: {
+              data: {
+                coursePayment: { connect: { Course: { id: "` +
+    data.idClass +
+    `" } } }
+                statusPayment: paymentSuccess
+              }
+            }
+          }
+        }
+        where: { email: "` +
+    data.email +
+    `" }
+      )
+      {
+        email
+        id
+      }
+    }
+   
+  `;
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result;
+};
+
+export const updateCoursePayment = async (data) => {
+  const query =
+    gql`
+    mutation MyMutation {
+      updateAccount(
+        data: {
+          payment: {
+            update: {
+              where: { id: "` +
+    data.id +
+    `" }
+              data: { statusPayment: paymentSuccess }
+            }
+          }
+        }
+        where: { email: "` +
+    data.email +
+    `" }
+      ) {
+        id
+        payment {
+          statusPayment
+        }
+      }
+      publishAccount(where: { email: "` +
+    data.email +
+    `" }) {
+        id
+      }
+    }
+  `;
+
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result;
+};
