@@ -83,6 +83,9 @@ export const authOptions = {
       if ("goals" in token) {
         session.user.goals = token.goals;
       }
+      if ("role" in token) {
+        session.user.role = token.role;
+      }
       return session;
     },
   },

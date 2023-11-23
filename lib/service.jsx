@@ -787,6 +787,11 @@ export const setUserCourse = async (data) => {
         email
         id
       }
+      publishAccount(where: { email: "` +
+    data.email +
+    `" }) {
+          id
+        }
     }
    
   `;

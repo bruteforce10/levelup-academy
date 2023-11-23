@@ -38,8 +38,7 @@ export default function Admin() {
   const handleStatusClass = async () => {
     if (data.email) {
       const result = await getStatusClass(data.email);
-      console.log(result);
-      if (result.length > 0) {
+      if (result?.length > 0) {
         setStatusCourse(result);
       } else {
         MySwal.fire({
@@ -68,7 +67,6 @@ export default function Admin() {
           email: data.email,
           id: filterStatusClass[0]?.id,
         });
-        console.log(result);
         if (result) {
           MySwal.fire({
             icon: "success",
@@ -77,10 +75,22 @@ export default function Admin() {
           });
         }
       } else {
+        const result = await setUserCourse(data);
+        if (result) {
+          MySwal.fire({
+            icon: "success",
+            title: "Sukses!",
+            text: "Kelas Berhasil ditambahkan",
+          });
+        }
+      }
+    } else {
+      const result = await setUserCourse(data);
+      if (result) {
         MySwal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Kelas tidak tersedia",
+          icon: "success",
+          title: "Sukses!",
+          text: "Kelas Berhasil ditambahkan",
         });
       }
     }
