@@ -24,7 +24,7 @@ export default function Transactions() {
 
   const handleFollowUp = (title, price) => {
     window.open(
-      `https://api.whatsapp.com/send?phone=6285888139105&text=hi%20mimin%20saya%20dengan%20email:%20${email}%20ingin%20follow%20up%20pembayaran%20produk%20${title}%20ini%20dengan%20harga%20${price}`,
+      `https://api.whatsapp.com/send?phone=6285888139106&text=hi%20mimin%20saya%20dengan%20email:%20${email}%20ingin%20follow%20up%20pembayaran%20produk%20${title}%20ini%20dengan%20harga%20${price}`,
       "_blank"
     );
   };

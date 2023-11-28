@@ -210,7 +210,7 @@ export default function Bundle() {
         <Link
           href={
             session
-              ? `https://api.whatsapp.com/send?phone=6285888139105&text=hi%20mimin%20saya%20dengan%20email:%20${
+              ? `https://api.whatsapp.com/send?phone=6285888139106&text=hi%20mimin%20saya%20dengan%20email:%20${
                   session?.user?.email
                 }%20ingin%20klaim%20promo%20${
                   data?.secondJudul
