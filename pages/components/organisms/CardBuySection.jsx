@@ -48,7 +48,7 @@ export default function CardBuySection({ price, payment, email, title }) {
       if (payResult) {
         setIsPending(true);
         window.open(
-          `https://api.whatsapp.com/send?phone=6287731803158&text=hi%20mimin%20saya%20dengan%20email:%20${email}%20ingin%20membeli%20produk%20${title}%20ini%20dengan%20harga%20${Discount(
+          `https://api.whatsapp.com/send?phone=6285888139105&text=hi%20mimin%20saya%20dengan%20email:%20${email}%20ingin%20membeli%20produk%20${title}%20ini%20dengan%20harga%20${Discount(
             price
           )}`,
           "_blank"
