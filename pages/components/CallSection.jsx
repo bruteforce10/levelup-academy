@@ -22,7 +22,7 @@ export default function CallSection() {
             WhatsApp ya.
           </p>
           <Link
-            href={"https://api.whatsapp.com/send?phone=6285691572453"}
+            href={"https://api.whatsapp.com/send?phone=6285691572452"}
             target="_blank"
             className="px-8 mt-6 bg-second border-4 max-lg:mx-auto w-fit   flex gap-2 border-[#fff] box-content hover:border-[#6de0b6] transition-all rounded-full text-white font-bold py-3"
           >
