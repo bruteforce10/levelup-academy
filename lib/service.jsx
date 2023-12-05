@@ -446,13 +446,18 @@ export const getClassById = async (id) => {
 };
 
 export const paymentRequest = async (data) => {
+  console.log(data);
   const query =
     gql`
     mutation MyMutation {
       updateAccount(
         data: {payment: {create: {data: {coursePayment: {connect: {Course: {id: "` +
     data.id +
-    `"}}}, statusPayment: paymentPending, time: "` +
+    `"}}}, statusPayment: paymentPending,
+    linkPayment: "` +
+    data.link +
+    `",
+    time: "` +
     data.time +
     `"}}}}
         where: {email: "` +
@@ -499,6 +504,7 @@ export const getPaymentUser = async (email) => {
             }
           }
           statusPayment
+          linkPayment
           time
         }
         updatedAt

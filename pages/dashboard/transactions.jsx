@@ -8,6 +8,8 @@ import { Discount } from "@/lib/Discount";
 import moment from "moment";
 import SubHeading from "../components/atoms/SubHeading";
 import Head from "next/head";
+import { Currency } from "@/lib/Currency";
+import Link from "next/link";
 
 export default function Transactions() {
   const [data, setData] = useState([]);
@@ -18,13 +20,14 @@ export default function Transactions() {
     getPaymentUser(email).then((result) => {
       if (result) {
         setData(result);
+        console.log(result);
       }
     });
   }, []);
 
   const handleFollowUp = (title, price) => {
     window.open(
-      `https://api.whatsapp.com/send?phone=6285691572452&text=hi%20mimin%20saya%20dengan%20email:%20${email}%20ingin%20follow%20up%20pembayaran%20produk%20${title}%20ini%20dengan%20harga%20${price}`,
+      `https://api.whatsapp.com/send?phone=6285691572452&text=hi%20mimin%20saya%20Saya%20membutuhkan%20bantuan...`,
       "_blank"
     );
   };
@@ -65,7 +68,7 @@ export default function Transactions() {
                     />
                   </td>
                   <td>{item?.coursePayment[0]?.judul}</td>
-                  <td>{Discount(item?.coursePayment[0]?.price)}</td>
+                  <td>{Currency(Discount(item?.coursePayment[0]?.price))}</td>
                   <td>{moment(item?.time).format(" MMMM DD YYYY HH:mm")}</td>
                   <td>
                     {item?.statusPayment === "paymentPending" ? (
@@ -82,19 +85,29 @@ export default function Transactions() {
                       </div>
                     )}
                   </td>
-                  <td>
+                  <td className="flex gap-4 items-center ">
                     {item?.statusPayment === "paymentPending" && (
-                      <button
-                        onClick={() =>
-                          handleFollowUp(
-                            item?.coursePayment[0]?.judul,
-                            Discount(item?.coursePayment[0]?.price)
-                          )
-                        }
-                        className="px-6 whitespace-nowrap bg-prime rounded-full text-[#fff] w-full hover:scale-90 transition-all  font-bold py-3"
-                      >
-                        Bantuan Admin
-                      </button>
+                      <>
+                        <button
+                          onClick={() => {
+                            window.open(item?.linkPayment, "_blank");
+                          }}
+                          className="px-6 whitespace-nowrap bg-prime text-[#fff] rounded-full w-full hover:scale-90 transition-all  font-bold py-3"
+                        >
+                          Proses Lanjut
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleFollowUp(
+                              item?.coursePayment[0]?.judul,
+                              Discount(item?.coursePayment[0]?.price)
+                            )
+                          }
+                          className="px-6 whitespace-nowrap bg-tersier text-black rounded-full w-full hover:scale-90 transition-all  font-bold py-3"
+                        >
+                          Bantuan Admin
+                        </button>
+                      </>
                     )}
                   </td>
                 </tr>

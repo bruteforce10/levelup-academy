@@ -14,6 +14,7 @@ export default function CardBuySection({ price, payment, email, title }) {
   const [isPending, setIsPending] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
   const { data: session } = useSession();
+  const [link, setLink] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -24,6 +25,7 @@ export default function CardBuySection({ price, payment, email, title }) {
         );
         if (filterClass[0]?.statusPayment === "paymentPending") {
           setIsPending(true);
+          setLink(filterClass[0]?.linkPayment);
         } else {
           setIsPending(false);
         }
@@ -33,26 +35,45 @@ export default function CardBuySection({ price, payment, email, title }) {
         }
       }
     });
+    // fetch("/api/payment", {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // }).then((res) => {
+    //   res.json().then((data) => {
+    //     console.log(data);
+    //   });
+    // });
   }, []);
 
   const handleBuy = async () => {
     if (session === null) {
       router.push(`/auth/login?callbackUrl=/kelas/${payment}`);
     } else {
+      const data = {
+        id: payment + Math.random() * 100 + 1,
+        productName: title,
+        price: Discount(price),
+        quantity: 1,
+      };
+      const response = await fetch("/api/post", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const requestData = await response?.json();
       const payResult = await paymentRequest({
         id: payment,
         email: email,
+        link: requestData?.redirect,
         time: new Date().toISOString(),
       });
-
       if (payResult) {
         setIsPending(true);
-        window.open(
-          `https://api.whatsapp.com/send?phone=6285691572452&text=hi%20mimin%20saya%20dengan%20email:%20${email}%20ingin%20membeli%20produk%20${title}%20ini%20dengan%20harga%20${Discount(
-            price
-          )}`,
-          "_blank"
-        );
+        window.open(requestData?.redirect, "_blank");
       }
     }
   };
@@ -69,7 +90,7 @@ export default function CardBuySection({ price, payment, email, title }) {
           {Currency(price)}
         </div>
         <div id="hookBuy" className="text-black text-3xl font-extrabold">
-          {Discount(price)}
+          {Currency(Discount(price))}
         </div>
       </div>
       <div
@@ -137,7 +158,8 @@ export default function CardBuySection({ price, payment, email, title }) {
       </ul>
       {isPending ? (
         <Link
-          href={"/dashboard/transactions"}
+          href={link}
+          target="_blank"
           className="px-6 flex bg-[#facb5e] justify-center gap-x-2 group text-center rounded-full text-[#fff] w-full transition-all  font-bold py-3"
         >
           Menunggu Pembayaran
