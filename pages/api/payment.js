@@ -3,9 +3,11 @@ const encodedSecret = Buffer.from(secret).toString("base64");
 const basicAuth = `Basic ${encodedSecret}`;
 
 export default async function handler(req, res) {
+  const { id } = await req.body;
+
   try {
     const response = await fetch(
-      `https://api.sandbox.midtrans.com/v2/cloy5ft49f6r40b2myijx2ika/status`,
+      `https://api.sandbox.midtrans.com/v2/${id}/status`,
       {
         method: "GET",
         headers: {

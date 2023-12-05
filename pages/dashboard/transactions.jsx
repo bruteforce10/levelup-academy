@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import SideBarCourse from "../components/organisms/SideBarCourse";
 import { FiArrowRight } from "react-icons/fi";
 import { useSession } from "next-auth/react";
-import { getPaymentUser } from "@/lib/service";
+import { getPaymentUser, paymentRequest } from "@/lib/service";
 import { Discount } from "@/lib/Discount";
 import moment from "moment";
 import SubHeading from "../components/atoms/SubHeading";
@@ -21,11 +21,31 @@ export default function Transactions() {
       if (result) {
         setData(result);
         console.log(result);
+        // paymentRequest({
+        //   id: payment,
+        //   email: email,
+        //   link: requestData?.redirect,
+        //   time: new Date().toISOString(),
+        // }).then((res) => {
+        //   console.log(res);
+        // });
       }
     });
+
+    // fetch("/api/payment", {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   // body: JSON.stringify("id"),
+    // }).then((res) => {
+    //   res.json().then((data) => {
+    //     console.log(data);
+    //   });
+    // });
   }, []);
 
-  const handleFollowUp = (title, price) => {
+  const handleFollowUp = () => {
     window.open(
       `https://api.whatsapp.com/send?phone=6285691572452&text=hi%20mimin%20saya%20Saya%20membutuhkan%20bantuan...`,
       "_blank"
@@ -88,14 +108,17 @@ export default function Transactions() {
                   <td className="flex gap-4 items-center ">
                     {item?.statusPayment === "paymentPending" && (
                       <>
-                        <button
-                          onClick={() => {
-                            window.open(item?.linkPayment, "_blank");
-                          }}
-                          className="px-6 whitespace-nowrap bg-prime text-[#fff] rounded-full w-full hover:scale-90 transition-all  font-bold py-3"
-                        >
-                          Proses Lanjut
-                        </button>
+                        {item?.linkPayment && (
+                          <button
+                            onClick={() => {
+                              window.open(item?.linkPayment, "_blank");
+                            }}
+                            className="px-6 whitespace-nowrap bg-prime text-[#fff] rounded-full w-full hover:scale-90 transition-all  font-bold py-3"
+                          >
+                            Proses Lanjut
+                          </button>
+                        )}
+
                         <button
                           onClick={() =>
                             handleFollowUp(
@@ -103,7 +126,7 @@ export default function Transactions() {
                               Discount(item?.coursePayment[0]?.price)
                             )
                           }
-                          className="px-6 whitespace-nowrap bg-tersier text-black rounded-full w-full hover:scale-90 transition-all  font-bold py-3"
+                          className="px-6 whitespace-nowrap bg-tersier text-black rounded-full w-fit hover:scale-90 transition-all  font-bold py-3"
                         >
                           Bantuan Admin
                         </button>

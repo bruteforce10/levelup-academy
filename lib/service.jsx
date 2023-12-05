@@ -457,6 +457,9 @@ export const paymentRequest = async (data) => {
     linkPayment: "` +
     data.link +
     `",
+    idPayment:"` +
+    data.idPayment +
+    `",
     time: "` +
     data.time +
     `"}}}}
@@ -503,6 +506,7 @@ export const getPaymentUser = async (email) => {
               updatedAt
             }
           }
+          idPayment
           statusPayment
           linkPayment
           time

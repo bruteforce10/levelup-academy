@@ -23,29 +23,29 @@ export default function CardBuySection({ price, payment, email, title }) {
         const filterClass = result?.filter(
           (item) => item?.coursePayment[0]?.judul === title
         );
-        if (filterClass[0]?.statusPayment === "paymentPending") {
-          setIsPending(true);
-          setLink(filterClass[0]?.linkPayment);
-        } else {
-          setIsPending(false);
-        }
 
+        fetch("/api/payment", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: filterClass[0]?.idPayment,
+          }),
+        }).then((res) => {
+          res.json().then((data) => {
+            if (data?.transaction_status === "pending") {
+              setIsPending(true);
+              setLink(filterClass[0]?.linkPayment);
+            }
+          });
+        });
         if (filterClass[0]?.statusPayment === "paymentSuccess") {
           setSuccess(true);
         }
       }
     });
-    // fetch("/api/payment", {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // }).then((res) => {
-    //   res.json().then((data) => {
-    //     console.log(data);
-    //   });
-    // });
-  }, []);
+  }, [setIsPending, isPending]);
 
   const handleBuy = async () => {
     if (session === null) {
@@ -53,8 +53,8 @@ export default function CardBuySection({ price, payment, email, title }) {
     } else {
       const data = {
         id: payment + Math.random() * 100 + 1,
-        productName: title,
-        price: Discount(price),
+        productName: title.slice(0, 35),
+        price: parseFloat(Discount(price)),
         quantity: 1,
       };
       const response = await fetch("/api/post", {
@@ -68,6 +68,7 @@ export default function CardBuySection({ price, payment, email, title }) {
       const payResult = await paymentRequest({
         id: payment,
         email: email,
+        idPayment: requestData?.id,
         link: requestData?.redirect,
         time: new Date().toISOString(),
       });
@@ -162,7 +163,7 @@ export default function CardBuySection({ price, payment, email, title }) {
           target="_blank"
           className="px-6 flex bg-[#facb5e] justify-center gap-x-2 group text-center rounded-full text-[#fff] w-full transition-all  font-bold py-3"
         >
-          Menunggu Pembayaran
+          Click Pembayaran
           <FiArrowRight
             className="group-hover:translate-x-4 transition"
             size={28}
