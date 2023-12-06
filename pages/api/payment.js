@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
   try {
     const response = await fetch(
-      `https://api.sandbox.midtrans.com/v2/${id}/status`,
+      `${process.env.NEXT_PUBLIC_API}/v2/${id}/status`,
       {
         method: "GET",
         headers: {

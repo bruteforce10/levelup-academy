@@ -73,6 +73,7 @@ export default function CardBuySection({ price, payment, email, title }) {
         time: new Date().toISOString(),
       });
       if (payResult) {
+        console.log(payResult);
         setIsPending(true);
         window.open(requestData?.redirect, "_blank");
       }

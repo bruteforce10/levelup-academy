@@ -3,47 +3,108 @@ import React, { useEffect, useState } from "react";
 import SideBarCourse from "../components/organisms/SideBarCourse";
 import { FiArrowRight } from "react-icons/fi";
 import { useSession } from "next-auth/react";
-import { getPaymentUser, paymentRequest } from "@/lib/service";
+import {
+  getPaymentUser,
+  getStatusClass,
+  paymentRequest,
+  updateCoursePayment,
+} from "@/lib/service";
 import { Discount } from "@/lib/Discount";
 import moment from "moment";
 import SubHeading from "../components/atoms/SubHeading";
 import Head from "next/head";
 import { Currency } from "@/lib/Currency";
 import Link from "next/link";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+import { useRouter } from "next/router";
 
 export default function Transactions() {
   const [data, setData] = useState([]);
   const { data: session } = useSession();
   const email = session?.user?.email;
+  const MySwal = withReactContent(Swal);
 
   useEffect(() => {
-    getPaymentUser(email).then((result) => {
-      if (result) {
-        setData(result);
-        console.log(result);
-        // paymentRequest({
-        //   id: payment,
-        //   email: email,
-        //   link: requestData?.redirect,
-        //   time: new Date().toISOString(),
-        // }).then((res) => {
-        //   console.log(res);
-        // });
+    getStatusClass(email).then((result) => {
+      const sort = result?.sort((a, b) => {
+        return (
+          new Date(b.coursePayment[0]?.updatedAt) -
+          new Date(a.coursePayment[0]?.updatedAt)
+        );
+      });
+      setData(sort);
+      if (data) {
+        for (let item of data) {
+          console.log(item);
+          fetch("/api/payment", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id: item?.idPayment,
+            }),
+          }).then((res) => {
+            res.json().then((res) => {
+              if (
+                res?.transaction_status === "expire" ||
+                res?.transaction_status === "cancel"
+              ) {
+                updateCoursePayment({
+                  id: item?.id,
+                  email: email,
+                  payment: "PaymentFailed",
+                });
+              }
+            });
+          });
+        }
       }
     });
+  }, [email]);
 
-    // fetch("/api/payment", {
-    //   method: "GET",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   // body: JSON.stringify("id"),
-    // }).then((res) => {
-    //   res.json().then((data) => {
-    //     console.log(data);
-    //   });
-    // });
-  }, []);
+  const handleDelete = async (idPayment) => {
+    const onDelete = await fetch("/api/delete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: idPayment,
+      }),
+    });
+    const resDelete = await onDelete.json();
+    console.log(resDelete);
+    if (resDelete?.status_code == "200") {
+      MySwal.fire({
+        icon: "success",
+        confirmButtonColor: "#1759D7",
+        title: "Sukses!",
+        text: "Berhasil Ubah Bank",
+      }).then(() => {
+        getPaymentUser(email).then((result) => {
+          const filter = result?.filter(
+            (item) => item?.idPayment === idPayment
+          );
+          updateCoursePayment({
+            id: filter[0]?.id,
+            email: email,
+            payment: "PaymentFailed",
+          }).then((res) => {
+            window.open(`/kelas/${filter[0]?.coursePayment[0]?.id}`, "_self");
+          });
+        });
+      });
+    } else {
+      MySwal.fire({
+        icon: "error",
+        confirmButtonColor: "#1759D7",
+        title: "Gagal Mengubah Bank!",
+        text: "Anda Belum Klik Bank di Proses Lanjut",
+      });
+    }
+  };
 
   const handleFollowUp = () => {
     window.open(
@@ -58,15 +119,15 @@ export default function Transactions() {
         <title>Transactions | Level-Up Academy</title>
       </Head>
       <SideBarCourse />
-      <section className="mt-[60px] w-full">
+      <section className="mt-[60px] w-full overflow-hidden ">
         <div className="space-y-3">
           <SubHeading size="3xl">Transactions</SubHeading>
           <p className="max-md:text-center  leading-relaxed">
             Daftar pembelian kelas dan ebook premium anda
           </p>
         </div>
-        <div className="overflow-x-scroll mt-8  ">
-          <table className="table  ">
+        <div className=" overflow-x-scroll ">
+          <table className="table w-screen mt-8 ">
             <thead>
               <tr>
                 <th>Cover</th>
@@ -105,7 +166,7 @@ export default function Transactions() {
                       </div>
                     )}
                   </td>
-                  <td className="flex gap-4 items-center ">
+                  <td className="flex gap-2 items-center max-sm:flex-wrap">
                     {item?.statusPayment === "paymentPending" && (
                       <>
                         {item?.linkPayment && (
@@ -113,11 +174,18 @@ export default function Transactions() {
                             onClick={() => {
                               window.open(item?.linkPayment, "_blank");
                             }}
-                            className="px-6 whitespace-nowrap bg-prime text-[#fff] rounded-full w-full hover:scale-90 transition-all  font-bold py-3"
+                            className="px-6 whitespace-nowrap bg-prime text-[#fff] rounded-full w-fit hover:scale-90 transition-all  font-bold py-3"
                           >
                             Proses Lanjut
                           </button>
                         )}
+
+                        <button
+                          onClick={() => handleDelete(item?.idPayment)}
+                          className="px-6 whitespace-nowrap bg-[#DC3545] text-[#fff] rounded-full w-fit hover:scale-90 transition-all  font-bold py-3"
+                        >
+                          Ubah Bank
+                        </button>
 
                         <button
                           onClick={() =>
