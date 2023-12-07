@@ -75,6 +75,7 @@ export default function CardBuySection({ price, payment, email, title }) {
       if (payResult) {
         console.log(payResult);
         setIsPending(true);
+        setLink(requestData?.redirect);
         window.open(requestData?.redirect, "_blank");
       }
     }
