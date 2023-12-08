@@ -151,23 +151,42 @@ export default function NavbarPage({ params }) {
             <Link href="/#benefit">Benefit</Link>
           </li>
           {session?.user?.role === "admin" && (
-            <li
-              className={
-                isScrolled ||
-                params == "/kelas" ||
-                params == "/testimonials" ||
-                params == "/kelas/fresh-sale" ||
-                pathname == "/course" ||
-                pathname !== "/" ||
-                pathname === "/kelas/category" ||
-                params == `/kelas/${query.slug}` ||
-                params == `/dashboard/${pathname.slice(11)}`
-                  ? "py-8 px-12 lg:p-0 text-black"
-                  : "py-8 px-12 lg:p-0 lg:text-white"
-              }
-            >
-              <Link href="/admin">Admin</Link>
-            </li>
+            <>
+              <li
+                className={
+                  isScrolled ||
+                  params == "/kelas" ||
+                  params == "/testimonials" ||
+                  params == "/kelas/fresh-sale" ||
+                  pathname == "/course" ||
+                  pathname !== "/" ||
+                  pathname === "/kelas/category" ||
+                  params == `/kelas/${query.slug}` ||
+                  params == `/dashboard/${pathname.slice(11)}`
+                    ? "py-8 px-12 lg:p-0 text-black"
+                    : "py-8 px-12 lg:p-0 lg:text-white"
+                }
+              >
+                <Link href="/admin">Admin</Link>
+              </li>
+              <li
+                className={
+                  isScrolled ||
+                  params == "/kelas" ||
+                  params == "/testimonials" ||
+                  params == "/kelas/fresh-sale" ||
+                  pathname == "/course" ||
+                  pathname !== "/" ||
+                  pathname === "/kelas/category" ||
+                  params == `/kelas/${query.slug}` ||
+                  params == `/dashboard/${pathname.slice(11)}`
+                    ? "py-8 px-12 lg:p-0 text-black whitespace-nowrap"
+                    : "py-8 px-12 lg:p-0 lg:text-white whitespace-nowrap"
+                }
+              >
+                <Link href="/admin/follow-up">Follow Up</Link>
+              </li>
+            </>
           )}
           <li
             className={

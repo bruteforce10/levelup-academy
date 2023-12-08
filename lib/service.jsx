@@ -756,6 +756,7 @@ export const getStatusClass = async (email) => {
         payment {
           statusPayment
           linkPayment
+          time
           idPayment
           coursePayment {
             ... on Course {

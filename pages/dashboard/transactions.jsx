@@ -6,7 +6,6 @@ import { useSession } from "next-auth/react";
 import {
   getPaymentUser,
   getStatusClass,
-  paymentRequest,
   updateCoursePayment,
 } from "@/lib/service";
 import { Discount } from "@/lib/Discount";
@@ -14,9 +13,9 @@ import moment from "moment";
 import SubHeading from "../components/atoms/SubHeading";
 import Head from "next/head";
 import { Currency } from "@/lib/Currency";
-import Link from "next/link";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
+import Image from "next/image";
 import { useRouter } from "next/router";
 
 export default function Transactions() {
@@ -24,19 +23,16 @@ export default function Transactions() {
   const { data: session } = useSession();
   const email = session?.user?.email;
   const MySwal = withReactContent(Swal);
+  const router = useRouter();
 
   useEffect(() => {
     getStatusClass(email).then((result) => {
       const sort = result?.sort((a, b) => {
-        return (
-          new Date(b.coursePayment[0]?.updatedAt) -
-          new Date(a.coursePayment[0]?.updatedAt)
-        );
+        return new Date(b?.updatedAt) - new Date(a?.updatedAt);
       });
-      setData(sort);
+      setData(sort?.reverse());
       if (data) {
         for (let item of data) {
-          console.log(item);
           fetch("/api/payment", {
             method: "POST",
             headers: {
@@ -62,7 +58,7 @@ export default function Transactions() {
         }
       }
     });
-  }, [email]);
+  }, [email, setData]);
 
   const handleDelete = async (idPayment) => {
     const onDelete = await fetch("/api/delete", {
@@ -92,7 +88,10 @@ export default function Transactions() {
             email: email,
             payment: "PaymentFailed",
           }).then((res) => {
-            window.open(`/kelas/${filter[0]?.coursePayment[0]?.id}`, "_self");
+            window.open(
+              `/kelas/${filter[0]?.coursePayment[0]?.id}/#hookBuy`,
+              "_self"
+            );
           });
         });
       });
@@ -127,7 +126,7 @@ export default function Transactions() {
           </p>
         </div>
         <div className=" overflow-x-scroll ">
-          <table className="table w-screen mt-8 ">
+          <table className="table mt-8 ">
             <thead>
               <tr>
                 <th>Cover</th>
@@ -153,8 +152,14 @@ export default function Transactions() {
                   <td>{moment(item?.time).format(" MMMM DD YYYY HH:mm")}</td>
                   <td>
                     {item?.statusPayment === "paymentPending" ? (
-                      <div className="badge badge-warning whitespace-nowrap">
-                        Payment Pending
+                      <div className="flex scale-90 items-center gap-x-2 text-[#FFC947] font-medium animate-pulse whitespace-nowrap">
+                        <Image
+                          src="/icon/pending.svg"
+                          width={24}
+                          height={24}
+                          alt="check"
+                        />
+                        Menunggu Pembayaran
                       </div>
                     ) : item?.statusPayment === "paymentSuccess" ? (
                       <div className="badge badge-success whitespace-nowrap">
