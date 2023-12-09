@@ -488,6 +488,49 @@ export const paymentRequest = async (data) => {
   return result;
 };
 
+export const paymentRequestBundle = async (data) => {
+  console.log(data);
+  const query =
+    gql`
+    mutation MyMutation {
+      updateAccount(
+        data: {payment: {create: {data: {bundelPayment: {connect: {Bundle: {id: "` +
+    data.id +
+    `"}}}, statusPayment: paymentPending,
+    linkPayment: "` +
+    data.link +
+    `",
+    idPayment:"` +
+    data.idPayment +
+    `",
+    time: "` +
+    data.time +
+    `"}}}}
+        where: {email: "` +
+    data.email +
+    `"}
+      ) {
+        id
+        name
+        payment {
+          linkPayment
+        }
+      }
+      publishAccount(where: {email: "` +
+    data.email +
+    `"}) {
+        id
+      }
+    }
+  `;
+
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result;
+};
+
 export const getPaymentUser = async (email) => {
   const query =
     gql`
@@ -507,6 +550,14 @@ export const getPaymentUser = async (email) => {
               linkClass
               discount
               updatedAt
+            }
+          }
+          bundelPayment {
+            ... on Bundle {
+              id
+              harga
+              slug
+              judul
             }
           }
           idPayment
@@ -758,6 +809,20 @@ export const getStatusClass = async (email) => {
           linkPayment
           time
           idPayment
+          bundelPayment {
+            ... on Bundle {
+              id
+              harga
+              judul
+              coverGambar {
+                url
+              }
+              courses {
+                judul
+                id
+              }
+            }
+          }
           coursePayment {
             ... on Course {
               id
@@ -781,6 +846,43 @@ export const getStatusClass = async (email) => {
     query
   );
   return result?.account?.payment;
+};
+
+export const updateBundleClass = async (data) => {
+  const query =
+    gql`
+    mutation MyMutation {
+      updateAccount(
+        data: {
+          payment: {
+            create: {
+              data: {
+                statusPayment: paymentSuccess
+                coursePayment: { connect: { Course: { id: "` +
+    data.id +
+    `" } } }
+              }
+            }
+          }
+        }
+        where: { email: "` +
+    data.email +
+    `" }
+      ) {
+        id
+      }
+      publishAccount(where: {email: "` +
+    data.email +
+    `"}) {
+        id
+      }
+    }
+  `;
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+  return result;
 };
 
 export const setUserCourse = async (data) => {
@@ -846,6 +948,12 @@ export const updateCoursePayment = async (data) => {
     id
     payment {
       statusPayment
+      bundelPayment {
+        ... on Bundle {
+          id
+          slug
+        }
+      }
     }
   }
   publishAccount(where: { email: "` +

@@ -2,7 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { getStatusClass, updateCoursePayment } from "@/lib/service";
+import {
+  getStatusClass,
+  updateBundleClass,
+  updateCoursePayment,
+} from "@/lib/service";
 import { useRouter } from "next/router";
 
 export default function ConfirmationMidtrans() {
@@ -22,14 +26,36 @@ export default function ConfirmationMidtrans() {
           query.transaction_status === "settlement" ||
           query.transaction_status === "capture"
         ) {
-          updateCoursePayment({
-            id: filter[0]?.id,
-            email: session?.user?.email,
-            payment: "paymentSuccess",
-          }).then((res) => {
-            setStatus(true);
-            console.log(res);
-          });
+          if (filter[0]?.bundelPayment[0]?.courses?.length > 0) {
+            const course = filter[0]?.bundelPayment[0]?.courses;
+            course.forEach((item, index) => {
+              if (index <= 2) {
+                updateBundleClass({
+                  id: item.id,
+                  email: session?.user?.email,
+                  payment: "paymentSuccess",
+                }).then((res) => {
+                  setStatus(true);
+                });
+              }
+            });
+            updateCoursePayment({
+              id: filter[0]?.id,
+              email: session?.user?.email,
+              payment: "paymentSuccess",
+            }).then((res) => {
+              setStatus(true);
+            });
+          } else {
+            updateCoursePayment({
+              id: filter[0]?.id,
+              email: session?.user?.email,
+              payment: "paymentSuccess",
+            }).then((res) => {
+              setStatus(true);
+              console.log(res);
+            });
+          }
         }
       }
     });

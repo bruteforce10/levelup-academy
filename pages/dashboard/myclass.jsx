@@ -17,7 +17,9 @@ export default function MyClass() {
     getPaymentUser(email).then((result) => {
       if (result) {
         const filterSuccess = result?.filter(
-          (item) => item?.statusPayment === "paymentSuccess"
+          (item) =>
+            item?.statusPayment === "paymentSuccess" &&
+            item?.bundelPayment.length <= 0
         );
         setData(filterSuccess);
       }

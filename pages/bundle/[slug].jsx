@@ -14,6 +14,7 @@ import { Discount } from "@/lib/Discount";
 import FooterBuy from "../components/molecules/FooterBuy";
 import useSectionView from "@/lib/hook";
 import CallSection from "../components/CallSection";
+import CardBuySectionBundle from "../components/organisms/CardBuySectionBundle";
 
 export default function Bundle() {
   const [data, setData] = useState(null);
@@ -118,110 +119,23 @@ export default function Bundle() {
             </div>
           </div>
         </div>
-        <div className="space-y-6">
-          <div className="space-y-3 text-center mx-auto">
-            <SubHeading size="3xl">Low Risk, High Return</SubHeading>
-            <p className="w-[400px] max-sm:w-full mx-auto ">
-              Investasi kepada diri kita sendiri memberikan leverage kuat untuk
-              masa depan karir kita
-            </p>
-          </div>
-        </div>
       </section>
-      <div
-        id="buy"
-        className="space-y-6 mt-8 bg-[#fff] rounded-2xl scroll-mt-[200px] px-[38px] py-8 w-[400px] max-sm:w-full mx-auto"
-      >
-        <Image
-          src={"/img/icon-disc.svg"}
-          alt="discount"
-          width={70}
-          height={70}
+      <div className="space-y-6 mt-24">
+        <div className="space-y-3 text-center mx-auto">
+          <SubHeading size="3xl">Low Risk, High Return</SubHeading>
+          <p className="w-[400px] max-sm:w-full mx-auto">
+            Investasi kepada diri kita sendiri memberikan leverage kuat untuk
+            masa depan karir kita
+          </p>
+        </div>
+        <CardBuySectionBundle
+          price={data?.harga}
+          payment={data?.id}
+          email={session?.user?.email}
+          title={data?.judul}
         />
-        <div className="space-y-2">
-          <div className="text-gray-800 text-lg font-normal ">Selamanya</div>
-          <div className="text-red-500 text-xl font-bold  line-through animate-pulse ">
-            {Currency(data?.harga)}
-          </div>
-          <div id="hookBuy" className="text-black text-3xl font-extrabold">
-            {Discount(data?.harga)}
-          </div>
-        </div>
-        <div className="  text-black text-lg font-normal leading-relaxed">
-          Miliki kelas Premium secara permanen dan bangun sebuah projek nyata
-        </div>
-        <hr />
-        <ul id="buy" className="space-y-4">
-          <li className="flex items-center gap-x-3 w-full">
-            <Image
-              src="/icon/checklist-green.svg"
-              width={28}
-              height={28}
-              alt="check"
-            />
-            Akses selamanya
-          </li>
-          <li ref={ref} className="flex items-center gap-x-3 w-full">
-            <Image
-              src="/icon/checklist-green.svg"
-              width={28}
-              height={28}
-              alt="check"
-            />
-            Video Tutorial, Source Code, dan Materi (pdf)
-          </li>
-          <li className="flex items-center gap-x-3 w-full">
-            <Image
-              src="/icon/checklist-green.svg"
-              width={28}
-              height={28}
-              alt="check"
-            />
-            Premium rewards
-          </li>
-          <li className="flex items-center gap-x-3 w-full">
-            <Image
-              src="/icon/checklist-green.svg"
-              width={28}
-              height={28}
-              alt="check"
-            />
-            Sertifikat kelulusan
-          </li>
-          <li className="flex items-center gap-x-3 w-full">
-            <Image
-              src="/icon/checklist-green.svg"
-              width={28}
-              height={28}
-              alt="check"
-            />
-            Free update materi selama 4 bulan
-          </li>
-          <li className="flex items-center gap-x-3 w-full">
-            <Image
-              src="/icon/checklist-green.svg"
-              width={28}
-              height={28}
-              alt="check"
-            />
-            Free akses kelas Freemium
-          </li>
-        </ul>
-        <Link
-          href={
-            session
-              ? `https://api.whatsapp.com/send?phone=6285691572452&text=hi%20mimin%20saya%20dengan%20email:%20${
-                  session?.user?.email
-                }%20ingin%20klaim%20promo%20${
-                  data?.secondJudul
-                }%20ini%20dengan%20harga%20${Discount(data?.harga)}`
-              : "/auth/login?callbackUrl=/bundle/ui-ux"
-          }
-          className=" bg-prime w-full inline-block text-center p-3 rounded-full text-md font-extrabold text-white border-4 border-white hover:border-[#a1b7e7] transition-all"
-        >
-          Dapatkan Promonya
-        </Link>
       </div>
+
       <CallSection />
       <FooterBuy price={data?.harga} />
     </div>

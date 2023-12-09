@@ -88,10 +88,14 @@ export default function Transactions() {
             email: email,
             payment: "PaymentFailed",
           }).then((res) => {
-            window.open(
-              `/kelas/${filter[0]?.coursePayment[0]?.id}/#hookBuy`,
-              "_self"
-            );
+            if (filter[0]?.bundelPayment[0]?.slug) {
+              window.open(
+                `/bundle/${filter[0]?.bundelPayment[0]?.slug}`,
+                "_self"
+              );
+            } else {
+              window.open(`/kelas/${filter[0]?.coursePayment[0]?.id}`, "_self");
+            }
           });
         });
       });
@@ -111,6 +115,8 @@ export default function Transactions() {
       "_blank"
     );
   };
+
+  console.log(data);
 
   return (
     <div className=" flex gap-x-8  container mx-auto ">
@@ -142,13 +148,26 @@ export default function Transactions() {
                 <tr key={index}>
                   <td>
                     <img
-                      src={item?.coursePayment[0]?.gambar?.url}
+                      src={
+                        item?.coursePayment[0]?.gambar?.url ||
+                        item?.bundelPayment[0]?.coverGambar?.url
+                      }
                       className="rounded-xl min-w-[90px] w-[100px]"
                       alt="cover"
                     />
                   </td>
-                  <td>{item?.coursePayment[0]?.judul}</td>
-                  <td>{Currency(Discount(item?.coursePayment[0]?.price))}</td>
+                  <td>
+                    {item?.coursePayment[0]?.judul ||
+                      item?.bundelPayment[0]?.judul}
+                  </td>
+                  <td>
+                    {Currency(
+                      Discount(
+                        item?.coursePayment[0]?.price ||
+                          item?.bundelPayment[0]?.harga
+                      )
+                    )}
+                  </td>
                   <td>{moment(item?.time).format(" MMMM DD YYYY HH:mm")}</td>
                   <td>
                     {item?.statusPayment === "paymentPending" ? (
