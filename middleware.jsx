@@ -8,13 +8,13 @@ export function mainMiddleware(req) {
 }
 
 export default withAuth(mainMiddleware, [
-  // "/course",
-  // "/dashboard/myclass",
-  // "/dashboard/transactions",
-  // "/dashboard/myebook",
-  // "/dashboard/settings",
-  // "/dashboard/settings/profile",
-  // "/dashboard/settings/update",
-  // "/admin",
-  // "/dashboard/settings/password",
+  "/course",
+  "/dashboard/myclass",
+  "/dashboard/transactions",
+  "/dashboard/myebook",
+  "/dashboard/settings",
+  "/dashboard/settings/profile",
+  "/dashboard/settings/update",
+  "/admin",
+  "/dashboard/settings/password",
 ]);

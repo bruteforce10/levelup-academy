@@ -31,32 +31,33 @@ export default function Transactions() {
         return new Date(b?.updatedAt) - new Date(a?.updatedAt);
       });
       setData(sort?.reverse());
-      if (data) {
-        for (let item of data) {
-          fetch("/api/payment", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              id: item?.idPayment,
-            }),
-          }).then((res) => {
-            res.json().then((res) => {
-              if (
-                res?.transaction_status === "expire" ||
-                res?.transaction_status === "cancel"
-              ) {
-                updateCoursePayment({
-                  id: item?.id,
-                  email: email,
-                  payment: "PaymentFailed",
-                });
-              }
-            });
+
+      console.log(result);
+
+      result?.forEach((item) => {
+        fetch("/api/payment", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: item?.idPayment,
+          }),
+        }).then((res) => {
+          res.json().then((res) => {
+            if (
+              res?.transaction_status === "expire" ||
+              res?.transaction_status === "cancel"
+            ) {
+              updateCoursePayment({
+                id: item?.id,
+                email: email,
+                payment: "PaymentFailed",
+              });
+            }
           });
-        }
-      }
+        });
+      });
     });
   }, [email, setData]);
 
@@ -115,8 +116,6 @@ export default function Transactions() {
       "_blank"
     );
   };
-
-  console.log(data);
 
   return (
     <div className=" flex gap-x-8  container mx-auto ">

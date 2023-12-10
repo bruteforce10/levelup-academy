@@ -12,11 +12,15 @@ export const signUp = async (userData) => {
     `", 
         email:  "` +
     userData.email +
-    `", 
+    `",
+    nomorWhatsapp: "` +
+    userData.nomor +
+    `",
         password:  "` +
     userData.password +
     `" ,
     role:"member",
+    statusFollowup: false
     }) {
         id
         name
@@ -1006,5 +1010,111 @@ export const updateCoursePayment = async (data) => {
       query
     );
     return result;
+  }
+};
+
+export const getPaymentAll = async (status) => {
+  if (status === "pending") {
+    const query = gql`
+      query MyQuery {
+        accounts(
+          where: {
+            payment_some: {
+              linkPayment_contains: "http"
+              statusPayment: paymentPending
+            }
+          }
+        ) {
+          id
+          email
+          nomorWhatsapp
+          statusFollowup
+          name
+          payment {
+            id
+            idPayment
+            linkPayment
+            statusPayment
+            bundelPayment {
+              ... on Bundle {
+                judul
+                coverGambar {
+                  url
+                }
+                harga
+                id
+                slug
+              }
+            }
+            coursePayment {
+              ... on Course {
+                judul
+                gambar {
+                  url
+                }
+                price
+                id
+              }
+            }
+          }
+        }
+      }
+    `;
+    const result = await request(
+      "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+      query
+    );
+    return result?.accounts;
+  } else {
+    const query = gql`
+      query MyQuery {
+        accounts(
+          where: {
+            payment_some: {
+              linkPayment_contains: "http"
+              statusPayment: PaymentFailed
+            }
+          }
+        ) {
+          id
+          email
+          nomorWhatsapp
+          statusFollowup
+          name
+          payment {
+            id
+            idPayment
+            linkPayment
+            statusPayment
+            bundelPayment {
+              ... on Bundle {
+                judul
+                coverGambar {
+                  url
+                }
+                harga
+                id
+                slug
+              }
+            }
+            coursePayment {
+              ... on Course {
+                judul
+                gambar {
+                  url
+                }
+                price
+                id
+              }
+            }
+          }
+        }
+      }
+    `;
+    const result = await request(
+      "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+      query
+    );
+    return result?.accounts;
   }
 };

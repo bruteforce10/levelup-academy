@@ -9,6 +9,7 @@ export default function FormRegister() {
     name: "",
     email: "",
     password: "",
+    nomor: "",
   });
   const [isLoading, setLoading] = useState(false);
 
@@ -17,9 +18,11 @@ export default function FormRegister() {
     errorRegister: "",
     email: "",
     password: "",
+    nomor: "",
   });
 
   const { push, query } = useRouter();
+  const callBackUrl = query.callbackUrl || "/";
 
   const onChange = (e) => {
     setData({
@@ -42,6 +45,11 @@ export default function FormRegister() {
     }
     if (!data.name) {
       newError.name = "Nama harus diisi";
+    }
+    if (!data.nomor) {
+      newError.nomor = "Nomor Whatsapp Harus di isi";
+    } else if (!data.nomor.startsWith("62")) {
+      newError.nomor = "Nomor Whatsapp harus diawali dengan 62";
     }
 
     if (!data.password) {
@@ -71,7 +79,9 @@ export default function FormRegister() {
         });
         if (res.ok) {
           setLoading(false);
-          push(`/auth/register/upload-profile?data=${result.id}`);
+          push(
+            `/auth/register/upload-profile?data=${result.id}&callbackUrl=${callBackUrl}`
+          );
         }
       }
 
@@ -117,6 +127,24 @@ export default function FormRegister() {
         <label className="label">
           <span className="label-text-alt text-red-500">{error.email}</span>
           <span className="label-text-alt text-white">.</span>
+        </label>
+      </div>
+      <div className="form-control w-full mb-2">
+        <label className="label">
+          <span className="label-text text-lg">Nomor Whatsapp</span>
+        </label>
+        <input
+          type="number"
+          name="nomor"
+          value={data.nomor}
+          onChange={onChange}
+          className="input bg-[#E5E9F2] w-full rounded-full"
+        />
+        <label className="label">
+          <span className="label-text-alt font-medium">
+            diawali dengan 62, contoh: 6289509046112
+          </span>
+          <span className="label-text-alt text-red-500">{error.nomor}</span>
         </label>
       </div>
       <div className="form-control w-full mb-6">
