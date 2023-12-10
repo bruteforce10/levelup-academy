@@ -1,7 +1,11 @@
 import { Currency } from "@/lib/Currency";
 import { Discount } from "@/lib/Discount";
 import useSectionView from "@/lib/hook";
-import { getPaymentUser, paymentRequest } from "@/lib/service";
+import {
+  getPaymentUser,
+  paymentRequest,
+  paymentRequestBundle,
+} from "@/lib/service";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,7 +13,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
 
-export default function CardBuySection({ price, payment, email, title }) {
+export default function CardBuySectionBundle({ price, payment, email, title }) {
   const { ref } = useSectionView("buy", 1);
   const [isPending, setIsPending] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
@@ -21,7 +25,7 @@ export default function CardBuySection({ price, payment, email, title }) {
     getPaymentUser(email).then((result) => {
       if (result !== undefined) {
         const filterClass = result?.filter(
-          (item) => item?.coursePayment[0]?.judul === title
+          (item) => item?.bundelPayment.length > 0
         );
 
         fetch("/api/payment", {
@@ -36,6 +40,7 @@ export default function CardBuySection({ price, payment, email, title }) {
           res.json().then((data) => {
             console.log(data);
             if (data?.transaction_status === "pending") {
+              console.log(data);
               setIsPending(true);
               setLink(filterClass[0]?.linkPayment);
             }
@@ -46,11 +51,11 @@ export default function CardBuySection({ price, payment, email, title }) {
         }
       }
     });
-  }, [setIsPending, isPending]);
+  }, [setIsPending, title, email]);
 
   const handleBuy = async () => {
     if (session === null) {
-      router.push(`/auth/login?callbackUrl=/kelas/${payment}`);
+      router.push(`/auth/login?callbackUrl=/bundle/${payment}`);
     } else {
       const data = {
         id: payment + Math.random() * 100 + 1,
@@ -66,7 +71,7 @@ export default function CardBuySection({ price, payment, email, title }) {
         body: JSON.stringify(data),
       });
       const requestData = await response?.json();
-      const payResult = await paymentRequest({
+      const payResult = await paymentRequestBundle({
         id: payment,
         email: email,
         idPayment: requestData?.id,
@@ -182,7 +187,7 @@ export default function CardBuySection({ price, payment, email, title }) {
               : " bg-prime w-full p-3 rounded-full text-md font-extrabold text-white border-4 border-white hover:border-[#a1b7e7] transition-all"
           }
         >
-          {isSuccess ? "Sudah Membeli Kelas" : "Beli Kelas"}
+          {isSuccess ? "Sudah Apply Promo" : "Dapatkan Promonya"}
         </button>
       )}
     </div>

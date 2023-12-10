@@ -143,9 +143,10 @@ export default function UploadProfile() {
           redirect: false,
           email: result.updateAccount.email,
           password: result.updateAccount.password,
+          callbackUrl: router?.query?.callbackUrl,
         });
         if (res.ok) {
-          router.push("/");
+          router.push(router?.query?.callbackUrl);
         }
         setLoading(false);
       }
@@ -288,7 +289,7 @@ export default function UploadProfile() {
                 <button
                   onClick={(e) => {
                     e.preventDefault();
-                    router.push("/");
+                    router.push(router?.query?.callbackUrl);
                   }}
                   className="bg-[#E5E9F2] w-full p-3 rounded-full text-md font-extrabold hover:shadow-md transition-all"
                 >

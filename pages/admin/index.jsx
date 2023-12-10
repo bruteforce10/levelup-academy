@@ -66,6 +66,7 @@ export default function Admin() {
         const result = await updateCoursePayment({
           email: data.email,
           id: filterStatusClass[0]?.id,
+          payment: "paymentSuccess",
         });
         if (result) {
           MySwal.fire({

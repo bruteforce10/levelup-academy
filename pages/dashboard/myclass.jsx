@@ -16,7 +16,12 @@ export default function MyClass() {
   useEffect(() => {
     getPaymentUser(email).then((result) => {
       if (result) {
-        setData(result);
+        const filterSuccess = result?.filter(
+          (item) =>
+            item?.statusPayment === "paymentSuccess" &&
+            item?.bundelPayment.length <= 0
+        );
+        setData(filterSuccess);
       }
     });
   }, [email]);
@@ -62,9 +67,11 @@ export default function MyClass() {
         )}
 
         <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 mt-8">
-          {data?.map((item) => (
-            <CardMyCourse key={item.id} data={item} />
-          ))}
+          {data?.map((item) => {
+            if (item?.statusPayment === "paymentSuccess") {
+              return <CardMyCourse key={item.id} data={item} />;
+            }
+          })}
         </div>
       </section>
     </div>
