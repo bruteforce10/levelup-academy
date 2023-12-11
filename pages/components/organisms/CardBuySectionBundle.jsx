@@ -20,6 +20,7 @@ export default function CardBuySectionBundle({ price, payment, email, title }) {
   const { data: session } = useSession();
   const [link, setLink] = useState("");
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getPaymentUser(email).then((result) => {
@@ -57,6 +58,7 @@ export default function CardBuySectionBundle({ price, payment, email, title }) {
     if (session === null) {
       router.push(`/auth/login?callbackUrl=/bundle/${payment}`);
     } else {
+      setIsLoading(true);
       const data = {
         id: payment + Math.random() * 100 + 1,
         productName: title.slice(0, 35),
@@ -79,6 +81,7 @@ export default function CardBuySectionBundle({ price, payment, email, title }) {
         time: new Date().toISOString(),
       });
       if (payResult) {
+        setIsLoading(false);
         console.log(payResult);
         setIsPending(true);
         setLink(requestData?.redirect);
@@ -177,6 +180,14 @@ export default function CardBuySectionBundle({ price, payment, email, title }) {
             size={28}
           />
         </Link>
+      ) : isLoading ? (
+        <button
+          disabled="disabled"
+          className="btn  text-white  w-full  rounded-full text-md font-extrabold  border-4 border-white  transition-all"
+        >
+          <span className="loading loading-spinner"></span>
+          loading
+        </button>
       ) : (
         <button
           onClick={handleBuy}

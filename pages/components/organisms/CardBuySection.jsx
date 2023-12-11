@@ -15,6 +15,7 @@ export default function CardBuySection({ price, payment, email, title }) {
   const [isSuccess, setSuccess] = useState(false);
   const { data: session } = useSession();
   const [link, setLink] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -34,7 +35,6 @@ export default function CardBuySection({ price, payment, email, title }) {
           }),
         }).then((res) => {
           res.json().then((data) => {
-            console.log(data);
             if (data?.transaction_status === "pending") {
               setIsPending(true);
               setLink(filterClass[0]?.linkPayment);
@@ -52,6 +52,7 @@ export default function CardBuySection({ price, payment, email, title }) {
     if (session === null) {
       router.push(`/auth/login?callbackUrl=/kelas/${payment}`);
     } else {
+      setIsLoading(true);
       const data = {
         id: payment + Math.random() * 100 + 1,
         productName: title.slice(0, 35),
@@ -74,6 +75,7 @@ export default function CardBuySection({ price, payment, email, title }) {
         time: new Date().toISOString(),
       });
       if (payResult) {
+        setIsLoading(false);
         console.log(payResult);
         setIsPending(true);
         setLink(requestData?.redirect);
@@ -172,6 +174,14 @@ export default function CardBuySection({ price, payment, email, title }) {
             size={28}
           />
         </Link>
+      ) : isLoading ? (
+        <button
+          disabled="disabled"
+          className="btn  text-white  w-full  rounded-full text-md font-extrabold  border-4 border-white  transition-all"
+        >
+          <span className="loading loading-spinner"></span>
+          loading
+        </button>
       ) : (
         <button
           onClick={handleBuy}
