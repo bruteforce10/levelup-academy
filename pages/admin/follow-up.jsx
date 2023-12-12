@@ -22,6 +22,7 @@ export default function FollowUp() {
     getPaymentAll("pending").then((result) => {
       result?.forEach((item) => {
         item?.payment?.forEach((payment) => {
+          console.log(payment);
           fetch("/api/payment", {
             method: "POST",
             headers: {
@@ -34,9 +35,9 @@ export default function FollowUp() {
             res.json().then((res) => {
               if (
                 res?.transaction_status === "expire" ||
-                res?.transaction_status === "cancel"
+                res?.transaction_status === "cancel" ||
+                res?.status_code === "404"
               ) {
-                console.log("bisa");
                 updateCoursePayment({
                   id: payment?.id,
                   email: item?.email,

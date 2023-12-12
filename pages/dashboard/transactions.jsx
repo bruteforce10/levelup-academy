@@ -112,7 +112,7 @@ export default function Transactions() {
 
   const handleFollowUp = () => {
     window.open(
-      `https://api.whatsapp.com/send?phone=6285649687819&text=hi%20mimin%20saya%20Saya%20membutuhkan%20bantuan...`,
+      `https://api.whatsapp.com/send?phone=6285602883970&text=hi%20mimin%20saya%20Saya%20membutuhkan%20bantuan...`,
       "_blank"
     );
   };
