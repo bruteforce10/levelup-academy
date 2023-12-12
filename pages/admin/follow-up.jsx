@@ -22,7 +22,6 @@ export default function FollowUp() {
     getPaymentAll("pending").then((result) => {
       result?.forEach((item) => {
         item?.payment?.forEach((payment) => {
-          console.log(payment);
           fetch("/api/payment", {
             method: "POST",
             headers: {
