@@ -38,7 +38,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href={"https://api.whatsapp.com/send?phone=6285602883970"}
+                  href={"https://api.whatsapp.com/send?phone=6289509046152"}
                   className="flex items-center gap-3 font-medium hover:text-second transition-all"
                 >
                   <AiOutlineWhatsApp size={24} /> Whatsapp
