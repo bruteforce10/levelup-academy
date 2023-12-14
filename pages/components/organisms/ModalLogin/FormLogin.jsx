@@ -153,7 +153,7 @@ export default function FormLogin() {
         >
           Create New Account
         </button>
-        <div className="w-full border-[1px] border-gray-200 rounded-full my-4"></div>
+        {/* <div className="w-full border-[1px] border-gray-200 rounded-full my-4"></div>
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -166,7 +166,7 @@ export default function FormLogin() {
         >
           <Image src="/google.svg" alt="google" width={24} height={24} />
           Masuk / Daftar
-        </button>
+        </button> */}
       </div>
     </form>
   );
