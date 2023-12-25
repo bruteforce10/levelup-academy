@@ -40,7 +40,9 @@ export default function CardClass({ data }) {
           <div className="text-red-500 text-sm font-bold  line-through animate-pulse ">
             {Currency(data?.price)}
           </div>
-          <p className="text-lg font-medium">{Discount(data?.price)}</p>
+          <p className="text-lg font-medium">
+            {Currency(Discount(data?.price))}
+          </p>
         </div>
       </div>
     </div>

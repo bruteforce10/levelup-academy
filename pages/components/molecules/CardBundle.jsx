@@ -26,7 +26,9 @@ export default function CardBundle({ data }) {
           <div className="text-red-500 text-sm font-bold  line-through animate-pulse ">
             {Currency(data?.harga)}
           </div>
-          <p className="text-lg font-medium">{Discount(data?.harga)}</p>
+          <p className="text-lg font-medium">
+            {Currency(Discount(data?.harga))}
+          </p>
         </div>
       </div>
     </Link>

@@ -15,7 +15,7 @@ export default function FooterBuy({ price }) {
       )}
     >
       <div className="space-y-1">
-        <p className="text-2xl font-extrabold">{Discount(price)}</p>
+        <p className="text-2xl font-extrabold">{Currency(Discount(price))}</p>
         <p className="text-md text-red-500 line-through font-bold animate-pulse">
           {Currency(price)}
         </p>

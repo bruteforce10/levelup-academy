@@ -3,15 +3,18 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 export default function StarRating({ review }) {
   const [rating, setRating] = React.useState(review);
+
   useEffect(() => {
-    setRating(review);
     if (typeof review === "object") {
+      console.log(review);
       const sum = Math.round(
         review.reduce((accumulator, currentValue) => {
-          return accumulator + currentValue.rating;
+          return accumulator + currentValue.rating / 1.05;
         }, 0) / review.length
       );
       setRating(sum);
+    } else {
+      setRating(review);
     }
   }, [review]);
 

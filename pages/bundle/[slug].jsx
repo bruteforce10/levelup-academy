@@ -91,11 +91,11 @@ export default function Bundle() {
           <div>
             <div className="space-y-12 scroll-mt-32" id="paket">
               {data?.courses?.map((course) => (
-                <div key={course.id} className="flex gap-8 max-lg:flex-wrap ">
+                <div key={course.id} className="flex gap-8 max-lg:flex-wrap">
                   <Image
                     src={course.gambar?.url}
                     width={300}
-                    className="rounded-3xl object-cover"
+                    className="rounded-3xl h-fit"
                     height={300}
                     alt={course.judul}
                   />

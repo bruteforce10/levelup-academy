@@ -12,9 +12,9 @@ export default function FreshSale() {
       <Head>
         <title>Promo Grand Opening Kelas Online Level-Up Academy</title>
       </Head>
-      <div className="-space-y-16 max-sm:mt-16">
+      <div className="mt-32 space-y-6 max-sm:mt-32">
         <Image
-          src="/img/sale.png"
+          src="/img/giatBelajar.png"
           width={400}
           height={300}
           alt="fresh-sale"

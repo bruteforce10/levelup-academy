@@ -67,6 +67,7 @@ export default function CardBuySection({ price, payment, email, title }) {
         body: JSON.stringify(data),
       });
       const requestData = await response?.json();
+      console.log(requestData);
       const payResult = await paymentRequest({
         id: payment,
         email: email,
