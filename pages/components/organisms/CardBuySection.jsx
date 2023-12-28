@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
-import * as fbq from "../lib/fpixel";
+import * as fbq from "@/lib/fpixel";
 
 export default function CardBuySection({ price, payment, email, title }) {
   const { ref } = useSectionView("buy", 1);
