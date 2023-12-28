@@ -28,7 +28,6 @@ export default function KelasOnline() {
     }
     getBundle().then((res) => {
       setBundle(res.bundles);
-      console.log(res.bundles);
     });
   }, [dataClass]);
 

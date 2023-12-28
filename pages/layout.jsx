@@ -32,6 +32,7 @@ export default function Layout({ children }) {
     <div className={`bg-[#F6F8FD]  ${jakarta.className} `}>
       {params !== "/auth/login" &&
         params !== "/auth/register" &&
+        params !== "/auth/password/reset" &&
         params !== "/auth/register/upload-profile" && (
           <NavbarPage params={params} />
         )}
@@ -39,6 +40,7 @@ export default function Layout({ children }) {
       {children}
       {params !== "/auth/login" &&
         params !== "/auth/register" &&
+        params !== "/auth/password/reset" &&
         params !== "/auth/register/upload-profile" && <Footer />}
 
       {(params == `/kelas/${query.slug}` || params == "/kelas") && (

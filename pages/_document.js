@@ -1,9 +1,20 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import { Html, Head, Main, NextScript } from "next/document";
+import { FB_PIXEL_ID } from "../lib/fpixel";
 
 export default function Document() {
   return (
     <Html lang="en" className="!scroll-smooth">
       <Head>
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`}
+          />
+        </noscript>
         <meta
           name="description"
           content="LevelUp Update skillmu dengan hal baru yang menghasilkan Login Member Lihat Kelas Best Seller Katalog Kelas Akses Kelas Pilihan Kelas Untukmu Temukan Kelas Favoritmu"

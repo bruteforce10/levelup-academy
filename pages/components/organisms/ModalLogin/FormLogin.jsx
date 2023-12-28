@@ -3,6 +3,7 @@ import Image from "next/image";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import * as EmailValidator from "email-validator";
+import Link from "next/link";
 
 export default function FormLogin() {
   const [data, setData] = useState({
@@ -118,9 +119,11 @@ export default function FormLogin() {
         />
         <label className="label">
           <span className="label-text-alt text-red-500">{error.password}</span>
-          {/* <span className="label-text-alt text-sm cursor-pointer text-gray-400 hover:scale-95 origin-top-right transition-all">
+          <Link href={"/auth/password/reset"}>
+            <span className="label-text-alt text-[16px] cursor-pointer text-gray-700 hover:text-prime transition-all">
               Lupa Password
-            </span> */}
+            </span>
+          </Link>
         </label>
       </div>
       <div className="space-y-4">

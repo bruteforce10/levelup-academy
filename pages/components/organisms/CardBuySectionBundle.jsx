@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
+import * as fbq from "../lib/fpixel";
 
 export default function CardBuySectionBundle({ price, payment, email, title }) {
   const { ref } = useSectionView("buy", 1);
@@ -59,6 +60,7 @@ export default function CardBuySectionBundle({ price, payment, email, title }) {
       router.push(`/auth/login?callbackUrl=/bundle/${payment}`);
     } else {
       setIsLoading(true);
+      fbq.event("Purchase", { currency: "IDR", value: price });
       const data = {
         id: payment + Math.random() * 100 + 1,
         productName: title.slice(0, 35),
