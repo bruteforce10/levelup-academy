@@ -70,8 +70,8 @@ export default function KelasOnline() {
             New
           </span>
         </SubHeading>
-        <div className="w-full overflow-x-scroll pb-8">
-          <div className="gap-6 flex ">
+        <div className="pb-8">
+          <div className="gap-6 max-md:gap-12 flex max-md:flex-wrap">
             {dataBundle &&
               dataBundle.map((item, index) => (
                 <CardBundle key={index} data={item} />

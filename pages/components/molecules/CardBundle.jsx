@@ -18,7 +18,7 @@ export default function CardBundle({ data }) {
         width={320}
         height={320}
       />
-      <div className="space-y-3  p-4">
+      <div className="space-y-3 flex flex-col justify-between h-[130px] p-4">
         <h4 className="font-extrabold text-xl line-clamp-2 hover:line-clamp-none leading-normal ">
           {data?.secondJudul}
         </h4>
