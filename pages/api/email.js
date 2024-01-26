@@ -1,8 +1,10 @@
 import nodemailer from "nodemailer";
+import fs from "fs";
+import Mustache from "mustache";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    const { to, subject, text } = req.body;
+    const { to, subject, data } = req.body;
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -15,15 +17,16 @@ export default async function handler(req, res) {
       },
     });
 
-    const mailOptions = {
+    let template = fs.readFileSync("view/otp.html", "utf8");
+
+    let mailOptions = {
       from: "lv.classonline@gmail.com",
       to,
       subject,
-      text,
+      html: Mustache.render(template, data),
     };
 
     try {
-      // Kirim email
       const info = await transporter.sendMail(mailOptions);
       console.log("Email sent:", info.response);
       res.status(200).json({ success: true });

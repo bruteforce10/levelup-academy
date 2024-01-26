@@ -119,11 +119,17 @@ export default function FormLogin() {
         />
         <label className="label">
           <span className="label-text-alt text-red-500">{error.password}</span>
-          <Link href={"/auth/password/reset"}>
+          <div
+            onClick={() => {
+              push("/auth/password/reset");
+              const modal = document.getElementById("my_modal_1");
+              modal.close();
+            }}
+          >
             <span className="label-text-alt text-[16px] cursor-pointer text-gray-700 hover:text-prime transition-all">
               Lupa Password
             </span>
-          </Link>
+          </div>
         </label>
       </div>
       <div className="space-y-4">

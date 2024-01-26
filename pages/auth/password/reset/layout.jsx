@@ -1,11 +1,10 @@
-import FormResetPassword from "@/pages/components/organisms/FormResetPassword";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 import { IoIosArrowBack } from "react-icons/io";
 
-export default function Reset() {
+export default function LayoutReset({ children }) {
   const router = useRouter();
   return (
     <div className="bg-[#F6F8FD] h-[100vh]">
@@ -40,7 +39,7 @@ export default function Reset() {
         </div>
 
         <div className=" mt-20 max-lg:mx-auto lg:ml-[600px] w-8/12 h-full ">
-          <FormResetPassword />
+          {children}
         </div>
       </div>
     </div>

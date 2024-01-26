@@ -33,6 +33,7 @@ export default function Layout({ children }) {
       {params !== "/auth/login" &&
         params !== "/auth/register" &&
         params !== "/auth/password/reset" &&
+        params !== `/auth/password/reset/${query.slug}` &&
         params !== "/auth/register/upload-profile" && (
           <NavbarPage params={params} />
         )}
@@ -41,6 +42,7 @@ export default function Layout({ children }) {
       {params !== "/auth/login" &&
         params !== "/auth/register" &&
         params !== "/auth/password/reset" &&
+        params !== `/auth/password/reset/${query.slug}` &&
         params !== "/auth/register/upload-profile" && <Footer />}
 
       {(params == `/kelas/${query.slug}` || params == "/kelas") && (

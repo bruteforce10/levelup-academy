@@ -771,6 +771,7 @@ export const getSearchUser = async (email) => {
       account(where: { email: "` +
     email +
     `" }) {
+        id
         email
       }
     }
