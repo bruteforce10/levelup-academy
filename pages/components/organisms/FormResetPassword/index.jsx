@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { getSearchUser, getUser } from "@/lib/service";
+import { getUser } from "@/lib/service";
 
 export default function FormResetPassword() {
   const [isSuccess, setSuccess] = useState(false);
