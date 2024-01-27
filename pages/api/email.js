@@ -3,7 +3,7 @@ import fs from "fs";
 import Mustache from "mustache";
 
 export default async function handler(req, res) {
-  const { to, subject, data } = req.body;
+  const { to, subject, data } = await req.body;
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
