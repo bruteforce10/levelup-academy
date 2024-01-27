@@ -10,6 +10,7 @@
   "dependencies": {
     "@tippyjs/react": "^4.2.6",
     "clsx": "^2.0.0",
+    "cors": "^2.8.5",
     "email-validator": "^2.0.4",
     "framer-motion": "^10.16.4",
     "graphql": "^16.8.1",

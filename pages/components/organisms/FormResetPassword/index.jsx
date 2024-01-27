@@ -27,7 +27,6 @@ export default function FormResetPassword() {
         return;
       }
 
-      console.log("Before fetch email API:", email);
       const response = await fetch("/api/email", {
         method: "POST",
         headers: {
