@@ -7,6 +7,16 @@
     "build": "next build",
     "start": "next start"
   },
+  "vercel": {
+    "routes": [
+      {
+        "src": "/api/email",
+        "methods": [
+          "POST"
+        ]
+      }
+    ]
+  },
   "dependencies": {
     "@tippyjs/react": "^4.2.6",
     "clsx": "^2.0.0",
