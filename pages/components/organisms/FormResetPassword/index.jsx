@@ -20,9 +20,7 @@ export default function FormResetPassword() {
     }
 
     try {
-      console.log("Before getUser:", email);
       const result = await getUser({ email });
-      console.log("After getUser result:", result);
       if (!result) {
         setLoading(false);
         setError("Email tidak ditemukan");
@@ -45,7 +43,6 @@ export default function FormResetPassword() {
           },
         }),
       });
-      console.log("After fetch email API:", response);
 
       const data = await response?.json();
       if (data?.success) {
