@@ -1,11 +1,9 @@
 import nodemailer from "nodemailer";
 import fs from "fs";
 import Mustache from "mustache";
-import { NextResponse } from "next/server";
 
-export default async function POST(req) {
-  const { to, subject, data } = await req.json();
-  console.log(to, subject, data);
+export default async function handler(req, res) {
+  const { to, subject, data } = req.body;
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -19,7 +17,6 @@ export default async function POST(req) {
   });
 
   let template = fs.readFileSync("view/otp.html", "utf8");
-  console.log(template);
 
   let mailOptions = {
     from: "lv.classonline@gmail.com",
@@ -30,8 +27,9 @@ export default async function POST(req) {
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    return NextResponse.json({ success: true });
+    res.status(200).json({ success: true });
   } catch (error) {
     console.error("Error:", error);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
   }
 }
