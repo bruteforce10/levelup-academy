@@ -53,6 +53,7 @@ export default function FormResetPassword() {
       }
     } catch (error) {
       setLoading(false);
+      console.log(error);
       setError("Terjadi kesalahan saat mengirim email");
     }
   };
