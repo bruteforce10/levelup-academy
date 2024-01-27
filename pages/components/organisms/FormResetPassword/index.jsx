@@ -43,7 +43,7 @@ export default function FormResetPassword() {
         }),
       });
 
-      const data = await response.json();
+      const data = await response?.json();
       if (data?.success) {
         setLoading(false);
         setSuccess(true);
