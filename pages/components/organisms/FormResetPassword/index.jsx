@@ -37,14 +37,14 @@ export default function FormResetPassword() {
           subject: "Atur Ulang Kata Sandi",
           data: {
             email: email,
-            name: result.name,
-            url: `https://www.levelupclass.online/reset/${result.id}?email=${email}`,
+            name: result?.name,
+            url: `https://www.levelupclass.online/reset/${result?.id}?email=${email}`,
           },
         }),
       });
 
       const data = await response.json();
-      if (data.success) {
+      if (data?.success) {
         setLoading(false);
         setSuccess(true);
         setTimeout(() => {
