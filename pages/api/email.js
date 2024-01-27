@@ -1,9 +1,11 @@
 import nodemailer from "nodemailer";
 import fs from "fs";
 import Mustache from "mustache";
+import { NextResponse } from "next/server";
 
-export default async function handler(req, res) {
-  const { to, subject, data } = await req.body;
+export default async function POST(req) {
+  const { to, subject, data } = await req.json();
+  console.log(to, subject, data);
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -28,9 +30,8 @@ export default async function handler(req, res) {
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    res.status(200).json({ success: true });
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error:", error);
-    res.status(500).json({ success: false, error: "Internal Server Error" });
   }
 }
