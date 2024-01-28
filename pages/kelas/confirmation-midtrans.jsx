@@ -63,7 +63,9 @@ export default function ConfirmationMidtrans() {
 
   const handleFollowUp = () => {
     window.open(
-      `https://api.whatsapp.com/send?phone=6282129747399&text=Halo%20MiminUp%2C%20Email%20saya%20audifirdi%40gmail.com%20telah%20membayar%20kelas%20${
+      `https://api.whatsapp.com/send?phone=6282129747399&text=Halo%20MiminUp%2C%20Email%20saya%20${
+        session?.user?.email
+      }%20telah%20membayar%20kelas%20${
         data[0]?.coursePayment[0]?.judul
       }%20tapi%20statusnya%20masih%20${
         status ? "Payment Success" : "Payment Pending"
