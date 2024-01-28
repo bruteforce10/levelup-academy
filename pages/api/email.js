@@ -25,7 +25,6 @@ export default async function handler(req, res) {
       to,
       subject,
       html: Mustache.render(template, data),
-      text: "Hello world?",
     };
 
     try {
