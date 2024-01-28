@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       },
     });
 
-    const template = fs.readFileSync("../../public/otp.html", "utf8");
+    const template = fs.readFileSync("public/otp.html", "utf8");
 
     let mailOptions = {
       from: "lv.classonline@gmail.com",
