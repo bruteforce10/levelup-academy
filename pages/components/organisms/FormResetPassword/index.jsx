@@ -38,7 +38,7 @@ export default function FormResetPassword() {
           data: {
             email: email,
             name: result?.name,
-            url: `https://www.levelupclass.online/reset/${result?.id}?email=${email}`,
+            url: `https://www.levelupclass.online/auth/password/reset/${result?.id}?email=${email}`,
           },
         }),
       });
