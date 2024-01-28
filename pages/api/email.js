@@ -17,13 +17,14 @@ export default async function handler(req, res) {
       },
     });
 
-    let template = fs.readFileSync("view/otp.html", "utf8");
+    // let template = fs.readFileSync("view/otp.html", "utf8");
 
     let mailOptions = {
       from: "lv.classonline@gmail.com",
       to,
       subject,
-      html: Mustache.render(template, data),
+      // html: Mustache.render(template, data),
+      text: "Hello world?",
     };
 
     try {
