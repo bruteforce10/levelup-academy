@@ -21,12 +21,14 @@ export default function FormInputResetPassword() {
 
   useEffect(() => {
     getUser({ email: session?.user?.email }).then((result) => {
-      signIn("credentials", {
-        email: result?.email,
-        redirect: false,
-        password: result?.password,
-      });
-      router.push(`/`);
+      if (result) {
+        signIn("credentials", {
+          email: result?.email,
+          redirect: false,
+          password: result?.password,
+        });
+        router.push(`/`);
+      }
     });
   }, []);
 
