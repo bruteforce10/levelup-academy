@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import fs from "fs";
 import Mustache from "mustache";
+import path from "path";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -17,7 +18,9 @@ export default async function handler(req, res) {
       },
     });
 
-    const template = fs.readFileSync("public/otp.html", "utf8");
+    const __dirname = path.resolve();
+    const templatePath = path.join(__dirname, "public", "otp.html");
+    const template = await fs.promises.readFile(templatePath, "utf8");
 
     let mailOptions = {
       from: "lv.classonline@gmail.com",
