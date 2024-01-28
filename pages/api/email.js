@@ -1,7 +1,6 @@
 import nodemailer from "nodemailer";
 import fs from "fs";
 import Mustache from "mustache";
-import path from "path";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -18,7 +17,7 @@ export default async function handler(req, res) {
       },
     });
 
-    const template = fs.readFileSync("public/otp.html", "utf8");
+    const template = fs.readFileSync("../../public/otp.html", "utf8");
 
     let mailOptions = {
       from: "lv.classonline@gmail.com",
