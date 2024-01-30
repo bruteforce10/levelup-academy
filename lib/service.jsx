@@ -98,7 +98,6 @@ export const signUpWithGoogle = async (userData) => {
     return result.updateAccount;
   } else {
     const result = await signUp(userData);
-    console.log(result);
     return result;
   }
 };
@@ -1118,4 +1117,56 @@ export const getPaymentAll = async (status) => {
     );
     return result?.accounts;
   }
+};
+
+export const getPromo = async (promo) => {
+  const query =
+    gql`
+    query Assets {
+      promos(where: { kodePromo: "` +
+    promo +
+    `" }) {
+        discount
+        kodePromo
+        id
+        quantity
+      }
+    }
+  `;
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+
+  return result?.promos;
+};
+
+export const updatePromo = async (data) => {
+  const query =
+    gql`
+    mutation MyMutation {
+      updateManyPromos(
+        data: { quantity: ` +
+    data.quantity +
+    ` }
+        where: { id: "` +
+    data.promo +
+    `" }
+      ) {
+        count
+      }
+      publishPromo(where: {id:  "` +
+    data.promo +
+    `"}) {
+        id
+      }
+    }
+  `;
+
+  const result = await request(
+    "https://ap-southeast-2.cdn.hygraph.com/content/clnrgq1m6llmt01uo7zk9hnhc/master",
+    query
+  );
+
+  return result;
 };

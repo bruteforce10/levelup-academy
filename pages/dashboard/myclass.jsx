@@ -16,12 +16,23 @@ export default function MyClass() {
   useEffect(() => {
     getPaymentUser(email).then((result) => {
       if (result) {
-        const filterSuccess = result?.filter(
-          (item) =>
-            item?.statusPayment === "paymentSuccess" &&
-            item?.bundelPayment.length <= 0
-        );
-        setData(filterSuccess);
+        if (result?.bundelPayment) {
+          const filter = result?.filter(
+            (item) =>
+              item?.statusPayment === "paymentSuccess" &&
+              item?.bundelPayment.length > 0
+          );
+          console.log(filter);
+          setData(filter);
+        } else {
+          const filterSuccess = result?.filter(
+            (item) =>
+              item?.statusPayment === "paymentSuccess" &&
+              item?.bundelPayment.length <= 0
+          );
+          console.log(filterSuccess);
+          setData(filterSuccess);
+        }
       }
     });
   }, [email]);

@@ -5,6 +5,7 @@ import {
   getPaymentUser,
   paymentRequest,
   paymentRequestBundle,
+  updatePromo,
 } from "@/lib/service";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -13,6 +14,8 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import * as fbq from "@/lib/fpixel";
+import ModalBuySection from "./ModalBuySection";
+import { MyContext } from "@/lib/context/AppContext";
 
 export default function CardBuySectionBundle({ price, payment, email, title }) {
   const { ref } = useSectionView("buy", 1);
@@ -22,6 +25,10 @@ export default function CardBuySectionBundle({ price, payment, email, title }) {
   const [link, setLink] = useState("");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [uniqeRandom, setUniqeRandom] = useState(
+    Math.floor(Math.random() * 100)
+  );
+  const { priceCheckout } = MyContext();
 
   useEffect(() => {
     getPaymentUser(email).then((result) => {
@@ -64,7 +71,12 @@ export default function CardBuySectionBundle({ price, payment, email, title }) {
       const data = {
         id: payment + Math.random() * 100 + 1,
         productName: title.slice(0, 35),
-        price: parseFloat(Discount(price)),
+        price: parseFloat(
+          Discount(price) -
+            uniqeRandom +
+            2500 -
+            Discount(price) * (priceCheckout.discount / 100)
+        ),
         quantity: 1,
       };
       const response = await fetch("/api/post", {
@@ -86,8 +98,16 @@ export default function CardBuySectionBundle({ price, payment, email, title }) {
         setIsLoading(false);
         console.log(payResult);
         setIsPending(true);
+        if (priceCheckout.promo) {
+          const result = await updatePromo({
+            promo: priceCheckout.promo,
+            quantity: priceCheckout.quantity - 1,
+          });
+          console.log(result);
+        }
         setLink(requestData?.redirect);
-        window.open(requestData?.redirect, "_blank");
+        window.open(requestData?.redirect);
+        document.getElementById("my_modal_5").close();
       }
     }
   };
@@ -182,17 +202,9 @@ export default function CardBuySectionBundle({ price, payment, email, title }) {
             size={28}
           />
         </Link>
-      ) : isLoading ? (
-        <button
-          disabled="disabled"
-          className="btn  text-white  w-full  rounded-full text-md font-extrabold  border-4 border-white  transition-all"
-        >
-          <span className="loading loading-spinner"></span>
-          loading
-        </button>
       ) : (
         <button
-          onClick={handleBuy}
+          onClick={() => document.getElementById("my_modal_5").showModal()}
           disabled={isSuccess}
           className={
             isSuccess
@@ -203,6 +215,12 @@ export default function CardBuySectionBundle({ price, payment, email, title }) {
           {isSuccess ? "Sudah Apply Promo" : "Dapatkan Promonya"}
         </button>
       )}
+      <ModalBuySection
+        handleBuy={handleBuy}
+        price={price}
+        uniqeRandom={uniqeRandom}
+        loading={isLoading}
+      />
     </div>
   );
 }

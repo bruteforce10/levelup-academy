@@ -136,7 +136,7 @@ export default function Transactions() {
               <tr>
                 <th>Cover</th>
                 <th>Name</th>
-                <th>Price</th>
+                {/* <th>Price</th> */}
                 <th>Date</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -159,14 +159,14 @@ export default function Transactions() {
                     {item?.coursePayment[0]?.judul ||
                       item?.bundelPayment[0]?.judul}
                   </td>
-                  <td>
+                  {/* <td>
                     {Currency(
                       Discount(
                         item?.coursePayment[0]?.price ||
                           item?.bundelPayment[0]?.harga
                       )
                     )}
-                  </td>
+                  </td> */}
                   <td>{moment(item?.time).format(" MMMM DD YYYY HH:mm")}</td>
                   <td>
                     {item?.statusPayment === "paymentPending" ? (

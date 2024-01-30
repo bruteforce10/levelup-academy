@@ -40,3 +40,10 @@ h3 {
   gap: 1rem;
   flex-direction: row;
 }
+
+.tooltip:before {
+  background-color: rgb(244, 244, 244);
+  color: #272b33;
+  text-align: left;
+  font-weight: 600;
+}

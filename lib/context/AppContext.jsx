@@ -8,6 +8,11 @@ const AppContextProvider = (props) => {
   const [activeSection, setActiveSection] = useState(null);
   const [dataClass, setDataClass] = useState([]);
   const [dataFilter, setDataFilter] = React.useState(dataClass);
+  const [priceCheckout, setPriceCheckout] = useState({
+    discount: 0,
+    quantity: 0,
+    promo: "",
+  });
 
   useEffect(() => {
     getClass().then((res) => {
@@ -26,6 +31,8 @@ const AppContextProvider = (props) => {
         setDataClass,
         dataFilter,
         setDataFilter,
+        priceCheckout,
+        setPriceCheckout,
       }}
     >
       {props.children}
