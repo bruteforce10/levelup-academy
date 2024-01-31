@@ -45,6 +45,7 @@ export default function CardBuySection({ price, payment, email, title }) {
             }),
           }).then((res) => {
             res.json().then((data) => {
+              console.log(data);
               if (
                 data?.transaction_status === "pending" ||
                 data?.status_code == 404
