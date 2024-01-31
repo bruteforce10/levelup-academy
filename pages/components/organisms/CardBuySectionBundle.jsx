@@ -37,27 +37,30 @@ export default function CardBuySectionBundle({ price, payment, email, title }) {
           (item) => item?.bundelPayment.length > 0
         );
 
-        fetch("/api/payment", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: filterClass[0]?.idPayment,
-          }),
-        }).then((res) => {
-          res.json().then((data) => {
-            console.log(data);
-            if (data?.transaction_status === "pending") {
-              console.log(data);
-              setIsPending(true);
-              setLink(filterClass[0]?.linkPayment);
-            }
+        filterClass.forEach((classItem) => {
+          fetch("/api/payment", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id: classItem?.idPayment,
+            }),
+          }).then((res) => {
+            res.json().then((data) => {
+              if (
+                data?.transaction_status === "pending" ||
+                data?.status_code == 404
+              ) {
+                setIsPending(true);
+                setLink(classItem?.linkPayment);
+              }
+            });
           });
+          if (classItem?.statusPayment === "paymentSuccess") {
+            setSuccess(true);
+          }
         });
-        if (filterClass[0]?.statusPayment === "paymentSuccess") {
-          setSuccess(true);
-        }
       }
     });
   }, [setIsPending, title, email]);

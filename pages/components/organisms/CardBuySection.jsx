@@ -17,7 +17,7 @@ export default function CardBuySection({ price, payment, email, title }) {
   const [isPending, setIsPending] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
   const { data: session } = useSession();
-  const [link, setLink] = useState("");
+  const [linkData, setLinkData] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [uniqeRandom, setUniqeRandom] = useState(
@@ -29,31 +29,35 @@ export default function CardBuySection({ price, payment, email, title }) {
     getPaymentUser(email).then((result) => {
       if (result !== undefined) {
         const filterClass = result?.filter(
-          (item) => item?.coursePayment[0]?.judul === title
+          (item) =>
+            item?.coursePayment[0]?.judul === title &&
+            item?.linkPayment !== null
         );
 
-        console.log(filterClass[0]);
-
-        fetch("/api/payment", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: filterClass[0]?.idPayment,
-          }),
-        }).then((res) => {
-          res.json().then((data) => {
-            console.log(data);
-            if (data?.transaction_status === "pending") {
-              setIsPending(true);
-              setLink(filterClass[0]?.linkPayment);
-            }
+        filterClass.forEach((classItem) => {
+          fetch("/api/payment", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id: classItem?.idPayment,
+            }),
+          }).then((res) => {
+            res.json().then((data) => {
+              if (
+                data?.transaction_status === "pending" ||
+                data?.status_code == 404
+              ) {
+                setIsPending(true);
+                setLinkData(classItem?.linkPayment);
+              }
+            });
           });
+          if (classItem?.statusPayment === "paymentSuccess") {
+            setSuccess(true);
+          }
         });
-        if (filterClass[0]?.statusPayment === "paymentSuccess") {
-          setSuccess(true);
-        }
       }
     });
   }, [setIsPending, isPending]);
@@ -95,7 +99,7 @@ export default function CardBuySection({ price, payment, email, title }) {
       if (payResult) {
         setIsLoading(false);
         setIsPending(true);
-        setLink(requestData?.redirect);
+        setLinkData(requestData?.redirect);
         if (priceCheckout?.promo) {
           const result = await updatePromo({
             promo: priceCheckout?.promo,
@@ -188,7 +192,7 @@ export default function CardBuySection({ price, payment, email, title }) {
       </ul>
       {isPending ? (
         <Link
-          href={link}
+          href={linkData}
           target="_blank"
           className="px-6 flex bg-[#facb5e] justify-center gap-x-2 group text-center rounded-full text-[#fff] w-full transition-all  font-bold py-3"
         >

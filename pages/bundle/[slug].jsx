@@ -7,10 +7,7 @@ import SubHeading from "../components/atoms/SubHeading";
 import KeyPointSection from "../components/organisms/KeyPointSection";
 import Heading from "../components/heading";
 import Link from "next/link";
-import CardBuySection from "../components/organisms/CardBuySection";
 import { useSession } from "next-auth/react";
-import { Currency } from "@/lib/Currency";
-import { Discount } from "@/lib/Discount";
 import FooterBuy from "../components/molecules/FooterBuy";
 import useSectionView from "@/lib/hook";
 import CallSection from "../components/CallSection";
@@ -97,17 +94,17 @@ export default function Bundle() {
                     width={300}
                     className="rounded-3xl h-fit"
                     height={300}
-                    alt={course.judul}
+                    alt={course?.judul}
                   />
                   <div className="space-y-4">
                     <h4 className="text-3xl leading-relaxed font-extrabold max-sm:text-2xl">
-                      {course.judul}
+                      {course?.judul}
                     </h4>
                     <p className="text-lg leading-relaxed md:w-[700px] ">
-                      {course.descBundle}
+                      {course?.descBundle}
                     </p>
                     <Link
-                      href={`/kelas/${course.id}`}
+                      href={`/kelas/${course?.id}`}
                       target="_blank"
                       className="text-md text-prime font-semibold inline-block underline"
                     >
