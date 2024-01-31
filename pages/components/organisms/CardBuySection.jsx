@@ -68,7 +68,7 @@ export default function CardBuySection({ price, payment, email, title }) {
           Discount(price) -
             uniqeRandom +
             2500 -
-            Discount(price) * (priceCheckout.discount / 100)
+            Discount(price) * (priceCheckout?.discount / 100)
         ),
         quantity: 1,
       };
@@ -92,14 +92,12 @@ export default function CardBuySection({ price, payment, email, title }) {
         setIsLoading(false);
         setIsPending(true);
         setLink(requestData?.redirect);
-        if (priceCheckout.promo) {
+        if (priceCheckout?.promo) {
           const result = await updatePromo({
-            promo: priceCheckout.promo,
-            quantity: priceCheckout.quantity - 1,
+            promo: priceCheckout?.promo,
+            quantity: priceCheckout?.quantity - 1,
           });
-          console.log(result);
         }
-        window.open(requestData?.redirect);
         document.getElementById("my_modal_5").close();
       }
     }

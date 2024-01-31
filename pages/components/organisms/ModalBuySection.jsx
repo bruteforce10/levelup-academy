@@ -184,7 +184,7 @@ export default function ModalBuySection({
           </button>
         ) : (
           <button
-            onClick={handleBuy}
+            onClick={() => handleBuy()}
             className="bg-prime p-3 w-full rounded-full text-md font-extrabold text-white border-4 border-white hover:border-[#a1b7e7] transition-all"
           >
             Bayar & Gabung Kelas
