@@ -63,7 +63,7 @@ export default function CardBuySectionBundle({ price, payment, email, title }) {
         });
       }
     });
-  }, [setIsPending, title, email]);
+  }, [setIsPending, title, email, setSuccess]);
 
   const handleBuy = async () => {
     if (session === null) {
