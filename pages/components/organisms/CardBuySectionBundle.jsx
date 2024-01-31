@@ -75,7 +75,7 @@ export default function CardBuySectionBundle({ price, payment, email, title }) {
           Discount(price) -
             uniqeRandom +
             2500 -
-            Discount(price) * (priceCheckout.discount / 100)
+            Discount(price) * (priceCheckout?.discount / 100)
         ),
         quantity: 1,
       };
@@ -98,10 +98,10 @@ export default function CardBuySectionBundle({ price, payment, email, title }) {
         setIsLoading(false);
         console.log(payResult);
         setIsPending(true);
-        if (priceCheckout.promo) {
+        if (priceCheckout?.promo) {
           const result = await updatePromo({
-            promo: priceCheckout.promo,
-            quantity: priceCheckout.quantity - 1,
+            promo: priceCheckout?.promo,
+            quantity: priceCheckout?.quantity - 1,
           });
           console.log(result);
         }

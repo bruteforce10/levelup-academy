@@ -32,6 +32,8 @@ export default function CardBuySection({ price, payment, email, title }) {
           (item) => item?.coursePayment[0]?.judul === title
         );
 
+        console.log(filterClass[0]);
+
         fetch("/api/payment", {
           method: "POST",
           headers: {
@@ -42,6 +44,7 @@ export default function CardBuySection({ price, payment, email, title }) {
           }),
         }).then((res) => {
           res.json().then((data) => {
+            console.log(data);
             if (data?.transaction_status === "pending") {
               setIsPending(true);
               setLink(filterClass[0]?.linkPayment);
@@ -88,6 +91,7 @@ export default function CardBuySection({ price, payment, email, title }) {
         link: requestData?.redirect,
         time: new Date().toISOString(),
       });
+      console.log(payResult);
       if (payResult) {
         setIsLoading(false);
         setIsPending(true);
@@ -98,6 +102,7 @@ export default function CardBuySection({ price, payment, email, title }) {
             quantity: priceCheckout?.quantity - 1,
           });
         }
+        window.open(requestData?.redirect);
         document.getElementById("my_modal_5").close();
       }
     }
