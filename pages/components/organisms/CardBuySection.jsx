@@ -61,7 +61,7 @@ export default function CardBuySection({ price, payment, email, title }) {
         });
       }
     });
-  }, [setIsPending, isPending]);
+  }, [setIsPending, isPending, setLinkData, setSuccess, email, title]);
 
   const handleBuy = async () => {
     if (session === null) {
