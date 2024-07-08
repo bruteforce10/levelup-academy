@@ -1,5 +1,3 @@
-import { data } from "autoprefixer";
-import { parseValue } from "graphql";
 import request, { gql } from "graphql-request";
 
 export const signUp = async (userData) => {
