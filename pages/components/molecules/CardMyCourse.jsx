@@ -8,12 +8,12 @@ export default function CardMyCourse({ data }) {
       href={
         data?.statusPayment === "paymentPending"
           ? "/dashboard/transactions"
-          : `/course?class=${data?.coursePayment[0]?.id}`
+          : `/course?class=${data?.id}`
       }
       className="rounded-3xl block bg-[#fff] overflow-hidden"
     >
       <Image
-        src={data?.coursePayment[0]?.gambar?.url}
+        src={data?.gambar?.url}
         alt="placeholder"
         width={500}
         className="w-full"
@@ -22,7 +22,7 @@ export default function CardMyCourse({ data }) {
       <div className="p-4 space-y-8">
         <div className="space-y-1">
           <div className="font-extrabold text-xl line-clamp-2 hover:line-clamp-none cursor-pointer">
-            {data?.coursePayment[0]?.judul}
+            {data?.judul}
           </div>
           <p className="text-md font-light text-opacity-70 text-deep">
             Class Recording

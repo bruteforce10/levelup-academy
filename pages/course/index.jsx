@@ -39,15 +39,19 @@ export default function Course() {
 
   useEffect(() => {
     getPaymentUser(email).then((result) => {
-      if (result) {
-        const filterClass = result?.filter(
-          (item) => item?.coursePayment[0]?.id === query?.class
-        );
-        if (filterClass[0]?.statusPayment === "paymentSuccess") {
+      result?.map((item) => {
+        if (item?.coursePayment[0]?.id === query?.class) {
           setBuy(true);
-          setGetData(filterClass[0]?.coursePayment[0]);
+          setGetData(item?.coursePayment[0]);
         }
-      }
+        if (item?.bundelPayment.length > 0) {
+          const courseBundle = item?.bundelPayment[0]?.courses.filter(
+            (item) => item?.id === query?.class
+          );
+          setBuy(true);
+          setGetData(courseBundle[0]);
+        }
+      });
     });
   }, [email, data, setData, query?.class]);
 

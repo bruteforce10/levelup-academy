@@ -559,6 +559,15 @@ export const getPaymentUser = async (email) => {
               harga
               slug
               judul
+              courses {
+                judul
+                id
+                gambar {
+                url
+              }
+              price
+              linkClass
+              }
             }
           }
           idPayment
@@ -690,7 +699,6 @@ export const updatePassword = async (data) => {
 
 export const getBundle = async (data) => {
   if (data) {
-    console.log(data);
     const query =
       gql`
       query Assets {
@@ -992,6 +1000,19 @@ export const updateCoursePayment = async (data) => {
     ) {
       id
       payment {
+        coursePayment {
+            ... on Course {
+              id
+              judul
+              gambar {
+                url
+              }
+              price
+              linkClass
+              discount
+              updatedAt
+            }
+          }
         statusPayment
       }
     }

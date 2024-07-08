@@ -3,7 +3,7 @@ const encodedSecret = Buffer.from(secret).toString("base64");
 const basicAuth = `Basic ${encodedSecret}`;
 
 export default async function handler(req, res) {
-  const { id } = await req.body;
+  const { id } = req.query;
 
   try {
     const response = await fetch(
@@ -13,7 +13,8 @@ export default async function handler(req, res) {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          Authorization: basicAuth,
+          Authorization:
+            "Basic U0ItTWlkLXNlcnZlci0tYlhiTVBmYk1LWjhGVzlfUmZpMWswaEE6",
         },
       }
     );

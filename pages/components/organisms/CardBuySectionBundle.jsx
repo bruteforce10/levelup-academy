@@ -5,6 +5,8 @@ import {
   getPaymentUser,
   paymentRequest,
   paymentRequestBundle,
+  updateBundleClass,
+  updateCoursePayment,
   updatePromo,
 } from "@/lib/service";
 import { useSession } from "next-auth/react";
@@ -38,22 +40,29 @@ export default function CardBuySectionBundle({ price, payment, email, title }) {
         );
 
         filterClass.forEach((classItem) => {
-          fetch("/api/payment", {
-            method: "POST",
+          fetch(`/api/payment/${classItem?.idPayment}`, {
+            method: "GET",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-              id: classItem?.idPayment,
-            }),
           }).then((res) => {
             res.json().then((data) => {
+              console.log(classItem);
               if (
                 data?.transaction_status === "pending" ||
                 data?.status_code == 404
               ) {
                 setIsPending(true);
                 setLink(classItem?.linkPayment);
+              }
+              if (data?.transaction_status === "settlement") {
+                updateCoursePayment({
+                  id: classItem?.id,
+                  email: session?.user?.email,
+                  payment: "paymentSuccess",
+                }).then((res) => {
+                  setSuccess(true);
+                });
               }
             });
           });
