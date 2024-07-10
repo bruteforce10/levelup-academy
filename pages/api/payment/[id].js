@@ -13,8 +13,7 @@ export default async function handler(req, res) {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          Authorization:
-            "Basic U0ItTWlkLXNlcnZlci0tYlhiTVBmYk1LWjhGVzlfUmZpMWswaEE6",
+          Authorization: `Basic ${basicAuth}`,
         },
       }
     );
